@@ -1,0 +1,438 @@
+// APA™ Platform — Prisma Schema
+// Accountable Partners for Africa · GRC Certification Platform
+// 14 domain tables + Better Auth tables · PostgreSQL
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+/// Platform-level role (RBAC checked in use-cases, never UI-only)
+enum PlatformRole {
+  USER
+  AUDITOR
+  CHAMPION
+  ADMIN_APA
+}
+
+/// Organization-level role
+enum OrgRole {
+  ORG_ADMIN
+  ORG_MEMBER
+}
+
+/// Official V3 classification — 22 FORM · 14 GUIDE · 15 LEGAL · 12 METRIC
+enum ToolCategory {
+  FORM
+  GUIDE
+  LEGAL
+  METRIC
+}
+
+enum EngagementStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  VALIDATED
+}
+
+/// The 5-step certification pathway (V8 screen 09)
+enum JourneyStep {
+  CSPA_DIAGNOSTIC // 1 · C-SPA Diagnostic (gate: score >= 70)
+  TRUST_AUDIT // 2 · Trust Audit (AUDITOR role)
+  KEA_AGREEMENT // 3 · Kinship Equity Agreement
+  CVP_ACTIVATION // 4 · Community Verification Portal (tool #27)
+  CERTIFIED // 5 · Certificate awarded
+}
+
+enum JourneyStatus {
+  IN_PROGRESS
+  BLOCKED // C-SPA < 70 → Colonial Architecture Alert
+  REMEDIATION // 90-day Relational Repair Phase (tool #56, CVP veto)
+  COMPLETED
+  ARCHIVED
+}
+
+enum AuditVerdict {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AgreementType {
+  KEA // Kinship Equity Agreement
+  CVP // Community Verification Portal activation
+}
+
+enum CertificateStatus {
+  ACTIVE
+  EXPIRED
+  REVOKED
+}
+
+/// Intelligence access tiers (V8 screen 08 — Strategic Navigator)
+enum IntelTier {
+  T0 // free
+  T1 // free (registered)
+  T2 // $10K/yr
+  T3 // $50K/yr
+}
+
+enum SubscriptionStatus {
+  PENDING // awaiting payment / admin activation
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+// ─────────────────────────────────────────────
+// BETTER AUTH — identity core
+// ─────────────────────────────────────────────
+
+model User {
+  id            String       @id @default(cuid())
+  name          String
+  email         String       @unique
+  emailVerified Boolean      @default(false)
+  image         String?
+  platformRole  PlatformRole @default(USER)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  sessions    Session[]
+  accounts    Account[]
+  memberships Membership[]
+  trustAudits TrustAudit[] @relation("AuditorAudits")
+  auditLogs   AuditLog[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+// ─────────────────────────────────────────────
+// GEOGRAPHY — 54 nations · 22 Atlas priority · V8 champions
+// ─────────────────────────────────────────────
+
+model Nation {
+  id     String @id @default(cuid())
+  code   String @unique // ISO 3166-1 alpha-2
+  nameEn String
+  nameFr String
+  region String // North · West · Central · East · Southern
+
+  // Atlas 22 priority nations (22-Nation Country Intelligence Atlas)
+  isPriority       Boolean @default(false)
+  activationTier   Int? // 1 (M1–4, ACRI 77–94) | 2 (M5–8, ACRI 66–75)
+  activationMonths String?
+  acriScore        Int?
+  strategicNote    String? // "APA Continental HQ", "AfCFTA HQ", …
+
+  // V8 Champions page (regional & national champions)
+  championName  String?
+  championTitle String?
+
+  organizations Organization[]
+  briefs        IntelligenceBrief[]
+
+  @@index([isPriority])
+  @@index([region])
+  @@map("nations")
+}
+
+// ─────────────────────────────────────────────
+// ORGANIZATIONS & MEMBERSHIP
+// ─────────────────────────────────────────────
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  sector    String?
+  nationId  String?
+  nation    Nation?  @relation(fields: [nationId], references: [id])
+  website   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships  Membership[]
+  engagements  ToolEngagement[]
+  journeys     CertificationJourney[]
+  subscription Subscription?
+
+  @@index([nationId])
+  @@map("organizations")
+}
+
+model Membership {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  role      OrgRole  @default(ORG_MEMBER)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, orgId])
+  @@index([orgId, role])
+  @@map("memberships")
+}
+
+// ─────────────────────────────────────────────
+// CATALOG — 6 pillars · 63 tools
+// ─────────────────────────────────────────────
+
+model Pillar {
+  id     String @id @default(cuid())
+  code   String @unique // I · II · III · IV · V · VI
+  order  Int    @unique
+  nameEn String
+  nameFr String
+
+  tools Tool[]
+
+  @@map("pillars")
+}
+
+model Tool {
+  id             String       @id @default(cuid())
+  number         Int          @unique // official 1–63
+  slug           String       @unique
+  pillarId       String
+  pillar         Pillar       @relation(fields: [pillarId], references: [id])
+  category       ToolCategory // official V3: FORM | GUIDE | LEGAL | METRIC
+  nameEn         String
+  nameFr         String
+  typeOfficialEn String // raw "Tool Type" from the 63 source sheets
+  typeFr         String
+  descEn         String
+  descFr         String
+
+  engagements ToolEngagement[]
+
+  @@index([pillarId])
+  @@index([category])
+  @@map("tools")
+}
+
+/// An organization working through one of the 63 tools
+model ToolEngagement {
+  id        String           @id @default(cuid())
+  orgId     String
+  org       Organization     @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  toolId    String
+  tool      Tool             @relation(fields: [toolId], references: [id])
+  status    EngagementStatus @default(NOT_STARTED)
+  /// FORM answers / GUIDE progress / LEGAL upload refs / METRIC values
+  data      Json?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([orgId, toolId])
+  @@index([orgId, status])
+  @@map("tool_engagements")
+}
+
+// ─────────────────────────────────────────────
+// CERTIFICATION ENGINE — the 5-step pathway
+// ─────────────────────────────────────────────
+
+model CertificationJourney {
+  id          String        @id @default(cuid())
+  orgId       String
+  org         Organization  @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  currentStep JourneyStep   @default(CSPA_DIAGNOSTIC)
+  status      JourneyStatus @default(IN_PROGRESS)
+  startedAt   DateTime      @default(now())
+  completedAt DateTime?
+  updatedAt   DateTime      @updatedAt
+
+  assessments CspaAssessment[]
+  audits      TrustAudit[]
+  agreements  Agreement[]
+  certificate Certificate?
+
+  @@index([orgId, status])
+  @@index([status, currentStep])
+  @@map("certification_journeys")
+}
+
+/// Step 1 — C-SPA Diagnostic. Versioned scoring engine, pass gate >= 70.
+model CspaAssessment {
+  id             String   @id @default(cuid())
+  journeyId      String
+  journey        CertificationJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  scoringVersion String // versioned rubric — scores stay reproducible
+  answers        Json
+  score          Int // 0–100
+  passed         Boolean // score >= 70
+  submittedAt    DateTime @default(now())
+
+  @@index([journeyId])
+  @@map("cspa_assessments")
+}
+
+/// Step 2 — Trust Audit, performed by a user with AUDITOR platform role.
+model TrustAudit {
+  id           String       @id @default(cuid())
+  journeyId    String
+  journey      CertificationJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  auditorId    String
+  auditor      User         @relation("AuditorAudits", fields: [auditorId], references: [id])
+  verdict      AuditVerdict @default(PENDING)
+  findings     Json?
+  /// S3 object keys of supporting documents (presigned upload)
+  documentKeys String[]
+  createdAt    DateTime     @default(now())
+  decidedAt    DateTime?
+
+  @@index([journeyId])
+  @@index([auditorId, verdict])
+  @@map("trust_audits")
+}
+
+/// Steps 3 & 4 — signed KEA / CVP instruments (uploaded PDF + integrity hash)
+model Agreement {
+  id          String        @id @default(cuid())
+  journeyId   String
+  journey     CertificationJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  type        AgreementType
+  documentKey String // S3 key of the signed PDF
+  sha256      String // integrity hash, computed server-side at upload
+  signedAt    DateTime
+  createdAt   DateTime      @default(now())
+
+  @@unique([journeyId, type])
+  @@map("agreements")
+}
+
+/// Step 5 — the certificate. publicNumber powers the public /verify page.
+model Certificate {
+  id           String            @id @default(cuid())
+  journeyId    String            @unique
+  journey      CertificationJourney @relation(fields: [journeyId], references: [id])
+  publicNumber String            @unique // e.g. APA-2026-SN-000123
+  status       CertificateStatus @default(ACTIVE)
+  issuedAt     DateTime          @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  revokedFor   String?
+
+  @@index([status])
+  @@map("certificates")
+}
+
+// ─────────────────────────────────────────────
+// INTELLIGENCE — Strategic Navigator T0–T3
+// ─────────────────────────────────────────────
+
+model Subscription {
+  id            String             @id @default(cuid())
+  orgId         String             @unique
+  org           Organization       @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  tier          IntelTier          @default(T0)
+  status        SubscriptionStatus @default(ACTIVE)
+  startsAt      DateTime           @default(now())
+  endsAt        DateTime?
+  /// v1: MANUAL (admin activation + invoice) · later: STRIPE | PAYSTACK
+  paymentMethod String             @default("MANUAL")
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@index([tier, status])
+  @@map("subscriptions")
+}
+
+model IntelligenceBrief {
+  id        String    @id @default(cuid())
+  nationId  String
+  nation    Nation    @relation(fields: [nationId], references: [id])
+  category  String // one of the 10 Atlas intelligence categories
+  minTier   IntelTier @default(T2) // paywall gate
+  titleEn   String
+  titleFr   String
+  contentEn String
+  contentFr String
+  published Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([nationId, minTier])
+  @@index([published, category])
+  @@map("intelligence_briefs")
+}
+
+// ─────────────────────────────────────────────
+// AUDIT TRAIL — append-only, GRC non-negotiable
+// ─────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id])
+  action     String // e.g. journey.step.advance · certificate.issue · subscription.activate
+  entityType String
+  entityId   String
+  ipAddress  String?
+  diff       Json? // before/after snapshot
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([actorId, createdAt])
+  @@index([action, createdAt])
+  @@map("audit_logs")
+}

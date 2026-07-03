@@ -1,0 +1,57 @@
+{
+  "Meta": {
+    "title": "APA™ — Accountable Partners for Africa",
+    "description": "La plateforme de Gouvernance, Risque & Conformité la plus fiable d'Afrique. 63 outils de précision, certification GRC en 5 étapes, intelligence 22 nations."
+  },
+  "Nav": {
+    "home": "Accueil",
+    "tools": "Les 63 Outils",
+    "solutions": "Solutions",
+    "intelligence": "Intelligence",
+    "certification": "Certification",
+    "about": "À propos",
+    "contact": "Contact",
+    "signIn": "Connexion",
+    "getCertified": "Se faire certifier"
+  },
+  "Home": {
+    "topbar": "Standard GRC™ · Auditable · Panafricain · Bilingue FR/EN",
+    "heroTitle": "Combler le Vide de Redevabilité™",
+    "heroLead": "APA™ — la plateforme de Gouvernance, Risque & Conformité la plus fiable d'Afrique. 54 nations | 22 pays actifs | 63 outils de précision | déficit d'IDE de $80B+ adressé. APA™ transforme la redevabilité d'un fardeau de conformité en l'avantage compétitif le plus puissant de l'Afrique.",
+    "ctaDashboard": "Explorer le Tableau de Bord",
+    "ctaTools": "Voir les 63 Outils",
+    "ctaCertify": "Se faire Certifier",
+    "execTitle": "Résumé Exécutif — Contexte Stratégique & le Vide de Redevabilité™",
+    "execContextTitle": "Contexte stratégique",
+    "execContextBody": "La croissance du PIB réel de l'Afrique (~4,1 % en 2025) la place 2e mondiale. Pourtant, un déficit de confiance institutionnel coûte au continent plus de 80 milliards $/an d'IDE perdus — non par risque réel, mais par absence de données de gouvernance vérifiables.",
+    "execVoidTitle": "Le Vide de Redevabilité™",
+    "execVoidBody": "L'écart systémique où les institutions manquent de signaux de confiance vérifiables, repoussant le capital. Les solutions existantes échouent en Afrique : elles appliquent des cadres occidentaux sans calibrage culturel — des cases à cocher qui produisent des rapports, pas de la confiance.",
+    "execWhyTitle": "Pourquoi APA™ y répond",
+    "execWhyBody": "APA™ opérationnalise la redevabilité via des diagnostics de précision, l'application de mandats et une infrastructure de confiance. La Prime d'Authenticité™ en fait un actif financier mesurable : les entreprises certifiées économisent 300–500 points de base de coût du capital.",
+    "kpisTitle": "Indicateurs clés",
+    "kpis": {
+      "fdi": { "value": "$80B+", "label": "Déficit d'IDE annuel adressé" },
+      "bps": { "value": "300–500 pb", "label": "Pénalité de coût du capital éliminée" },
+      "tools": { "value": "63+", "label": "Outils GRC propriétaires" },
+      "nations": { "value": "54 nations", "label": "Couverture Afrique ciblée" },
+      "valuation": { "value": "$2,5M", "label": "Hausse de valorisation / entité certifiée" },
+      "months": { "value": "12 mois", "label": "Déploiement continental" }
+    },
+    "arcTitle": "Arc d'Engagement en 3 Temps — Comprendre › S'Engager › Devenir Redevable",
+    "arc1Step": "01 · Comprendre",
+    "arc1Title": "Commencer par un Parcours",
+    "arc1Body": "Vivre l'Afrique directement. Un accès de terrain aux systèmes que vous voulez transformer.",
+    "arc2Step": "02 · S'Engager",
+    "arc2Title": "Apprendre le Cadre",
+    "arc2Body": "Comprendre l'architecture de redevabilité : C-SPA, MAE, CVP, Prime d'Authenticité™ et suppression-σ.",
+    "arc3Step": "03 · Devenir Redevable",
+    "arc3Title": "Certifier · Déployer · Bâtir",
+    "arc3Body": "Lancer le diagnostic C-SPA et compléter le parcours en 5 étapes vers le certificat GRC vérifiable."
+  },
+  "Footer": {
+    "mantra": "« L'éthique en Alpha. La confiance comme monnaie. La redevabilité comme souveraineté. »",
+    "quote": "« La redevabilité n'est pas un coût de conformité — c'est un générateur d'alpha économique. »",
+    "quoteSource": "Cadre de la Prime d'Authenticité™ APA",
+    "rights": "© {year} APA™ — Accountable Partners for Africa. Tous droits réservés."
+  }
+}

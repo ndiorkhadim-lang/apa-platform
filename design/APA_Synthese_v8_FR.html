@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>APA — Synthèse Stratégique v8 (FR)</title>
+<style>
+  :root{--green:#0A5C36;--teal:#0B5C4E;--mid:#1A8A52;--navy:#0D2B4E;--gold:#C9A24B;--gold2:#D4AF37;--ink:#1F2933;--grey:#5b6b66;--line:#d9e2df;--soft:#f4f8f6;}
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{font-family:"Helvetica Neue",Arial,sans-serif;color:#1F2933;margin:0;font-size:10.5px;line-height:1.5;}
+  h1,h2,h3,h4{font-family:"Helvetica Neue",Arial,sans-serif;color:#0A5C36;margin:0 0 6px;}
+  h2{font-size:18px;border-bottom:3px solid #C9A24B;padding-bottom:6px;}
+  h3{font-size:13px;color:#1A8A52;margin-top:13px;}
+  h4{font-size:11.5px;color:#0D2B4E;margin-top:10px;}
+  p{margin:0 0 7px;} .muted{color:#5b6b66;} .small{font-size:9px;}
+  @page{size:A4;margin:15mm 13mm 14mm 13mm;}
+  .page{page-break-after:always;} .page:last-child{page-break-after:auto;}
+  tr{page-break-inside:avoid;}
+  .cover{height:267mm;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(157deg,#0A5C36 0%,#0B5C4E 48%,#0D2B4E 100%);color:#fff;padding:22mm 17mm;margin:-15mm -13mm 0 -13mm;}
+  .cover .logo{background:#fff;padding:9px 15px;border-radius:8px;display:inline-block;width:180px;}
+  .cover .logo img{width:100%;display:block;}
+  .cover h1{color:#fff;font-size:34px;line-height:1.12;margin-top:16px;}
+  .cover .sub{color:#dff0ea;font-size:13px;max-width:140mm;}
+  .cover .rule{height:3px;width:84px;background:#C9A24B;margin:14px 0;}
+  .cover .meta{font-size:10.5px;color:#cfe7df;} .cover .meta b{color:#fff;}
+  .cover .mantra{font-style:italic;color:#D4AF37;font-size:13px;}
+  .badge{border:1px solid #D4AF37;color:#D4AF37;display:inline-block;padding:4px 10px;border-radius:4px;font-size:9.5px;letter-spacing:1px;}
+  .kpi{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+  .kpi .k{flex:1;min-width:90px;background:rgba(255,255,255,.10);border-radius:8px;padding:9px;text-align:center;}
+  .kpi .k .n{font-size:20px;font-weight:800;color:#D4AF37;} .kpi .k .l{font-size:8.5px;color:#dff0ea;}
+  .box{background:#f4f8f6;border:1px solid #d9e2df;border-left:4px solid #1A8A52;padding:9px 11px;border-radius:4px;margin:7px 0;}
+  .box.gold{border-left-color:#C9A24B;} .box.navy{border-left-color:#0D2B4E;}
+  table{width:100%;border-collapse:collapse;margin:7px 0;font-size:9.3px;}
+  th{background:#0A5C36;color:#fff;text-align:left;padding:5px 7px;font-size:8.6px;text-transform:uppercase;}
+  td{border:1px solid #d9e2df;padding:5px 7px;vertical-align:top;} tr:nth-child(even) td{background:#f7faf9;}
+  ul{margin:4px 0 7px 15px;padding:0;} li{margin-bottom:3px;}
+  .grid2{display:flex;gap:11px;} .grid2>div{flex:1;} .grid3{display:flex;gap:9px;} .grid3>div{flex:1;}
+  .secnum{display:inline-block;background:#C9A24B;color:#1F2933;font-weight:800;border-radius:5px;padding:1px 9px;margin-right:8px;font-size:14px;}
+  .toc a{display:flex;justify-content:space-between;border-bottom:1px dotted #cfe0d9;padding:6px 0;color:#1F2933;} .toc .s{color:#1A8A52;font-weight:700;}
+  .card{background:#fff;border:1px solid #d9e2df;border-radius:6px;padding:8px 10px;margin:5px 0;}
+  .tag{display:inline-block;background:#eef4f1;color:#0A5C36;border:1px solid #cfe0d9;font-size:8px;padding:1px 6px;border-radius:8px;margin:1px;}
+  .t63{width:100%;border-collapse:collapse;margin:4px 0 12px;font-size:9.2px;}
+  .t63 td{border:1px solid #e3eae7;padding:4px 7px;vertical-align:top;}
+  .t63 .tnum{color:#fff;font-weight:800;text-align:center;width:26px;font-size:9px;}
+  .t63 .tname{font-weight:700;color:#0D2B4E;width:33%;}
+  .t63 .tdesc{color:#33403c;}
+  .gauge{height:9px;background:#e3eae7;border-radius:5px;overflow:hidden;} .gauge>span{display:block;height:100%;background:#1A8A52;}
+  .pill{display:inline-block;background:#0A5C36;color:#fff;font-size:8px;padding:2px 7px;border-radius:9px;margin:1px;}
+</style>
+</head>
+<body>
+
+<!-- COUVERTURE -->
+<div class="page"><div class="cover">
+  <div>
+    <div class="logo"><img src="apa-logo.png" alt="APA"></div>
+    <div class="badge" style="margin-top:16px;">CONFIDENTIEL · RÉFÉRENCE DE CONCEPTION DÉFINITIVE</div>
+    <h1>APA™ — Synthèse<br>Stratégique</h1>
+    <div class="rule"></div>
+    <p class="sub">Maquette de Synthèse Stratégique — Référence de conception définitive pour theapaafrica.org. APA™ — Accountable Partners for Africa™.</p>
+    <div class="kpi">
+      <div class="k"><div class="n">22</div><div class="l">Pays actifs</div></div>
+      <div class="k"><div class="n">54</div><div class="l">Nations ciblées</div></div>
+      <div class="k"><div class="n">63</div><div class="l">Outils GRC</div></div>
+      <div class="k"><div class="n">$80B+</div><div class="l">Déficit d'IDE adressé</div></div>
+    </div>
+  </div>
+  <div>
+    <p class="mantra">« L'éthique en Alpha. La confiance comme monnaie. La redevabilité comme souveraineté. »</p>
+    <div class="rule"></div>
+    <p class="meta">
+      <b>Architecture &amp; Conception :</b> Pape Samb — Directeur Stratégique &amp; Expert GRC, Co-Fondateur<br>
+      <b>Fondatrice &amp; Présidente Visionnaire :</b> Aisha Babangida<br>
+      <b>Partenaire technique :</b> Digitrine Technologies LLP<br>
+      <b>Version :</b> v8 — Synthèse Stratégique (FR) · Édition définitive<br>
+      <b>Site :</b> theapaafrica.org &nbsp;·&nbsp; pape@theapaafrica.org<br>
+      <b>Classification :</b> Confidentiel — version publique (sections internes retirées)
+    </p>
+  </div>
+</div></div>
+
+<!-- SOMMAIRE -->
+<div class="page">
+  <h2>Sommaire</h2>
+  <p class="muted small">Version française de la synthèse stratégique, fidèle à l'édition anglaise. <b>Note :</b> le Plan d'action de déploiement 12 mois ainsi que les Spécifications Techniques &amp; Chartes Graphiques ont été retirés de cette édition — ce sont des éléments internes, non destinés à la diffusion publique.</p>
+  <div class="toc">
+    <a><span><span class="s">01</span> &nbsp;Page d'Accueil — Hero, Résumé Exécutif &amp; le Vide de Redevabilité™</span><span>p.3</span></a>
+    <a><span><span class="s">02</span> &nbsp;Conseil Consultatif &amp; Double Direction</span><span>p.4</span></a>
+    <a><span><span class="s">03</span> &nbsp;Tableau de Bord GRC en Direct</span><span>p.5</span></a>
+    <a><span><span class="s">04</span> &nbsp;Les 63 Outils &amp; Mandats GRC — Suite Complète (détail de chaque outil)</span><span>p.6</span></a>
+    <a><span><span class="s">05</span> &nbsp;Champions Régionaux &amp; Nationaux — 22 Nations</span><span>p.9</span></a>
+    <a><span><span class="s">06</span> &nbsp;Solutions &amp; Forfaits de Services</span><span>p.10</span></a>
+    <a><span><span class="s">07</span> &nbsp;À Propos d'APA™ — Mission, Vision &amp; Valeurs</span><span>p.11</span></a>
+    <a><span><span class="s">08</span> &nbsp;Concierge IA &amp; Ressources — Strategic Navigator</span><span>p.11</span></a>
+    <a><span><span class="s">09</span> &nbsp;Portail de Certification &amp; Audit de Confiance</span><span>p.12</span></a>
+    <a><span><span class="s">10</span> &nbsp;Impact &amp; Contact</span><span>p.13</span></a>
+  </div>
+  <div class="box gold"><b>« La redevabilité n'est pas un coût de conformité — c'est un générateur d'alpha économique. »</b> — Cadre de la Prime d'Authenticité™ APA</div>
+</div>
+
+<!-- 01 ACCUEIL -->
+<div class="page">
+  <h2><span class="secnum">01</span>Page d'Accueil — Tableau de Bord Souverain</h2>
+  <div class="box navy" style="background:#0A5C36;color:#fff;border:none">
+    <div class="small" style="color:#D4AF37;letter-spacing:2px">STANDARD GRC™ · AUDITABLE · PANAFRICAIN · BILINGUE FR/EN</div>
+    <h3 style="color:#fff;font-size:20px;margin:6px 0">Combler le Vide de Redevabilité™</h3>
+    <p style="color:#dff0ea">APA™ — la plateforme de Gouvernance, Risque &amp; Conformité la plus fiable d'Afrique. 54 nations | 22 pays actifs | 63 outils de précision | déficit d'IDE de $80B+ adressé. APA™ transforme la redevabilité d'un fardeau de conformité en l'avantage compétitif le plus puissant de l'Afrique.</p>
+    <span class="pill" style="background:#D4AF37;color:#0A5C36">Explorer le Tableau de Bord →</span>
+    <span class="pill" style="background:#D4AF37;color:#0A5C36">Voir les 63 Outils →</span>
+    <span class="pill" style="background:#D4AF37;color:#0A5C36">Se faire Certifier →</span>
+  </div>
+
+  <h3>Résumé Exécutif — Contexte Stratégique &amp; le Vide de Redevabilité™</h3>
+  <div class="grid3">
+    <div class="box"><b>Contexte stratégique</b><p class="small">La croissance du PIB réel de l'Afrique (~4,1 % en 2025) la place 2e mondiale. Pourtant, un déficit de confiance institutionnel coûte au continent plus de <b>80 milliards $/an d'IDE perdus</b> — non par risque réel, mais par absence de données de gouvernance vérifiables.</p></div>
+    <div class="box gold"><b>Le Vide de Redevabilité™</b><p class="small">L'écart systémique où les institutions manquent de signaux de confiance vérifiables, repoussant le capital. Les solutions existantes échouent en Afrique : elles appliquent des cadres occidentaux sans calibrage culturel — des cases à cocher qui produisent des rapports, pas de la confiance.</p></div>
+    <div class="box navy"><b>Pourquoi APA™ y répond</b><p class="small">APA™ opérationnalise la redevabilité via des diagnostics de précision, l'application de mandats et une infrastructure de confiance. La <b>Prime d'Authenticité™</b> en fait un actif financier mesurable : les entreprises certifiées économisent <b>300–500 points de base</b> de coût du capital.</p></div>
+  </div>
+
+  <h3>Indicateurs clés</h3>
+  <table>
+    <tr><th>$80B+</th><th>300–500 pb</th><th>63+</th><th>54 nations</th><th>$2,5M</th><th>12 mois</th></tr>
+    <tr><td>Déficit d'IDE annuel adressé</td><td>Pénalité de coût du capital éliminée</td><td>Outils GRC propriétaires</td><td>Couverture Afrique ciblée</td><td>Hausse de valorisation / entité certifiée</td><td>Déploiement continental</td></tr>
+  </table>
+
+  <h3>Arc d'Engagement en 3 Temps — Comprendre › S'Engager › Devenir Redevable</h3>
+  <div class="grid3">
+    <div class="card"><b>01 · COMPRENDRE</b><br>Commencer par un Parcours<br><span class="small muted">Vivre l'Afrique directement. Un accès de terrain aux systèmes que vous voulez transformer.</span></div>
+    <div class="card"><b>02 · S'ENGAGER</b><br>Apprendre le Cadre<br><span class="small muted">Comprendre l'architecture de redevabilité : C-SPA, MAE, CVP, Prime d'Authenticité™ et suppression-σ.</span></div>
+    <div class="card"><b>03 · DEVENIR REDEVABLE</b><br>Certifier · Déployer · Bâtir<br><span class="small muted">Lancer le diagnostic C-SPA et compléter le parcours en 5 étapes vers le certificat GRC vérifiable.</span></div>
+  </div>
+</div>
+
+<!-- 02 CONSEIL -->
+<div class="page">
+  <h2><span class="secnum">02</span>Conseil Consultatif &amp; Double Direction</h2>
+  <h3>Conseil Consultatif Mondial</h3>
+  <table>
+    <tr><th style="width:33%">Membre</th><th>Profil</th></tr>
+    <tr><td><b>Prof. James Otieno</b> 🇰🇪</td><td>Ancien Directeur Banque Mondiale, Division Afrique. 30+ ans en gouvernance &amp; redevabilité.</td></tr>
+    <tr><td><b>Dr. Fatima Diallo</b> 🇸🇳</td><td>Commissaire UA aux Affaires Politiques. Spécialiste démocratie &amp; redevabilité.</td></tr>
+    <tr><td><b>M. Emmanuel Nkrumah</b> 🇬🇭</td><td>Directeur Régional IFC, Afrique de l'Ouest. Facilitation IDE &amp; réforme institutionnelle.</td></tr>
+    <tr><td><b>Dr. Amina Osei</b> 🇳🇬</td><td>Ancienne Économiste Senior FMI. Experte gouvernance fiscale &amp; transparence.</td></tr>
+    <tr><td><b>Prof. Leila Mansouri</b> 🇲🇦</td><td>Harvard Kennedy School. Spécialiste État de droit &amp; gouvernance MENA.</td></tr>
+    <tr><td><b>M. Charles Mutua</b> 🇷🇼</td><td>Partner McKinsey Afrique. Réforme institutionnelle &amp; renforcement des capacités.</td></tr>
+  </table>
+
+  <h3>Fondateurs — Profils Officiels (bilingue EN/FR)</h3>
+  <div class="grid2">
+    <div class="box gold"><b>Aisha Babangida</b> — Fondatrice | Présidente Visionnaire<br><p class="small">Humanitaire et philanthrope panafricaine de premier plan, elle a conçu le mandat fondateur d'APA™ : autonomiser structurellement les femmes et décoloniser radicalement le développement en Afrique. S'appuyant sur la Women Enterprise Alliance (WenA) et le Better Life Program for the African Rural Woman, elle oriente la stratégie vers l'intégration des systèmes de savoirs endogènes.</p><span class="tag">Réseau WenA</span><span class="tag">Décolonisation</span><span class="tag">Co-gouvernance</span></div>
+    <div class="box navy"><b>Pape Samb</b> — Co-Fondateur | CEO | Architecte Principal — Stratège GRC<br><p class="small">Leader stratégique international et expert en investissement systémique, il est le concepteur et l'architecte principal de la méthodologie APA™ et de sa suite de 63 outils GRC. En tant que CEO, il a conçu les cadres Prime d'Authenticité™, Taxe de Confiance™ et Suppression-Sigma™. Architecte du CVP et du Tableau de Bord du Changement sur 10 ans. 15+ ans en gouvernance, risque &amp; conformité à travers l'Afrique francophone.</p></div>
+  </div>
+</div>
+
+<!-- 03 DASHBOARD -->
+<div class="page">
+  <h2><span class="secnum">03</span>Tableau de Bord GRC en Direct — Analytique Temps Réel</h2>
+  <p class="muted small">Prime d'Authenticité™ · Taxe de Confiance™ · Suppression-Sigma™ · Réussite Projet · Pipeline IDE</p>
+  <div class="kpi" style="background:#0A5C36;border-radius:8px;padding:10px">
+    <div class="k"><div class="n">87,3%</div><div class="l">Prime d'Authenticité™ (+4,2% vs T3)</div></div>
+    <div class="k"><div class="n">12,4%</div><div class="l">Taux de Taxe de Confiance™ (↓ de 18,1%)</div></div>
+    <div class="k"><div class="n">2,1σ</div><div class="l">Suppression-Sigma™ (cible &lt;1,5σ)</div></div>
+    <div class="k"><div class="n">74%</div><div class="l">Taux de Réussite Projet (↑ 11 pts/an)</div></div>
+    <div class="k"><div class="n">$2,3B</div><div class="l">IDE débloqué (cumul annuel)</div></div>
+    <div class="k"><div class="n">63/63</div><div class="l">Outils déployés (100% actifs)</div></div>
+  </div>
+  <h3>Prime d'Authenticité™ par pays (Top 6)</h3>
+  <table>
+    <tr><th>🇲🇦 Maroc</th><th>🇷🇼 Rwanda</th><th>🇸🇳 Sénégal</th><th>🇰🇪 Kenya</th><th>🇳🇬 Nigeria</th><th>🇬🇭 Ghana</th></tr>
+    <tr><td>91%</td><td>88%</td><td>87%</td><td>84%</td><td>79%</td><td>76%</td></tr>
+  </table>
+  <h3>Taux de Réussite Projet par région</h3>
+  <table>
+    <tr><th>Région</th><th>Pays</th><th>Réussite</th><th>IDE</th></tr>
+    <tr><td>Afrique de l'Ouest</td><td>6</td><td><div class="gauge"><span style="width:78%"></span></div></td><td>78% · $820M</td></tr>
+    <tr><td>Afrique de l'Est</td><td>5</td><td><div class="gauge"><span style="width:83%"></span></div></td><td>83% · $640M</td></tr>
+    <tr><td>Afrique Centrale</td><td>4</td><td><div class="gauge"><span style="width:69%"></span></div></td><td>69% · $410M</td></tr>
+    <tr><td>Afrique du Nord</td><td>7</td><td><div class="gauge"><span style="width:81%"></span></div></td><td>81% · $450M</td></tr>
+  </table>
+  <p class="small muted">Indicateurs illustratifs de la maquette ; le tableau de bord en production affiche des métriques live (WebSocket), données domiciliées en Afrique, protection ZKP.</p>
+</div>
+
+<!-- 04 INTRO 63 OUTILS -->
+<div class="page">
+  <h2><span class="secnum">04</span>Les 63 Outils &amp; Mandats GRC — Suite Complète</h2>
+  <p>La suite GRC propriétaire d'APA™ compte <b>63 outils</b>, organisés en 6 piliers stratégiques. Chaque outil est présenté ci-dessous avec son <b>numéro officiel (sur 63)</b>, son intitulé et sa description. Chaque fiche outil dispose d'un document source complet (objet, fonctionnalités obligatoires, bénéfices stratégiques, questions d'évaluation).</p>
+  <div class="grid3">
+    <div class="box"><b>I · Diagnostics Fondamentaux</b><br><span class="small">9 outils — alignement stratégique &amp; audits de départ</span></div>
+    <div class="box"><b>II · Gouvernance &amp; Partage du Pouvoir</b><br><span class="small">8 outils — redevabilité &amp; architecture du pouvoir</span></div>
+    <div class="box"><b>III · Mandats Contractuels</b><br><span class="small">9 outils — mécanismes d'application juridiques</span></div>
+  </div>
+  <div class="grid3">
+    <div class="box gold"><b>IV · Métriques &amp; Impact</b><br><span class="small">9 outils — vérification &amp; suivi longitudinal</span></div>
+    <div class="box gold"><b>V · Mise en Œuvre Spécialisée</b><br><span class="small">15 outils — capacités &amp; secteurs</span></div>
+    <div class="box gold"><b>VI · Concepts &amp; Mandats Opérationnels</b><br><span class="small">13 outils — protocoles &amp; métriques cœur</span></div>
+  </div>
+  <p class="small muted">Détail complet des 63 outils ci-après.</p>
+</div>
+
+<!-- 04 LISTE COMPLETE -->
+<div class="page">
+  <h2 style="font-size:15px">Détail des 63 Outils — par Pilier</h2>
+<h3 style="color:#0A5C36;border-left:5px solid #0A5C36;padding-left:8px">I — Diagnostics Fondamentaux & Alignement Stratégique <span class="muted small">(9 outils)</span></h3>
+<table class="t63">
+<tr><td class="tnum" style="background:#0A5C36">01</td><td class="tname">Évaluation de la Maturité de Partenariat</td><td class="tdesc">Diagnostique la capacité interne en auditant l'état d'esprit du leadership sur le partage du pouvoir et les barrières structurelles à la réciprocité éthique.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">02</td><td class="tname">Audit de Confiance & Cartographie des Parties Prenantes</td><td class="tdesc">Prérequis obligatoire pour TOUS les projets : documente l'historique des griefs et cartographie le pouvoir des acteurs formels et informels.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">03</td><td class="tname">Audit du Paradigme Stratégique (C-SPA)</td><td class="tdesc">Force le leadership à choisir explicitement entre l'« Ancien Paradigme » (RSE = centre de coût) et la « Nouvelle Vision » (CSV = investissement stratégique).</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">04</td><td class="tname">Diagnostic de Transition Exécutive (CEO)</td><td class="tdesc">Évaluation pour dirigeants entrants/en transition : identifie les signaux d'alerte urgents et fixe un agenda de confiance à 90 jours.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">05</td><td class="tname">Diagnostic de Captation de Valeur Locale & Fuites</td><td class="tdesc">Quantifie les risques de « fuite structurelle » (aide liée, flux illicites, rapatriement de profits) et fixe des quotas de sourcing local obligatoires.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">06</td><td class="tname">Audit de Décolonisation & Transformation</td><td class="tdesc">Mesure l'engagement de réforme structurelle des dirigeants africains ET occidentaux sur la redistribution du pouvoir.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">07</td><td class="tname">Outil d'Alignement Stratégique & Feuille de Route</td><td class="tdesc">Guide de pré-planification : définir les objectifs, engager les ressources et cartographier les parties prenantes pour une adoption APA par phases.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">08</td><td class="tname">Audit de Prospérité Intergénérationnelle</td><td class="tdesc">Mesure l'investissement dans les actifs communautaires non monétaires (confiance, gouvernance, capital humain) qui survivent au cycle du projet.</td></tr>
+<tr><td class="tnum" style="background:#0A5C36">09</td><td class="tname">Diagnostic d'Alignement Au-delà du Profit</td><td class="tdesc">Audite le passage de la primauté actionnariale à un modèle intégrant les métriques de « Retour à la Société » (RTS).</td></tr>
+</table>
+<h3 style="color:#1A8A52;border-left:5px solid #1A8A52;padding-left:8px">II — Gouvernance, Redevabilité & Partage du Pouvoir <span class="muted small">(8 outils)</span></h3>
+<table class="t63">
+<tr><td class="tnum" style="background:#1A8A52">10</td><td class="tname">Service & Questionnaire de Co-conception du MGG</td><td class="tdesc">Crée un Mécanisme de Gestion des Griefs validé par la communauté, axé sur la restauration des relations et la correction systémique.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">11</td><td class="tname">Vetting & Checklist de Co-création du Partenaire Local</td><td class="tdesc">Diligence raisonnable priorisant le Score de Confiance Communautaire et la parité salariale plutôt que la seule conformité financière.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">12</td><td class="tname">Questionnaire de Vetting du Partenaire International</td><td class="tdesc">Permet aux partenaires africains d'auditer l'engagement réel des organisations internationales à céder le pouvoir et transférer les capacités.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">13</td><td class="tname">Traceur de Mise en Œuvre de la Redevabilité</td><td class="tdesc">Traduit les promesses de redevabilité en étapes procédurales obligatoires et auditables, alignées sur les standards APA.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">14</td><td class="tname">Cadre de Conseil en Politiques Publiques</td><td class="tdesc">Intègre les principes APA aux politiques nationales (marchés publics, IDE, commerce) pour attirer un investissement de qualité durable.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">15</td><td class="tname">Scorecard de Légitimité du Partenaire</td><td class="tdesc">Aide les entités africaines à évaluer les partenaires internationaux sur la souveraineté financière et le transfert de capacités.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">16</td><td class="tname">Évaluation du Partenaire Authentique</td><td class="tdesc">Diagnostic utilisé par les partenaires locaux pour évaluer la co-création réelle et la mise en œuvre de la Clause de Sortie.</td></tr>
+<tr><td class="tnum" style="background:#1A8A52">17</td><td class="tname">Scorecard de Résilience Démocratique</td><td class="tdesc">Évalue la santé institutionnelle d'un pays via l'indépendance du pare-feu judiciaire et la culture de concession du pouvoir.</td></tr>
+</table>
+<h3 style="color:#0D2B4E;border-left:5px solid #0D2B4E;padding-left:8px">III — Mandats Contractuels & Mécanismes d'Application <span class="muted small">(9 outils)</span></h3>
+<table class="t63">
+<tr><td class="tnum" style="background:#0D2B4E">18</td><td class="tname">Clause de Droit de Veto</td><td class="tdesc">Levier structurel clé accordant aux partenaires locaux l'autorité finale de co-signer ou opposer son veto aux décisions critiques.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">19</td><td class="tname">Mandat de Parité Salariale</td><td class="tdesc">Politique garantissant que la rémunération du partenaire local égale ou dépasse celle des consultants externes à expertise comparable.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">20</td><td class="tname">Clause de Sortie Modèle (Sunset)</td><td class="tdesc">Formalise une sortie maîtrisée garantissant la propriété locale permanente de la gouvernance, de la PI et des finances.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">21</td><td class="tname">Co-propriété de la Propriété Intellectuelle</td><td class="tdesc">Accord juridique garantissant la propriété conjointe de toute PI, donnée et technologie co-créées avec les partenaires locaux.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">22</td><td class="tname">Comités de Pilotage Conjoints</td><td class="tdesc">Structure de gouvernance imposant une représentation 50/50 pour garantir une prise de décision bilatérale.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">23</td><td class="tname">Clause de Risque Partagé</td><td class="tdesc">Impose une répartition équitable du risque projet et lie la responsabilité financière aux résultats relationnels.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">24</td><td class="tname">Mandat de Budgétisation Relationnelle</td><td class="tdesc">Impose qu'au moins 10 % des coûts du projet soient contractuellement alloués à la confiance et au transfert de capacités.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">25</td><td class="tname">Politique Anti-Représailles</td><td class="tdesc">Politique garantissant la sécurité psychologique et la protection juridique de toute personne déposant un grief.</td></tr>
+<tr><td class="tnum" style="background:#0D2B4E">26</td><td class="tname">Mandat de Pare-feu Financiers</td><td class="tdesc">Exige une séparation opérationnelle et financière stricte entre les entités à but non lucratif et commerciales.</td></tr>
+</table>
+<h3 style="color:#0B5C4E;border-left:5px solid #0B5C4E;padding-left:8px">IV — Métriques, Vérification & Impact Longitudinal <span class="muted small">(9 outils)</span></h3>
+<table class="t63">
+<tr><td class="tnum" style="background:#0B5C4E">27</td><td class="tname">Portail de Vérification Communautaire (CVP)</td><td class="tdesc">Conçu par Pape Samb — mécanisme d'application ultime donnant aux partenaires locaux l'autorité de co-signer ou veto les conclusions d'audit.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">28</td><td class="tname">Tableau de Bord du Changement Systémique sur 10 ans</td><td class="tdesc">Suit les indicateurs macro-économiques et institutionnels sur une décennie pour appliquer la Clause de Sortie et garantir un legs durable.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">29</td><td class="tname">Boîte à Outils d'Évaluation « Made in Africa » (MAE)</td><td class="tdesc">Remplace les KPI financiers occidentaux génériques par des résultats relationnels ancrés dans les valeurs africaines : dignité, agence, cohésion sociale.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">30</td><td class="tname">Plateforme de Certification</td><td class="tdesc">Hub central de soumission du Portfolio Numérique, du scoring PQI automatisé et de l'octroi du Score de Crédibilité et du Sceau APA.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">31</td><td class="tname">Score de l'Indice de Qualité du Partenariat (PQI)</td><td class="tdesc">Métrique issue d'un feedback partenaire 360° anonyme mesurant respect, transparence, équité et engagement.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">32</td><td class="tname">Taux de Réduction de la Pauvreté Laborieuse</td><td class="tdesc">Mesure la réduction durable de la pauvreté au sein de la population active sur une décennie.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">33</td><td class="tname">KPI de Permanence des Politiques</td><td class="tdesc">Mesure le % de changements de politiques influencés par l'APA restant financés par les budgets nationaux après la sortie.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">34</td><td class="tname">Taux de Réduction Systémique des Griefs</td><td class="tdesc">Suit la baisse des types de griefs récurrents pour prouver que le MGG mène à une correction structurelle systémique.</td></tr>
+<tr><td class="tnum" style="background:#0B5C4E">35</td><td class="tname">Score de Résultat Relationnel MAE</td><td class="tdesc">Mesure l'atteinte des définitions locales du succès : dignité, cohésion sociale, intégrité culturelle et agence.</td></tr>
+</table>
+<h3 style="color:#C9A24B;border-left:5px solid #C9A24B;padding-left:8px">V — Mise en Œuvre Spécialisée & Renforcement des Capacités <span class="muted small">(15 outils)</span></h3>
+<table class="t63">
+<tr><td class="tnum" style="background:#C9A24B">36</td><td class="tname">Boîte à Outils Gouvernance IA & Anti-Colonialisme des Données</td><td class="tdesc">Audite les projets IA contre les biais, impose la co-propriété de la PI et exige des protocoles « humain dans la boucle ».</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">37</td><td class="tname">Programme de Développement du Leadership Africanisé</td><td class="tdesc">Programme fondé sur la philosophie Ubuntu et la décolonisation pour combattre le tokenisme via une planification de succession rigoureuse.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">38</td><td class="tname">Audit de Capacité Relationnelle & Leadership</td><td class="tdesc">Évalue la capacité individuelle de décolonisation, de partage du pouvoir et de mise en œuvre du MAE.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">39</td><td class="tname">Diagnostic d'Investissement du Gestionnaire de Fonds</td><td class="tdesc">Outil de vetting pour LP et fondations, aligné sur les mandats MAE, MGG et Clause de Sortie.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">40</td><td class="tname">Planificateur d'Événement Redevable & Inclusion Numérique</td><td class="tdesc">Guide la planification de sommets et événements pour garantir résilience, multilinguisme et inclusivité numérique.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">41</td><td class="tname">Questionnaire de Redevabilité & Parrainage des Célébrités</td><td class="tdesc">Intègre des Clauses de Sortie Morale et la parité salariale dans les contrats d'ambassadeurs et de parrainage.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">42</td><td class="tname">Blueprint d'Incubateur de Modèle à Valeur Partagée</td><td class="tdesc">Guide pour accélérateurs ancré dans la co-création communautaire et les principes MAE.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">43</td><td class="tname">Design Sprint de Modèles d'Affaires Contextualisés</td><td class="tdesc">Adapte les design sprints pour valider les modèles d'affaires par co-création communautaire avant tout engagement de capital.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">44</td><td class="tname">Outil d'Alignement & Redevabilité ODD</td><td class="tdesc">Traduit les 17 ODD de l'ONU en actions contractuelles APA spécifiques et auditables.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">45</td><td class="tname">Outil d'Alignement & Redevabilité Agenda 2063</td><td class="tdesc">Applique le partage du pouvoir pour aligner les initiatives locales sur l'Agenda 2063 de l'Union Africaine.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">46</td><td class="tname">Blueprint d'Intégration de Ventes IA Redevables</td><td class="tdesc">Garantit les standards éthiques dans le sourcing de données et la prospection sur tout le cycle de vente B2B.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">47</td><td class="tname">Planificateur d'Outreach & d'Engagement Relationnel</td><td class="tdesc">Guide la recherche GRC/ESG et l'outreach pour un alignement authentique des parties prenantes et éviter le greenwashing.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">48</td><td class="tname">Guide Stratégique pour Financeurs d'Impact & Fondations</td><td class="tdesc">Guide les financeurs vers des modèles relationnels de long terme bâtissant une capacité institutionnelle réelle.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">49</td><td class="tname">Évaluation de Calibrage Stratégique</td><td class="tdesc">Aide à déterminer la stratégie d'entrée de marché appropriée selon l'économie unitaire réelle et les structures de capital disponibles.</td></tr>
+<tr><td class="tnum" style="background:#C9A24B">50</td><td class="tname">Suite d'Évaluation Fintech & Licorne</td><td class="tdesc">Distingue les « licornes de vanité » (spéculatives) des « licornes structurelles » (infrastructure, ancrage communautaire) par les données réelles.</td></tr>
+</table>
+<h3 style="color:#7a4706;border-left:5px solid #7a4706;padding-left:8px">VI — Concepts Fondamentaux & Mandats Opérationnels <span class="muted small">(13 outils)</span></h3>
+<table class="t63">
+<tr><td class="tnum" style="background:#7a4706">51</td><td class="tname">Boîte à Outils de Mise en Œuvre du Cadre</td><td class="tdesc">Référentiel global fournissant le guidage pas-à-pas, la logique de séquençage et l'accès aux 63 outils et modèles APA.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">52</td><td class="tname">Portfolio Numérique</td><td class="tdesc">Soumission obligatoire des preuves de diagnostic et de mise en œuvre requises pour l'audit externe et la certification APA.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">53</td><td class="tname">Quota d'Approvisionnement Local</td><td class="tdesc">Exige de maximiser le sourcing local pour garantir la rétention de valeur et l'impact économique circulaire.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">54</td><td class="tname">L'Audit du Regard (Gaze Audit)</td><td class="tdesc">Étape diagnostique obligatoire visant à confronter et atténuer la déférence inconsciente envers l'expertise non-locale (euro-occidentale).</td></tr>
+<tr><td class="tnum" style="background:#7a4706">55</td><td class="tname">Mandat de Narration Éthique</td><td class="tdesc">Exige l'approbation du partenaire local sur TOUTE communication externe mettant en scène les communautés (anti « misérabilisme »).</td></tr>
+<tr><td class="tnum" style="background:#7a4706">56</td><td class="tname">Phase de Réparation Relationnelle</td><td class="tdesc">Période obligatoire de 90 jours déclenchée par un veto de certification CVP, exigeant un Pacte Relationnel contraignant co-créé.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">57</td><td class="tname">Stratégie de Découplage LC</td><td class="tdesc">Réoriente l'investissement en compétences des formations liées au projet vers les institutions éducatives locales souveraines.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">58</td><td class="tname">Synthèse des Tendances de Griefs</td><td class="tdesc">Outil analytique identifiant les types de griefs récurrents pour imposer une correction structurelle systémique.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">59</td><td class="tname">Mandat de Décolonisation des Données Brutes</td><td class="tdesc">Garantit aux signataires CVP locaux un accès sécurisé en lecture seule à toutes les données MAE brutes avant vérification.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">60</td><td class="tname">Score de l'Indice de Confiance Communautaire</td><td class="tdesc">Métrique cœur du vetting relationnel, priorisant la réputation locale sur les références financières ou techniques.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">61</td><td class="tname">Ratio d'Institutionnalisation Durable</td><td class="tdesc">Mesure le % de politiques et structures influencées par l'APA restant financées par les budgets nationaux des décennies après la sortie.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">62</td><td class="tname">Politiques de Seuil de Veto</td><td class="tdesc">Échecs prédéfinis déclenchant légalement et automatiquement le veto final de certification CVP.</td></tr>
+<tr><td class="tnum" style="background:#7a4706">63</td><td class="tname">Score de Résilience du Partenaire</td><td class="tdesc">Suit les réserves de trésorerie et l'adaptabilité des partenaires locaux face aux chocs macro-économiques.</td></tr>
+</table>
+</div>
+
+<!-- 05 CHAMPIONS -->
+<div class="page">
+  <h2><span class="secnum">05</span>Champions Régionaux &amp; Nationaux — 22 Nations</h2>
+  <p class="muted small">4 régions · 22 pays actifs · vision 54 nations · champions nommés + 5 champions de hubs mondiaux + conseil consultatif.</p>
+  <div class="grid2">
+    <div class="box"><b>🌍 Afrique de l'Ouest — 6 pays</b>
+      <ul class="small">
+        <li><b>Sénégal</b> — Ousmane Diallo · ancien Directeur Conformité UEMOA ; expert OHADA &amp; CEDEAO.</li>
+        <li><b>Nigeria</b> — Chukwuemeka Obi · ex-enquêteur senior EFCC ; anti-corruption, 20+ ans.</li>
+        <li><b>Ghana</b> — Akosua Mensah · spécialiste gouvernance Banque Mondiale ; gestion des finances publiques.</li>
+        <li><b>Côte d'Ivoire</b> — Amadou Koné · conseiller risque BAD ; gouvernance souveraine &amp; infrastructures.</li>
+        <li><b>Mali</b> — Fatoumata Traoré · experte juridique OHADA ; conformité commerce transfrontalier.</li>
+        <li><b>Burkina Faso</b> — Inoussa Compaoré · consultant GRC ; gouvernance minière &amp; droits communautaires.</li>
+      </ul>
+    </div>
+    <div class="box"><b>🌍 Afrique de l'Est — 5 pays</b>
+      <ul class="small">
+        <li><b>Kenya</b> — Wanjiku Kamau · responsable gouvernance PwC Afrique ; réforme du secteur public &amp; gouvernance numérique.</li>
+        <li><b>Éthiopie</b> — Dawit Bekele · officier conformité UA ; intégration régionale.</li>
+        <li><b>Ouganda</b> — Amina Nakato · partenaire conseil IFC ; climat d'investissement &amp; redevabilité.</li>
+        <li><b>Tanzanie</b> — Juma Mwangi · conformité commerciale EAC ; promotion des exportations.</li>
+        <li><b>Rwanda</b> — Claire Uwimana · championne investissement RDB ; transformation économique.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="box"><b>🌍 Afrique Centrale — 4 pays</b>
+      <ul class="small">
+        <li><b>RDC</b> — Lukasa Mbuyi · expert gouvernance minière ; droits communautaires &amp; secteur extractif.</li>
+        <li><b>Cameroun</b> — Ngo'o Manga · responsable conformité CEMAC ; spécialiste GRC bilingue (FR/EN).</li>
+        <li><b>Congo</b> — Albert Mouyabi · praticien OHADA ; gouvernance d'entreprise &amp; conformité juridique.</li>
+        <li><b>Gabon</b> — Léa Obiang · conseillère gouvernance des ressources ; gestion de fonds souverain.</li>
+      </ul>
+    </div>
+    <div class="box"><b>🌍 Afrique du Nord — 7 pays</b>
+      <ul class="small">
+        <li><b>Maroc</b> — Houda El Filali · gouvernance financière (AMMC).</li>
+        <li><b>Égypte · Tunisie · Algérie · Libye · Mauritanie</b> (+1) — champions en cours de désignation.</li>
+      </ul>
+      <p class="small muted">5 champions de hubs mondiaux (Washington, Londres, Paris, Dubaï, New York) assurent le pont avec le capital institutionnel.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 06 SOLUTIONS -->
+<div class="page">
+  <h2><span class="secnum">06</span>Solutions &amp; Forfaits de Services</h2>
+  <p class="muted small">Cartes de solutions étiquetées par rôle · filtrables par audience (Toutes · Entreprise · Investisseur · Gouvernement · Fondation · Diaspora · Célébrité).</p>
+  <table>
+    <tr><th style="width:6%">#</th><th style="width:24%">Solution</th><th style="width:26%">Audience</th><th>Description → Sortie</th></tr>
+    <tr><td>01</td><td><b>Diagnostic de Transition Exécutive</b> (C-SPA)</td><td>CEO · Admins de Fondation · Institutionnel</td><td>Évaluation bilingue à choix multiples ; score &lt;70 → Alerte d'Architecture Coloniale déclenchée. → Score d'Alignement /100.</td></tr>
+    <tr><td>02</td><td><b>Audit de Risque &amp; Territoire</b></td><td>Directeurs Stratégie · Responsables Risque</td><td>Catalogue les griefs, quantifie le déficit de confiance. → Indice de Déficit de Confiance.</td></tr>
+    <tr><td>03</td><td><b>Évaluation d'Impact Décolonisée</b> (MAE)</td><td>Praticiens du Développement · Leaders OSC · DFI</td><td>Remplace les KPI importés par des indicateurs de dignité, cohésion &amp; agence locale. → Score MAE.</td></tr>
+    <tr><td>04</td><td><b>Passerelle de Capital Institutionnel</b> (Prime d'Authenticité™)</td><td>Officiers DFI · Investisseurs d'Impact · Souverains</td><td>Données de gouvernance vérifiées par IA satisfaisant la diligence DFI ; accès à $80B+ d'IDE.</td></tr>
+    <tr><td>05</td><td><b>Pipeline d'Intégrité PME</b> (Certification PME)</td><td>Dirigeants de PME · Coopératives</td><td>4 étapes : Bootcamp → Pipeline → Sprint → S&amp;E ; la certification = passeport numérique vers le capital.</td></tr>
+    <tr><td>06</td><td><b>Voie de Capital Souverain Diaspora</b></td><td>Entrepreneurs Diaspora · Investisseurs de Transferts</td><td>Voie structurée pour déployer expertise &amp; ressources de manière éthique.</td></tr>
+  </table>
+  <h3>Forfaits de Services — Adaptés aux besoins de l'Afrique</h3>
+  <div class="grid3">
+    <div class="box"><b>STARTER — Entrée Pays</b><br><span class="small muted">Sur devis</span><ul class="small"><li>Diagnostic d'Intégrité Institutionnelle</li><li>Scorecard de Gouvernance</li><li>Cadre de Politique GRC</li><li>2 modules de formation</li><li>Tableau de bord 6 mois</li></ul><span class="small">Idéal : ONG, petites institutions.</span></div>
+    <div class="box gold"><b>PROFESSIONAL — Activation Complète</b><br><span class="small muted">Sur devis</span><ul class="small"><li>Suite de diagnostics complète</li><li>Les 15 mandats appliqués</li><li>Suivi Prime d'Authenticité™</li><li>Taxe de Confiance™ + Suppression-Sigma™</li><li>Accès formation complet</li></ul><span class="small">Idéal : gouvernements, sociétés d'État, grandes ONG.</span></div>
+    <div class="box navy"><b>ENTERPRISE — National / Régional</b><br><span class="small muted">Sur devis</span><ul class="small"><li>Les 63 outils déployés</li><li>Déploiement à l'échelle pays</li><li>Tableau de bord d'impact 10 ans</li><li>Conseil sur-mesure + advisory</li><li>Intégration capital institutionnel</li></ul><span class="small">Idéal : programmes nationaux &amp; régionaux.</span></div>
+  </div>
+  <div class="box"><b>Conseiller Solutions IA :</b> « Parlez-moi du défi que vous affrontez en Afrique, et je vous orienterai vers la bonne solution APA. » → ouvre le Concierge IA (§08).</div>
+</div>
+
+<!-- 07 ABOUT + 08 CONCIERGE -->
+<div class="page">
+  <h2><span class="secnum">07</span>À Propos d'APA™ — Mission, Vision &amp; Valeurs</h2>
+  <div class="grid3">
+    <div class="box"><b>Mission</b><p class="small">Éliminer le Vide de Redevabilité dans les institutions africaines en livrant des outils GRC de précision, des champions formés et une infrastructure de confiance vérifiable à travers 54 nations.</p></div>
+    <div class="box gold"><b>Vision</b><p class="small">Un continent où chaque entreprise africaine — de la coopérative de Dakar à la fintech de Nairobi — accède au capital mondial à des taux justes, adossée à des données de gouvernance vérifiables reflétant la réalité locale.</p></div>
+    <div class="box navy"><b>Proposition de Valeur</b><p class="small">Le Cadre APA™ décolonise les métriques de la confiance — remplaçant les cases à cocher occidentales par des indicateurs vérifiables et contextualisés, qui résonnent localement tout en satisfaisant les standards institutionnels mondiaux.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><b>Redevabilité™</b> — standards vérifiés de transparence.</div>
+    <div class="card"><b>Authenticité™</b> — des outils calibrés pour l'Afrique uniquement.</div>
+  </div>
+  <div class="grid2">
+    <div class="card"><b>Inclusivité</b> — les 54 nations représentées.</div>
+    <div class="card"><b>Précision</b> — fondé sur les preuves, testé sur le terrain.</div>
+  </div>
+
+  <h2 style="margin-top:16px"><span class="secnum">08</span>Concierge IA &amp; Ressources — Strategic Navigator</h2>
+  <div class="box navy" style="background:#0D2B4E;color:#fff;border:none">
+    <b style="color:#D4AF37">APA NAVIGATOR</b>
+    <p class="small" style="color:#dfe7ef">« Bienvenue dans APA™ Intelligence. Je suis votre Strategic Navigator. Dites-moi ce que vous cherchez à résoudre — dé-risquer un déploiement de capital, trouver le bon parcours, ou comprendre comment APA™ se compare aux standards ESG traditionnels. »</p>
+    <p class="small" style="color:#cfe7df"><i>Suggestions :</i> › Stratégie souveraine agro-industrielle en Afrique de l'Ouest · › Réduire ma Taxe de Confiance™ &amp; neutraliser les risques opérationnels · › ESG vs GRC APA™ — quelle différence fondamentale ?</p>
+  </div>
+  <h3>Ressources &amp; Accès — 4 Niveaux</h3>
+  <table>
+    <tr><th>Niveau</th><th>Accès</th><th>Contenu</th><th>Prix</th></tr>
+    <tr><td><b>Niveau 0</b></td><td>Sans connexion</td><td>« L'Afrique : Pauvre ou Drainée ? » (actif de conversion phare)</td><td>Gratuit</td></tr>
+    <tr><td><b>Niveau 1</b></td><td>Compte gratuit</td><td>Glossaire complet, leadership intellectuel, aperçus des parcours</td><td>Gratuit</td></tr>
+    <tr><td><b>Niveau 2</b></td><td>Abonnement payant</td><td>Suite GRC complète, Boîte à outils MAE, protocoles d'accès CVP</td><td>Payant</td></tr>
+    <tr><td><b>Niveau 3</b></td><td>Abonnement payant</td><td>Suite complète + conseil sur-mesure + Tableau de bord 10 ans</td><td>Payant</td></tr>
+  </table>
+</div>
+
+<!-- 09 CERTIFICATION -->
+<div class="page">
+  <h2><span class="secnum">09</span>Portail de Certification &amp; Audit de Confiance</h2>
+  <div class="grid2">
+    <div class="box"><b>Formulaire de Diagnostic · Bilingue · FR/EN</b>
+      <ul class="small">
+        <li>Nom de l'organisation</li><li>Votre rôle</li><li>Secteur</li>
+        <li>Q1 — Votre projet inclut-il un mécanisme de co-propriété communautaire juridiquement contraignant ? <i>(Oui, Kinship Equity / MOU seulement / Pas encore)</i></li>
+        <li>Q2 — L'impact est-il mesuré via des indicateurs locaux de dignité &amp; cohésion ? <i>(Boîte MAE / KPI seulement / Non mesuré)</i></li>
+        <li><b>Score d'Alignement : 68/100</b> — <span style="color:#b4451f">⚠ Alerte d'Architecture Coloniale — score &lt; 70</span></li>
+        <li>→ Soumettre pour l'Audit GRC Complet</li>
+      </ul>
+    </div>
+    <div class="box gold"><b>Parcours de Certification APA™ — 5 Étapes</b>
+      <ol class="small">
+        <li><b>Diagnostic C-SPA</b> — score ≥70 requis ; Alerte d'Architecture Coloniale si en deçà.</li>
+        <li><b>Audit de Confiance &amp; Cartographie</b> — catalogue des griefs, Indice de Déficit de Confiance attribué par l'équipe APA.</li>
+        <li><b>Accord Kinship Equity</b> — instruments de co-propriété juridiquement contraignants, sous le cadre de co-gouvernance APA.</li>
+        <li><b>Activation CVP &amp; Suppression-σ</b> — le Portail de Vérification Communautaire devient actif ; matrice de consentement temps réel ; suivi du coefficient de fuite.</li>
+        <li><b>Certification GRC APA™ Décernée</b> — réception du sceau Prime d'Authenticité™ + certificat de conformité vérifiable par les DFI &amp; BMD.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="box navy"><b>Critères d'obtention du certificat :</b> Score C-SPA ≥ 70 · Indice de Déficit de Confiance évalué &amp; accepté · Accord Kinship Equity exécuté · CVP actif avec suivi-σ en direct → certificat auto-émis (sceau Prime d'Authenticité™ + URL de vérification publique).</div>
+</div>
+
+<!-- 10 IMPACT & CONTACT -->
+<div class="page">
+  <h2><span class="secnum">10</span>Impact &amp; Contact</h2>
+  <h3>Impact — Vision &amp; Trajectoire</h3>
+  <div class="grid3">
+    <div class="box"><b>Dé-risquer le capital</b><p class="small">300–500 pb de réduction du coût du capital pour les entreprises certifiées ; conversion des bénéficiaires de subventions en entreprises de qualité institutionnelle.</p></div>
+    <div class="box gold"><b>Autonomiser les femmes</b><p class="small">Étoile polaire : 5 millions de femmes d'ici 2050 — comme nœuds de croissance des chaînes de valeur, non comme bénéficiaires.</p></div>
+    <div class="box navy"><b>Standard continental</b><p class="small">Faire d'APA le standard de gouvernance reconnu (équivalent IFC PS1, reconnu AfCFTA) intégré aux notations de risque Afrique.</p></div>
+  </div>
+  <div class="box"><b>Indicateurs d'impact suivis :</b> compression du coût du capital · MoU institutionnels · réduction de prime d'assurance (MIGA) pour projets certifiés · intégration des données APA aux notations ESG · &gt;100 entreprises certifiées (jalon).</div>
+
+  <h3>Contact</h3>
+  <table>
+    <tr><th style="width:30%">Canal</th><th>Détail</th></tr>
+    <tr><td>Entité</td><td>APA Sénégal SARL — Accountable Partners for Africa™</td></tr>
+    <tr><td>Email</td><td>pape@theapaafrica.org</td></tr>
+    <tr><td>Téléphone</td><td>+221 78 839 15 84</td></tr>
+    <tr><td>Site web</td><td>https://www.theapaafrica.org/</td></tr>
+    <tr><td>Portails</td><td>Portail CVP · Réseau WenA · Réservation d'Audit Niveau 1</td></tr>
+  </table>
+  <div class="box gold"><b>Télécharger le Dossier de Pré-Qualification</b> — accessible via un court formulaire de qualification (nom, email professionnel, organisation, pays), puis remise immédiate du dossier PDF.</div>
+
+  <p class="small muted" style="margin-top:14px">© 2026 APA™ — Accountable Partners for Africa · APA Sénégal SARL · Document confidentiel — version publique. Le Plan d'action de déploiement (12 mois) et les Spécifications Techniques &amp; Chartes Graphiques sont conservés en interne et ne figurent pas dans cette édition.</p>
+</div>
+
+</body>
+</html>

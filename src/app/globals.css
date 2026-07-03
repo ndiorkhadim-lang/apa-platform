@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+/*
+ * APA™ Design System — tokens extracted from the V8 Strategic Synthesis
+ * (design/APA_Synthese_v8_FR.html — the definitive design reference).
+ */
+@theme {
+  /* Brand palette */
+  --color-apa-green: #0a5c36; /* sovereign green — primary */
+  --color-apa-green-mid: #1a8a52; /* bright green — accents, h3 */
+  --color-apa-teal: #0b5c4e; /* gradient middle stop */
+  --color-apa-navy: #0d2b4e; /* deep navy — gradient end, h4 */
+  --color-apa-gold: #c9a24b; /* gold — rules, section chips */
+  --color-apa-gold-bright: #d4af37; /* bright gold — badges, KPI numbers */
+  --color-apa-bronze: #7a4706; /* bronze — fine print on gold */
+  --color-apa-ink: #1f2933; /* body text */
+  --color-apa-grey: #5b6b66; /* muted text */
+  --color-apa-line: #d9e2df; /* borders */
+  --color-apa-soft: #f4f8f6; /* soft surface */
+  --color-apa-mint: #dff0ea; /* pale mint — subtitles on dark */
+  --color-apa-mist: #e3eae7; /* light borders (63-tools table) */
+  --color-apa-sage: #cfe7df; /* cover meta text */
+
+  /* Typography — V8 uses Helvetica Neue exclusively */
+  --font-sans: "Helvetica Neue", "Helvetica", "Arial", ui-sans-serif, system-ui,
+    sans-serif;
+
+  /* Radii seen in V8 (cards 6px, KPI 8px, badges 4px) */
+  --radius-apa: 6px;
+  --radius-apa-lg: 8px;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: var(--color-apa-ink);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── V8 signature pieces ──────────────────────────── */
+
+/* Cover / hero gradient: linear-gradient(157deg, green 0%, teal 48%, navy 100%) */
+.apa-gradient {
+  background: linear-gradient(157deg, #0a5c36 0%, #0b5c4e 48%, #0d2b4e 100%);
+}
+
+/* The 3px gold rule under section titles */
+.apa-rule {
+  height: 3px;
+  width: 84px;
+  background: var(--color-apa-gold);
+}
+
+/* Outlined gold badge (CONFIDENTIEL · …) */
+.apa-badge {
+  border: 1px solid var(--color-apa-gold-bright);
+  color: var(--color-apa-gold-bright);
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Gold section-number chip (01, 02, …) */
+.apa-secnum {
+  display: inline-block;
+  background: var(--color-apa-gold);
+  color: var(--color-apa-ink);
+  font-weight: 800;
+  border-radius: 5px;
+  padding: 2px 12px;
+}
+
+/* Left-accented info box */
+.apa-box {
+  background: var(--color-apa-soft);
+  border: 1px solid var(--color-apa-line);
+  border-left: 4px solid var(--color-apa-green-mid);
+  border-radius: 4px;
+}
+.apa-box-gold {
+  border-left-color: var(--color-apa-gold);
+}
+.apa-box-navy {
+  border-left-color: var(--color-apa-navy);
+}
+
+/* KPI tile on dark gradient */
+.apa-kpi {
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 8px;
 }

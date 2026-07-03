@@ -1,0 +1,57 @@
+{
+  "Meta": {
+    "title": "APA™ — Accountable Partners for Africa",
+    "description": "Africa's most trusted Governance, Risk & Compliance platform. 63 precision tools, 5-step GRC certification, 22-nation intelligence."
+  },
+  "Nav": {
+    "home": "Home",
+    "tools": "The 63 Tools",
+    "solutions": "Solutions",
+    "intelligence": "Intelligence",
+    "certification": "Certification",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign in",
+    "getCertified": "Get certified"
+  },
+  "Home": {
+    "topbar": "GRC Standard™ · Auditable · Pan-African · Bilingual FR/EN",
+    "heroTitle": "Closing the Accountability Void™",
+    "heroLead": "APA™ — Africa's most trusted Governance, Risk & Compliance platform. 54 nations | 22 active countries | 63 precision tools | $80B+ FDI deficit addressed. APA™ turns accountability from a compliance burden into Africa's most powerful competitive advantage.",
+    "ctaDashboard": "Explore the Dashboard",
+    "ctaTools": "See the 63 Tools",
+    "ctaCertify": "Get Certified",
+    "execTitle": "Executive Summary — Strategic Context & the Accountability Void™",
+    "execContextTitle": "Strategic context",
+    "execContextBody": "Africa's real GDP growth (~4.1% in 2025) ranks 2nd worldwide. Yet an institutional trust deficit costs the continent more than $80 billion/year in lost FDI — not from real risk, but from the absence of verifiable governance data.",
+    "execVoidTitle": "The Accountability Void™",
+    "execVoidBody": "The systemic gap where institutions lack verifiable trust signals, pushing capital away. Existing solutions fail in Africa: they apply Western frameworks without cultural calibration — checkboxes that produce reports, not trust.",
+    "execWhyTitle": "Why APA™ answers it",
+    "execWhyBody": "APA™ operationalizes accountability through precision diagnostics, mandate enforcement and trust infrastructure. The Authenticity Premium™ makes it a measurable financial asset: certified enterprises save 300–500 basis points in cost of capital.",
+    "kpisTitle": "Key indicators",
+    "kpis": {
+      "fdi": { "value": "$80B+", "label": "Annual FDI deficit addressed" },
+      "bps": { "value": "300–500 bps", "label": "Cost-of-capital penalty eliminated" },
+      "tools": { "value": "63+", "label": "Proprietary GRC tools" },
+      "nations": { "value": "54 nations", "label": "Targeted Africa coverage" },
+      "valuation": { "value": "$2.5M", "label": "Valuation uplift / certified entity" },
+      "months": { "value": "12 months", "label": "Continental deployment" }
+    },
+    "arcTitle": "3-Beat Engagement Arc — Understand › Engage › Become Accountable",
+    "arc1Step": "01 · Understand",
+    "arc1Title": "Start with a Journey",
+    "arc1Body": "Experience Africa directly. Ground-level access to the systems you want to transform.",
+    "arc2Step": "02 · Engage",
+    "arc2Title": "Learn the Framework",
+    "arc2Body": "Understand the accountability architecture: C-SPA, MAE, CVP, Authenticity Premium™ and σ-suppression.",
+    "arc3Step": "03 · Become Accountable",
+    "arc3Title": "Certify · Deploy · Build",
+    "arc3Body": "Launch the C-SPA diagnostic and complete the 5-step pathway to the verifiable GRC certificate."
+  },
+  "Footer": {
+    "mantra": "\"Ethics into Alpha. Trust as Currency. Accountability as Sovereignty.\"",
+    "quote": "\"Accountability is not a compliance cost — it is an economic alpha generator.\"",
+    "quoteSource": "APA Authenticity Premium™ Framework",
+    "rights": "© {year} APA™ — Accountable Partners for Africa. All rights reserved."
+  }
+}
