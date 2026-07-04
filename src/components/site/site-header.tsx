@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { LocaleSwitcher } from './locale-switcher';
 
 const NAV_ITEMS = [
+  { key: 'journeys', href: '/journeys' },
   { key: 'tools', href: '/tools' },
   { key: 'solutions', href: '/solutions' },
   { key: 'intelligence', href: '/intelligence' },
