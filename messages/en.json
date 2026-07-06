@@ -273,6 +273,84 @@
     "downloadTitle": "Download the Pre-Qualification Deck",
     "downloadDesc": "Available through a short qualification form (name, work email, organization, country), followed by immediate delivery of the PDF deck."
   },
+  "Auth": {
+    "signInTitle": "Sign in to APA™",
+    "signInSubtitle": "Access your workspace: certification journey, GRC tools and strategic intelligence.",
+    "signUpTitle": "Create your APA™ account",
+    "signUpSubtitle": "The first step toward verifiable GRC certification — free, bilingual, no commitment.",
+    "name": "Full name",
+    "email": "Work email",
+    "password": "Password",
+    "passwordHint": "10 characters minimum.",
+    "submitIn": "Sign in",
+    "submitUp": "Create my account",
+    "noAccount": "No account yet?",
+    "createOne": "Create an account",
+    "hasAccount": "Already have an account?",
+    "signInLink": "Sign in",
+    "errorCredentials": "Incorrect email or password.",
+    "errorExists": "An account already exists with this email.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "signOut": "Sign out",
+    "myAccount": "My workspace"
+  },
+  "AppHome": {
+    "welcome": "Welcome, {name}",
+    "subtitle": "Your APA™ workspace — the starting point of your accountability journey.",
+    "roleLabel": "Platform role",
+    "roles": {
+      "USER": "Member",
+      "AUDITOR": "Auditor",
+      "CHAMPION": "National champion",
+      "ADMIN_APA": "APA Administration"
+    },
+    "nextTitle": "Your next steps",
+    "cards": [
+      { "title": "Start certification", "desc": "The 5-step pathway begins with the C-SPA diagnostic (score ≥ 70 required).", "cta": "See the pathway", "href": "/certification" },
+      { "title": "Explore the 63 tools", "desc": "Forms, guides, legal instruments and metrics — the complete framework.", "cta": "Open the catalog", "href": "/tools" },
+      { "title": "Strategic intelligence", "desc": "Tiers T0–T3: from the free glossary to bespoke 22-nation advisory.", "cta": "Discover the tiers", "href": "/intelligence" },
+      { "title": "Verify a certificate", "desc": "The public registry — trust as currency.", "cta": "Verify", "href": "/verify" }
+    ],
+    "engineNote": "The online certification engine (interactive C-SPA diagnostic, audits, certificate issuance) lands in Sprint 3 — your account will unlock it directly."
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page not found",
+    "body": "This page does not exist or has moved. We close the Accountability Void™ — missing pages included.",
+    "cta": "Back to home",
+    "ctaTools": "See the 63 Tools"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong",
+    "body": "Our team has been notified. Try again — if the problem persists, write to pape@theapaafrica.org.",
+    "retry": "Try again"
+  },
+  "ContactForm": {
+    "title": "Write to us",
+    "name": "Full name",
+    "email": "Work email",
+    "organization": "Organization",
+    "country": "Country",
+    "message": "Your message",
+    "submit": "Send message",
+    "success": "Message received — the APA team replies within 48 business hours.",
+    "throttled": "Too many messages from this address. Try again in an hour.",
+    "invalid": "Please check the form fields."
+  },
+  "PrequalForm": {
+    "name": "Full name",
+    "email": "Work email",
+    "organization": "Organization",
+    "country": "Country",
+    "submit": "Get the deck",
+    "success": "Thank you! Your deck is ready:",
+    "download": "Download the Pre-Qualification Deck (PDF)"
+  },
+  "FooterNav": {
+    "platform": "Platform",
+    "certification": "Certification",
+    "contact": "Contact"
+  },
   "Footer": {
     "mantra": "\"Ethics into Alpha. Trust as Currency. Accountability as Sovereignty.\"",
     "quote": "\"Accountability is not a compliance cost — it is an economic alpha generator.\"",

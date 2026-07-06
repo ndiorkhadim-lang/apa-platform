@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
+import { submitContact, submitPrequal } from './actions';
 
 interface Impact {
   title: string;
@@ -28,17 +29,32 @@ function renderDetail(detail: string) {
   return detail;
 }
 
+const inputCls =
+  'mt-1 w-full rounded-md border border-apa-line bg-white px-3 py-2.5 text-sm focus:border-apa-green focus:outline-none focus:ring-2 focus:ring-apa-green/20';
+
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('Contact');
+  const sp = await searchParams;
+  const [t, tForm, tPrequal] = await Promise.all([
+    getTranslations('Contact'),
+    getTranslations('ContactForm'),
+    getTranslations('PrequalForm'),
+  ]);
 
   const impacts = t.raw('impacts') as Impact[];
   const rows = t.raw('rows') as ContactRow[];
+
+  const sent = sp.sent === '1';
+  const deck = sp.deck === '1';
+  const err = typeof sp.err === 'string' ? sp.err : null;
+  const perr = typeof sp.perr === 'string' ? sp.perr : null;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
@@ -63,34 +79,133 @@ export default async function ContactPage({
         {t('indicators')}
       </p>
 
-      {/* Contact table */}
-      <h2 className="mt-14 text-xl font-bold text-apa-green">{t('contactTitle')}</h2>
-      <div className="mt-2 h-[3px] w-full bg-apa-gold" />
-      <div className="mt-6 max-w-2xl overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
-          <thead>
-            <tr className="bg-apa-green text-left text-xs uppercase text-white">
-              <th className="px-3 py-2">{t('cols.channel')}</th>
-              <th className="px-3 py-2">{t('cols.detail')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => (
-              <tr key={r.channel} className="border border-apa-line even:bg-apa-soft">
-                <td className="whitespace-nowrap px-3 py-2 font-bold text-apa-navy">
-                  {r.channel}
-                </td>
-                <td className="px-3 py-2">{renderDetail(r.detail)}</td>
+      <div className="mt-14 grid gap-10 lg:grid-cols-2">
+        {/* Left — contact info + contact form */}
+        <div>
+          <h2 className="text-xl font-bold text-apa-green">{t('contactTitle')}</h2>
+          <div className="mt-2 h-[3px] w-full bg-apa-gold" />
+          <table className="mt-6 w-full border-collapse text-sm">
+            <thead>
+              <tr className="bg-apa-green text-left text-xs uppercase text-white">
+                <th className="px-3 py-2">{t('cols.channel')}</th>
+                <th className="px-3 py-2">{t('cols.detail')}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.channel} className="border border-apa-line even:bg-apa-soft">
+                  <td className="whitespace-nowrap px-3 py-2 font-bold text-apa-navy">
+                    {r.channel}
+                  </td>
+                  <td className="px-3 py-2">{renderDetail(r.detail)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-      {/* Pre-qualification deck */}
-      <div className="apa-box apa-box-gold mt-10 max-w-2xl p-5">
-        <h3 className="font-bold text-apa-green">{t('downloadTitle')}</h3>
-        <p className="mt-2 text-sm">{t('downloadDesc')}</p>
+          <h3 id="contact-form" className="mt-10 text-lg font-bold text-apa-green">
+            {tForm('title')}
+          </h3>
+          {sent ? (
+            <p role="status" className="apa-box mt-4 p-4 text-sm font-semibold text-apa-green">
+              ✓ {tForm('success')}
+            </p>
+          ) : (
+            <form action={submitContact} className="mt-4 space-y-3">
+              <input type="hidden" name="locale" value={locale} />
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="block text-sm font-semibold text-apa-ink">
+                  {tForm('name')}
+                  <input name="name" required minLength={2} className={inputCls} />
+                </label>
+                <label className="block text-sm font-semibold text-apa-ink">
+                  {tForm('email')}
+                  <input type="email" name="email" required className={inputCls} />
+                </label>
+                <label className="block text-sm font-semibold text-apa-ink">
+                  {tForm('organization')}
+                  <input name="organization" className={inputCls} />
+                </label>
+                <label className="block text-sm font-semibold text-apa-ink">
+                  {tForm('country')}
+                  <input name="country" className={inputCls} />
+                </label>
+              </div>
+              <label className="block text-sm font-semibold text-apa-ink">
+                {tForm('message')}
+                <textarea name="message" required minLength={10} rows={5} className={inputCls} />
+              </label>
+              {err ? (
+                <p role="alert" className="apa-box apa-box-gold p-3 text-sm">
+                  {tForm(err === 'throttled' ? 'throttled' : 'invalid')}
+                </p>
+              ) : null}
+              <button
+                type="submit"
+                className="rounded-md bg-apa-green px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-apa-green-mid"
+              >
+                {tForm('submit')}
+              </button>
+            </form>
+          )}
+        </div>
+
+        {/* Right — pre-qualification deck */}
+        <div>
+          <h2 className="text-xl font-bold text-apa-green">{t('downloadTitle')}</h2>
+          <div className="mt-2 h-[3px] w-full bg-apa-gold" />
+          <p className="mt-6 text-sm text-apa-grey">{t('downloadDesc')}</p>
+
+          <div id="prequal-form" className="apa-box apa-box-gold mt-6 p-5">
+            {deck ? (
+              <div role="status">
+                <p className="text-sm font-semibold text-apa-green">
+                  ✓ {tPrequal('success')}
+                </p>
+                <a
+                  href="/docs/APA_Prequalification_Deck.pdf"
+                  download
+                  className="mt-4 inline-block rounded-md bg-apa-green px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-apa-green-mid"
+                >
+                  ⬇ {tPrequal('download')}
+                </a>
+              </div>
+            ) : (
+              <form action={submitPrequal} className="space-y-3">
+                <input type="hidden" name="locale" value={locale} />
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="block text-sm font-semibold text-apa-ink">
+                    {tPrequal('name')}
+                    <input name="name" required minLength={2} className={inputCls} />
+                  </label>
+                  <label className="block text-sm font-semibold text-apa-ink">
+                    {tPrequal('email')}
+                    <input type="email" name="email" required className={inputCls} />
+                  </label>
+                  <label className="block text-sm font-semibold text-apa-ink">
+                    {tPrequal('organization')}
+                    <input name="organization" className={inputCls} />
+                  </label>
+                  <label className="block text-sm font-semibold text-apa-ink">
+                    {tPrequal('country')}
+                    <input name="country" className={inputCls} />
+                  </label>
+                </div>
+                {perr ? (
+                  <p role="alert" className="apa-box p-3 text-sm">
+                    {tForm(perr === 'throttled' ? 'throttled' : 'invalid')}
+                  </p>
+                ) : null}
+                <button
+                  type="submit"
+                  className="rounded-md bg-apa-green px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-apa-green-mid"
+                >
+                  {tPrequal('submit')}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

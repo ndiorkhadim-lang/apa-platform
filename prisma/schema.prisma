@@ -417,6 +417,32 @@ model IntelligenceBrief {
 }
 
 // ─────────────────────────────────────────────
+// LEADS — contact & pre-qualification funnels
+// ─────────────────────────────────────────────
+
+enum LeadType {
+  CONTACT
+  PREQUAL
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  type         LeadType
+  name         String
+  email        String
+  organization String?
+  country      String?
+  message      String?
+  locale       String   @default("fr")
+  ipAddress    String?
+  createdAt    DateTime @default(now())
+
+  @@index([type, createdAt])
+  @@index([ipAddress, createdAt])
+  @@map("leads")
+}
+
+// ─────────────────────────────────────────────
 // AUDIT TRAIL — append-only, GRC non-negotiable
 // ─────────────────────────────────────────────
 

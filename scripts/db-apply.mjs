@@ -46,6 +46,11 @@ let count = 0;
 for (const name of dirs) {
   if (applied.has(name)) continue;
   const sql = readFileSync(join(MIGRATIONS_DIR, name, 'migration.sql'), 'utf8');
+  if (!sql.trim()) {
+    console.error(`FAILED ${name}: migration.sql is empty — refusing to record a no-op.`);
+    process.exitCode = 1;
+    break;
+  }
   const checksum = createHash('sha256').update(sql).digest('hex');
   console.log(`Applying ${name}…`);
   try {

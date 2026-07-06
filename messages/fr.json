@@ -273,6 +273,84 @@
     "downloadTitle": "Télécharger le Dossier de Pré-Qualification",
     "downloadDesc": "Accessible via un court formulaire de qualification (nom, email professionnel, organisation, pays), puis remise immédiate du dossier PDF."
   },
+  "Auth": {
+    "signInTitle": "Connexion à APA™",
+    "signInSubtitle": "Accédez à votre espace : parcours de certification, outils GRC et intelligence stratégique.",
+    "signUpTitle": "Créer votre compte APA™",
+    "signUpSubtitle": "Première étape vers la certification GRC vérifiable — gratuit, bilingue, sans engagement.",
+    "name": "Nom complet",
+    "email": "Email professionnel",
+    "password": "Mot de passe",
+    "passwordHint": "10 caractères minimum.",
+    "submitIn": "Se connecter",
+    "submitUp": "Créer mon compte",
+    "noAccount": "Pas encore de compte ?",
+    "createOne": "Créer un compte",
+    "hasAccount": "Déjà un compte ?",
+    "signInLink": "Se connecter",
+    "errorCredentials": "Email ou mot de passe incorrect.",
+    "errorExists": "Un compte existe déjà avec cet email.",
+    "errorGeneric": "Une erreur est survenue. Réessayez.",
+    "signOut": "Se déconnecter",
+    "myAccount": "Mon espace"
+  },
+  "AppHome": {
+    "welcome": "Bienvenue, {name}",
+    "subtitle": "Votre espace APA™ — le point de départ de votre parcours de redevabilité.",
+    "roleLabel": "Rôle plateforme",
+    "roles": {
+      "USER": "Membre",
+      "AUDITOR": "Auditeur",
+      "CHAMPION": "Champion national",
+      "ADMIN_APA": "Administration APA"
+    },
+    "nextTitle": "Vos prochaines étapes",
+    "cards": [
+      { "title": "Démarrer la certification", "desc": "Le parcours en 5 étapes commence par le diagnostic C-SPA (score ≥ 70 requis).", "cta": "Voir le parcours", "href": "/certification" },
+      { "title": "Explorer les 63 outils", "desc": "Formulaires, guides, instruments juridiques et métriques — le cadre complet.", "cta": "Ouvrir le catalogue", "href": "/tools" },
+      { "title": "Intelligence stratégique", "desc": "Niveaux T0–T3 : du glossaire gratuit au conseil sur-mesure 22 nations.", "cta": "Découvrir les niveaux", "href": "/intelligence" },
+      { "title": "Vérifier un certificat", "desc": "Le registre public — la confiance comme monnaie.", "cta": "Vérifier", "href": "/verify" }
+    ],
+    "engineNote": "Le moteur de certification en ligne (diagnostic C-SPA interactif, audits, émission du certificat) arrive au Sprint 3 — votre compte y donnera accès directement."
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page introuvable",
+    "body": "Cette page n'existe pas ou a été déplacée. Le Vide de Redevabilité™, nous le comblons — les pages manquantes aussi.",
+    "cta": "Retour à l'accueil",
+    "ctaTools": "Voir les 63 Outils"
+  },
+  "ErrorPage": {
+    "title": "Une erreur est survenue",
+    "body": "Notre équipe est notifiée. Réessayez — si le problème persiste, écrivez à pape@theapaafrica.org.",
+    "retry": "Réessayer"
+  },
+  "ContactForm": {
+    "title": "Écrivez-nous",
+    "name": "Nom complet",
+    "email": "Email professionnel",
+    "organization": "Organisation",
+    "country": "Pays",
+    "message": "Votre message",
+    "submit": "Envoyer le message",
+    "success": "Message bien reçu — l'équipe APA vous répond sous 48h ouvrées.",
+    "throttled": "Trop de messages envoyés depuis cette adresse. Réessayez dans une heure.",
+    "invalid": "Vérifiez les champs du formulaire."
+  },
+  "PrequalForm": {
+    "name": "Nom complet",
+    "email": "Email professionnel",
+    "organization": "Organisation",
+    "country": "Pays",
+    "submit": "Recevoir le dossier",
+    "success": "Merci ! Votre dossier est prêt :",
+    "download": "Télécharger le Dossier de Pré-Qualification (PDF)"
+  },
+  "FooterNav": {
+    "platform": "Plateforme",
+    "certification": "Certification",
+    "contact": "Contact"
+  },
   "Footer": {
     "mantra": "« L'éthique en Alpha. La confiance comme monnaie. La redevabilité comme souveraineté. »",
     "quote": "« La redevabilité n'est pas un coût de conformité — c'est un générateur d'alpha économique. »",
