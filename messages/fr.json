@@ -344,7 +344,7 @@
     "cards": [
       { "title": "Démarrer la certification", "desc": "Le parcours en 5 étapes commence par le diagnostic C-SPA (score ≥ 70 requis).", "cta": "Voir le parcours", "href": "/certification" },
       { "title": "Explorer les 63 outils", "desc": "Formulaires, guides, instruments juridiques et métriques — le cadre complet.", "cta": "Ouvrir le catalogue", "href": "/tools" },
-      { "title": "Intelligence stratégique", "desc": "Niveaux T0–T3 : du glossaire gratuit au conseil sur-mesure 22 nations.", "cta": "Découvrir les niveaux", "href": "/intelligence" },
+      { "title": "Intelligence stratégique", "desc": "3 niveaux : compte gratuit, Accès Professionnel, Partenariat Entreprise.", "cta": "Découvrir les niveaux", "href": "/intelligence" },
       { "title": "Vérifier un certificat", "desc": "Le registre public — la confiance comme monnaie.", "cta": "Vérifier", "href": "/verify" }
     ],
     "engineNote": "Le moteur de certification en ligne (diagnostic C-SPA interactif, audits, émission du certificat) arrive au Sprint 3 — votre compte y donnera accès directement."

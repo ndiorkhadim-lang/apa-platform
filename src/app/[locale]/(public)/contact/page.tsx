@@ -56,6 +56,19 @@ export default async function ContactPage({
   const err = typeof sp.err === 'string' ? sp.err : null;
   const perr = typeof sp.perr === 'string' ? sp.perr : null;
 
+  // Intelligence pricing CTAs pre-fill the message (plan=professional|enterprise)
+  const plan = typeof sp.plan === 'string' ? sp.plan : null;
+  const planMessage =
+    plan === 'professional'
+      ? locale === 'fr'
+        ? "Bonjour, je souhaite activer l'Accès Professionnel APA Intelligence (10 000 USD/an) pour mon organisation. Merci de m'envoyer la facture et les étapes d'activation."
+        : 'Hello, I would like to activate APA Intelligence Professional Access (USD 10,000/yr) for my organization. Please send the invoice and activation steps.'
+      : plan === 'enterprise'
+        ? locale === 'fr'
+          ? "Bonjour, je représente une organisation intéressée par le Partenariat Entreprise APA Intelligence (50 000 USD/an). Merci de nous mettre en relation avec l'équipe Entreprise pour un briefing."
+          : 'Hello, I represent an organization interested in the APA Intelligence Enterprise Partnership (USD 50,000/yr). Please connect us with the Enterprise team for a briefing.'
+        : '';
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <SectionHeader num={t('secnum')} title={t('title')} />
@@ -133,7 +146,14 @@ export default async function ContactPage({
               </div>
               <label className="block text-sm font-semibold text-apa-ink">
                 {tForm('message')}
-                <textarea name="message" required minLength={10} rows={5} className={inputCls} />
+                <textarea
+                  name="message"
+                  required
+                  minLength={10}
+                  rows={5}
+                  defaultValue={planMessage}
+                  className={inputCls}
+                />
               </label>
               {err ? (
                 <p role="alert" className="apa-box apa-box-gold p-3 text-sm">

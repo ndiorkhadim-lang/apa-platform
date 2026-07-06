@@ -14,8 +14,9 @@ export default async function SignInPage({
   setRequestLocale(locale);
   const sp = await searchParams;
   const rawRedirect = typeof sp.redirect === 'string' ? sp.redirect : '/app';
-  // only allow app-internal redirects (prevent open redirect)
-  const redirectTo = rawRedirect.startsWith('/app') ? rawRedirect : '/app';
+  // internal paths only (prevent open redirect: no protocol, no //host)
+  const redirectTo =
+    rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/app';
 
   const session = await getSession();
   if (session) redirect({ href: redirectTo, locale });

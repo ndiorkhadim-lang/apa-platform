@@ -344,7 +344,7 @@
     "cards": [
       { "title": "Start certification", "desc": "The 5-step pathway begins with the C-SPA diagnostic (score ≥ 70 required).", "cta": "See the pathway", "href": "/certification" },
       { "title": "Explore the 63 tools", "desc": "Forms, guides, legal instruments and metrics — the complete framework.", "cta": "Open the catalog", "href": "/tools" },
-      { "title": "Strategic intelligence", "desc": "Tiers T0–T3: from the free glossary to bespoke 22-nation advisory.", "cta": "Discover the tiers", "href": "/intelligence" },
+      { "title": "Strategic intelligence", "desc": "3 tiers: Free account, Professional Access, Enterprise Partnership.", "cta": "Discover the tiers", "href": "/intelligence" },
       { "title": "Verify a certificate", "desc": "The public registry — trust as currency.", "cta": "Verify", "href": "/verify" }
     ],
     "engineNote": "The online certification engine (interactive C-SPA diagnostic, audits, certificate issuance) lands in Sprint 3 — your account will unlock it directly."

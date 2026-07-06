@@ -11,6 +11,7 @@ const PUBLIC_ROUTES = [
   '/intelligence',
   '/certification',
   '/champions',
+  '/champions/apply',
   '/dashboard',
   '/about',
   '/contact',

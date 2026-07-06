@@ -24,6 +24,13 @@ export default async function AppHomePage({
   const user = session!.user;
   const role = (user as { platformRole?: string }).platformRole ?? 'USER';
   const cards = t.raw('cards') as AppCard[];
+  const isFr = locale !== 'en';
+
+  const { prisma } = await import('@/infrastructure/prisma/client');
+  const championApp = await prisma.championApplication.findUnique({
+    where: { userId: user.id },
+    select: { status: true },
+  });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
@@ -61,6 +68,50 @@ export default async function AppHomePage({
             </span>
           </Link>
         ))}
+      </div>
+
+      {/* Champion application tracking */}
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/champions/apply"
+          className="group rounded-apa-lg border border-apa-gold bg-white p-6 transition-shadow hover:shadow-md"
+        >
+          <h3 className="font-bold text-apa-navy group-hover:text-apa-green">
+            {isFr ? 'Ma candidature Champion' : 'My Champion application'}
+          </h3>
+          <p className="mt-2 text-sm text-apa-grey">
+            {championApp
+              ? (isFr ? 'Statut actuel : ' : 'Current status: ') + championApp.status
+              : isFr
+                ? 'Aucune candidature — le programme recrute dans 54 nations.'
+                : 'No application yet — the program recruits across 54 nations.'}
+          </p>
+          <span className="mt-3 inline-block text-sm font-semibold text-apa-gold">
+            {championApp
+              ? isFr ? 'Voir mon dossier' : 'View my file'
+              : isFr ? 'Candidater' : 'Apply'}{' '}
+            →
+          </span>
+        </Link>
+
+        {role === 'ADMIN_APA' ? (
+          <Link
+            href="/app/admin/champions"
+            className="group rounded-apa-lg border border-apa-navy bg-white p-6 transition-shadow hover:shadow-md"
+          >
+            <h3 className="font-bold text-apa-navy group-hover:text-apa-green">
+              {isFr ? 'Admin — Candidatures Champions' : 'Admin — Champion applications'}
+            </h3>
+            <p className="mt-2 text-sm text-apa-grey">
+              {isFr
+                ? 'Pipeline de recrutement : filtrer, évaluer, décider, exporter.'
+                : 'Recruitment pipeline: filter, score, decide, export.'}
+            </p>
+            <span className="mt-3 inline-block text-sm font-semibold text-apa-gold">
+              {isFr ? 'Ouvrir le pipeline' : 'Open the pipeline'} →
+            </span>
+          </Link>
+        ) : null}
       </div>
 
       <p className="apa-box mt-10 p-4 text-sm text-apa-ink">{t('engineNote')}</p>

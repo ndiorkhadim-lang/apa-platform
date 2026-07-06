@@ -5,17 +5,24 @@ import { AuthForm } from '@/components/auth/auth-form';
 
 export default async function SignUpPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const sp = await searchParams;
+  const rawRedirect = typeof sp.redirect === 'string' ? sp.redirect : '/app';
+  const redirectTo =
+    rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/app';
+
   const session = await getSession();
-  if (session) redirect({ href: '/app', locale });
+  if (session) redirect({ href: redirectTo, locale });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16">
-      <AuthForm mode="sign-up" />
+      <AuthForm mode="sign-up" redirectTo={redirectTo} />
     </div>
   );
 }

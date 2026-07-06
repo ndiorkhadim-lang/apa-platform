@@ -113,6 +113,7 @@ model User {
   trustAudits  TrustAudit[]  @relation("AuditorAudits")
   auditLogs    AuditLog[]
   toolSessions ToolSession[]
+  championApp  ChampionApplication?
 
   @@map("users")
 }
@@ -460,6 +461,95 @@ model IntelligenceBrief {
   @@index([nationId, minTier])
   @@index([published, category])
   @@map("intelligence_briefs")
+}
+
+// ─────────────────────────────────────────────
+// CHAMPIONS PROGRAM — recruitment pipeline
+// ─────────────────────────────────────────────
+
+enum ChampionAppStatus {
+  DRAFT
+  SUBMITTED
+  SCREENING
+  INTERVIEW
+  ACCEPTED
+  REJECTED
+}
+
+/// One application per user; DRAFT is resumable, then flows through the pipeline.
+model ChampionApplication {
+  id     String            @id @default(cuid())
+  userId String            @unique
+  user   User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status ChampionAppStatus @default(DRAFT)
+
+  // Personal
+  firstName        String?
+  lastName         String?
+  gender           String?
+  dateOfBirth      String?
+  nationality      String?
+  countryResidence String?
+  city             String?
+  phone            String?
+  email            String?
+  linkedin         String?
+  website          String?
+
+  // Professional
+  position        String?
+  organization    String?
+  industry        String?
+  yearsExperience Int?
+  education       String?
+  certifications  String?
+  languages       String?
+  expertise       String?
+
+  // Motivation (max ~1000 words enforced at action level)
+  motivationWhy        String?
+  motivationLeadership String?
+  motivationImpact     String?
+  motivationValue      String?
+
+  // Documents — v1 collects URLs; direct upload activates with S3 credentials
+  cvUrl             String?
+  coverLetterUrl    String?
+  idDocUrl          String?
+  certificatesUrl   String?
+  recommendationUrl String?
+  portfolioUrl      String?
+
+  // Declarations
+  acceptEthics           Boolean @default(false)
+  acceptPrivacy          Boolean @default(false)
+  acceptResponsibilities Boolean @default(false)
+  signature              String?
+
+  submittedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  reviews ChampionReview[]
+
+  @@index([status, countryResidence])
+  @@index([status, submittedAt])
+  @@map("champion_applications")
+}
+
+/// Admin evaluation of an application (score 0–100, notes, decision trace).
+model ChampionReview {
+  id            String              @id @default(cuid())
+  applicationId String
+  application   ChampionApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  reviewerId    String
+  score         Int?
+  notes         String?
+  decision      ChampionAppStatus?
+  createdAt     DateTime            @default(now())
+
+  @@index([applicationId, createdAt])
+  @@map("champion_reviews")
 }
 
 // ─────────────────────────────────────────────
