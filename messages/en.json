@@ -12,8 +12,19 @@
     "about": "About",
     "contact": "Contact",
     "journeys": "Journeys",
+    "framework": "Framework",
+    "aiConcierge": "AI Concierge",
+    "champions": "Champions Program",
+    "verify": "Verify a certificate",
+    "missionFounders": "Mission & Founders",
     "signIn": "Sign in",
-    "getCertified": "Get certified"
+    "signUp": "Create account",
+    "getCertified": "Get certified",
+    "account": "Account",
+    "myWorkspace": "My workspace",
+    "myApplication": "My Champion application",
+    "adminPipeline": "Admin — Applications",
+    "signOut": "Sign out"
   },
   "Journeys": {
     "title": "Find Your Journey",

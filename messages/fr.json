@@ -12,8 +12,19 @@
     "about": "À propos",
     "contact": "Contact",
     "journeys": "Parcours",
+    "framework": "Framework",
+    "aiConcierge": "Concierge IA",
+    "champions": "Programme Champions",
+    "verify": "Vérifier un certificat",
+    "missionFounders": "Mission & Fondateurs",
     "signIn": "Connexion",
-    "getCertified": "Se faire certifier"
+    "signUp": "Créer un compte",
+    "getCertified": "Se faire certifier",
+    "account": "Compte",
+    "myWorkspace": "Mon espace",
+    "myApplication": "Ma candidature Champion",
+    "adminPipeline": "Admin — Candidatures",
+    "signOut": "Se déconnecter"
   },
   "Journeys": {
     "title": "Trouvez Votre Parcours",

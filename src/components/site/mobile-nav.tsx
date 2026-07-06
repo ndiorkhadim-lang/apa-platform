@@ -3,24 +3,22 @@
 import { useState } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 
-interface NavLink {
+export interface MobileGroup {
   label: string;
   href: string;
+  children?: { label: string; href: string }[];
 }
 
 export function MobileNav({
-  items,
-  authLabel,
-  authHref,
+  groups,
   ctaLabel,
 }: {
-  items: NavLink[];
-  authLabel: string;
-  authHref: string;
+  groups: MobileGroup[];
   ctaLabel: string;
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const close = () => setOpen(false);
 
   return (
     <div className="lg:hidden">
@@ -37,34 +35,42 @@ export function MobileNav({
       </button>
 
       {open ? (
-        <nav className="absolute inset-x-0 top-16 z-50 border-b border-apa-line bg-white shadow-lg">
+        <nav className="absolute inset-x-0 top-16 z-50 max-h-[80vh] overflow-y-auto border-b border-apa-line bg-white shadow-lg">
           <ul className="px-4 py-3">
-            {items.map((item) => (
-              <li key={item.href}>
+            {groups.map((g) => (
+              <li key={g.href} className="border-b border-apa-mist last:border-0">
                 <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`block border-b border-apa-mist py-3 text-sm font-medium ${
-                    pathname === item.href ? 'text-apa-green' : 'text-apa-ink'
+                  href={g.href}
+                  onClick={close}
+                  className={`block py-3 text-sm font-bold uppercase tracking-wide ${
+                    pathname === g.href ? 'text-apa-green' : 'text-apa-ink'
                   }`}
                 >
-                  {item.label}
+                  {g.label}
                 </Link>
+                {g.children ? (
+                  <ul className="pb-2 pl-4">
+                    {g.children.map((c) => (
+                      <li key={c.href}>
+                        <Link
+                          href={c.href}
+                          onClick={close}
+                          className={`block py-2 text-sm ${
+                            pathname === c.href ? 'text-apa-green' : 'text-apa-grey'
+                          }`}
+                        >
+                          {c.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </li>
             ))}
-            <li>
-              <Link
-                href={authHref}
-                onClick={() => setOpen(false)}
-                className="block border-b border-apa-mist py-3 text-sm font-semibold text-apa-navy"
-              >
-                {authLabel}
-              </Link>
-            </li>
             <li className="py-3">
               <Link
                 href="/certification"
-                onClick={() => setOpen(false)}
+                onClick={close}
                 className="block rounded-md bg-apa-green px-4 py-3 text-center text-sm font-semibold text-white"
               >
                 {ctaLabel}
