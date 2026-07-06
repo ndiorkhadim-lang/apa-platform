@@ -95,6 +95,42 @@
       "METRIC": "Metric / Dashboard"
     }
   },
+  "Marketplace": {
+    "accessTool": "Access tool",
+    "modalHint": "Sign in to open the selected tool — you'll be redirected straight to it."
+  },
+  "Workspace": {
+    "backToMarketplace": "← All tools",
+    "toolNumber": "Tool {number}/63",
+    "benefits": "Benefits",
+    "instructions": "Instructions",
+    "inputTitle": "Input",
+    "resultsTitle": "Results",
+    "save": "Save",
+    "saved": "Saved",
+    "generate": "Generate report",
+    "reportSaved": "Report saved",
+    "export": "Export",
+    "scorePending": "Answer the questions to see your alignment score.",
+    "scorePass": "✓ Threshold met (≥ 70) — certification-eligible.",
+    "scoreFail": "⚠ Below threshold (< 70) — Colonial Architecture Alert.",
+    "output": {
+      "document": "Complete the fields, then generate your exportable working document.",
+      "clause": "Enter parties and parameters, then generate the draft clause.",
+      "metric": "Enter measured values, then generate a metric snapshot."
+    },
+    "savedReports": "Saved reports",
+    "noReports": "No reports yet — generate one from your input.",
+    "history": "History",
+    "current": "Current session",
+    "reportCount": "{count, plural, =0 {no reports} one {# report} other {# reports}}",
+    "help": "Help",
+    "helpBody": "Every tool has a full source sheet (purpose, features, assessment questions).",
+    "support": "Support",
+    "aiAssistant": "AI Assistant",
+    "aiBody": "The Strategic Navigator routes you to the right tool and interprets your results.",
+    "aiCta": "Open the Navigator"
+  },
   "Champions": {
     "secnum": "05",
     "title": "Regional & National Champions — 22 Nations",

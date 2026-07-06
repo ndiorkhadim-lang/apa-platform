@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
+import { AccessToolButton } from '@/components/tools/access-tool-button';
 import { prisma } from '@/infrastructure/prisma/client';
+import { toolWorkspaceUrl } from '@/lib/tool-access';
 import type { Prisma, ToolCategory } from '@/generated/prisma/client';
 
 const CATEGORY_STYLE: Record<ToolCategory, string> = {
@@ -148,7 +150,7 @@ export default async function ToolsPage({
         {tools.map((tool) => (
           <article
             key={tool.number}
-            className="rounded-apa border border-apa-line bg-white p-5 transition-shadow hover:shadow-md"
+            className="flex flex-col rounded-apa border border-apa-line bg-white p-5 transition-shadow hover:shadow-md"
           >
             <div className="flex items-start justify-between gap-3">
               <span className="text-xs font-bold uppercase tracking-wide text-apa-grey">
@@ -164,9 +166,13 @@ export default async function ToolsPage({
             <h2 className="mt-2 font-bold text-apa-navy">
               {isFr ? tool.nameFr : tool.nameEn}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-apa-ink">
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-apa-ink">
               {isFr ? tool.descFr : tool.descEn}
             </p>
+            <AccessToolButton
+              slug={tool.slug}
+              workspacePath={toolWorkspaceUrl(tool.slug, locale)}
+            />
           </article>
         ))}
       </div>

@@ -95,6 +95,42 @@
       "METRIC": "Métrique / Dashboard"
     }
   },
+  "Marketplace": {
+    "accessTool": "Accéder à l'outil",
+    "modalHint": "Connectez-vous pour ouvrir l'outil sélectionné — vous y serez redirigé immédiatement."
+  },
+  "Workspace": {
+    "backToMarketplace": "← Tous les outils",
+    "toolNumber": "Outil {number}/63",
+    "benefits": "Bénéfices",
+    "instructions": "Instructions",
+    "inputTitle": "Saisie",
+    "resultsTitle": "Résultats",
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "generate": "Générer un rapport",
+    "reportSaved": "Rapport enregistré",
+    "export": "Exporter",
+    "scorePending": "Répondez aux questions pour voir votre score d'alignement.",
+    "scorePass": "✓ Seuil atteint (≥ 70) — éligible à la certification.",
+    "scoreFail": "⚠ Sous le seuil (< 70) — Alerte d'Architecture Coloniale.",
+    "output": {
+      "document": "Complétez les champs puis générez votre document de travail exportable.",
+      "clause": "Renseignez les parties et paramètres puis générez le projet de clause.",
+      "metric": "Saisissez les valeurs mesurées puis générez un instantané de métrique."
+    },
+    "savedReports": "Rapports enregistrés",
+    "noReports": "Aucun rapport pour l'instant — générez-en un depuis votre saisie.",
+    "history": "Historique",
+    "current": "Session en cours",
+    "reportCount": "{count, plural, =0 {aucun rapport} one {# rapport} other {# rapports}}",
+    "help": "Aide",
+    "helpBody": "Chaque outil dispose d'une fiche source complète (objet, fonctionnalités, questions d'évaluation).",
+    "support": "Support",
+    "aiAssistant": "Assistant IA",
+    "aiBody": "Le Strategic Navigator vous oriente vers le bon outil et interprète vos résultats.",
+    "aiCta": "Ouvrir le Navigator"
+  },
   "Champions": {
     "secnum": "05",
     "title": "Champions Régionaux & Nationaux — 22 Nations",

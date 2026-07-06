@@ -5,7 +5,13 @@ import { useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { authClient } from '@/lib/auth-client';
 
-export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
+export function AuthForm({
+  mode,
+  redirectTo = '/app',
+}: {
+  mode: 'sign-in' | 'sign-up';
+  redirectTo?: string;
+}) {
   const t = useTranslations('Auth');
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +46,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
       );
       return;
     }
-    router.push('/app');
+    router.push(redirectTo);
     router.refresh();
   }
 

@@ -48,6 +48,18 @@ export const auth = betterAuth({
     window: 60,
     max: 10, // 10 auth attempts / minute / IP
   },
+  // Cross-subdomain SSO: when set (e.g. ".theapaafrica.org"), the session cookie
+  // is shared with certification.theapaafrica.org so tools open already-signed-in.
+  ...(process.env.AUTH_COOKIE_DOMAIN
+    ? {
+        advanced: {
+          crossSubDomainCookies: {
+            enabled: true,
+            domain: process.env.AUTH_COOKIE_DOMAIN,
+          },
+        },
+      }
+    : {}),
 });
 
 export type AuthSession = typeof auth.$Infer.Session;

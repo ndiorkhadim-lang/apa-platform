@@ -107,11 +107,12 @@ model User {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  sessions    Session[]
-  accounts    Account[]
-  memberships Membership[]
-  trustAudits TrustAudit[] @relation("AuditorAudits")
-  auditLogs   AuditLog[]
+  sessions     Session[]
+  accounts     Account[]
+  memberships  Membership[]
+  trustAudits  TrustAudit[]  @relation("AuditorAudits")
+  auditLogs    AuditLog[]
+  toolSessions ToolSession[]
 
   @@map("users")
 }
@@ -261,12 +262,57 @@ model Tool {
   typeFr         String
   descEn         String
   descFr         String
+  /// Paywall gate applied when subscriptions go live (T1 = free account)
+  minTier        IntelTier    @default(T1)
 
   engagements ToolEngagement[]
+  sessions    ToolSession[]
 
   @@index([pillarId])
   @@index([category])
   @@map("tools")
+}
+
+// ─────────────────────────────────────────────
+// TOOL MARKETPLACE — per-user working sessions & reports
+// ─────────────────────────────────────────────
+
+enum ToolSessionStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+/// A user's working session inside one of the 63 tools.
+model ToolSession {
+  id        String            @id @default(cuid())
+  userId    String
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  toolId    String
+  tool      Tool              @relation(fields: [toolId], references: [id])
+  status    ToolSessionStatus @default(ACTIVE)
+  /// Workspace payload: context, responses, progress — shape varies by category
+  data      Json?
+  startedAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  reports ToolReport[]
+
+  @@index([userId, toolId])
+  @@index([userId, updatedAt])
+  @@map("tool_sessions")
+}
+
+/// A frozen, exportable report generated from a session.
+model ToolReport {
+  id        String      @id @default(cuid())
+  sessionId String
+  session   ToolSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  title     String
+  content   Json
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId, createdAt])
+  @@map("tool_reports")
 }
 
 /// An organization working through one of the 63 tools
