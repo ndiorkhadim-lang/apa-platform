@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Prisma generated client (regenerate: npm run db:generate)
 /src/generated/
+
+# but DO track the env template
+!.env.example
