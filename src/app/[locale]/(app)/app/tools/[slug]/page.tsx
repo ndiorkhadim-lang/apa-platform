@@ -4,6 +4,7 @@ import { Link, redirect } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
 import { prisma } from '@/infrastructure/prisma/client';
 import { BLUEPRINTS } from '@/domain/tools/workspace-blueprint';
+import { SOLUTIONS, solutionOf, journeyOf } from '@/domain/solutions/ecosystem';
 import { ToolWorkspace } from '@/components/tools/tool-workspace';
 import { ensureSession } from './actions';
 
@@ -159,6 +160,44 @@ export default async function ToolWorkspacePage({
           ))}
         </ul>
       </section>
+
+      {/* Ecosystem — where this tool sits & what comes next */}
+      {(() => {
+        const solution = solutionOf(tool.number);
+        const nextSolution = SOLUTIONS[(SOLUTIONS.findIndex((s) => s.id === solution.id) + 1) % SOLUTIONS.length];
+        return (
+          <section className="apa-box apa-box-navy mt-10 p-5">
+            <h2 className="font-bold text-apa-green">
+              {isFr ? 'Cet outil dans l’écosystème APA' : 'This tool in the APA ecosystem'}
+            </h2>
+            <div className="mt-3 grid gap-3 text-sm sm:grid-cols-3">
+              <div>
+                <dt className="text-[11px] font-bold uppercase text-apa-grey">{isFr ? 'Solution' : 'Solution'}</dt>
+                <dd className="mt-0.5 font-semibold text-apa-navy">{solution.code} · {isFr ? solution.nameFr : solution.nameEn}</dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-bold uppercase text-apa-grey">{isFr ? 'Framework' : 'Framework'}</dt>
+                <dd className="mt-0.5">{tool.pillar.code} · {isFr ? tool.pillar.nameFr : tool.pillar.nameEn}</dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-bold uppercase text-apa-grey">{isFr ? 'Certification' : 'Certification'}</dt>
+                <dd className="mt-0.5">{isFr ? solution.certificationFr : solution.certificationEn}</dd>
+              </div>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link href={`/journeys#${journeyOf(tool.number)}`} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-apa-green ring-1 ring-apa-line hover:ring-apa-green">
+                {isFr ? 'Parcours lié' : 'Related journey'} →
+              </Link>
+              <Link href="/certification" className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-apa-navy ring-1 ring-apa-line hover:ring-apa-green">
+                {isFr ? 'Aller à la certification' : 'Go to certification'} →
+              </Link>
+              <Link href={`/tools#${nextSolution.id}`} className="rounded-full bg-apa-green px-3 py-1 text-xs font-semibold text-white hover:bg-apa-green-mid">
+                {isFr ? 'Solution suivante suggérée' : 'Next suggested solution'}: {nextSolution.code} →
+              </Link>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Help / Support / AI Assistant */}
       <section className="mt-10 grid gap-4 md:grid-cols-3">

@@ -1,9 +1,18 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
-import { AccessToolButton } from '@/components/tools/access-tool-button';
+import { AiConcierge } from '@/components/solutions/ai-concierge';
+import { LaunchToolButton } from '@/components/tools/launch-tool-button';
+import { Link } from '@/i18n/navigation';
 import { prisma } from '@/infrastructure/prisma/client';
-import { toolWorkspaceUrl } from '@/lib/tool-access';
-import type { Prisma, ToolCategory } from '@/generated/prisma/client';
+import type { ToolCategory } from '@/generated/prisma/client';
+import {
+  SOLUTIONS,
+  CATEGORY_META,
+  CONCIERGE_RULES,
+  AI_RECOMMENDED,
+  solutionOf,
+  launchPath,
+} from '@/domain/solutions/ecosystem';
 
 const CATEGORY_STYLE: Record<ToolCategory, string> = {
   FORM: 'bg-apa-green text-white',
@@ -12,170 +21,181 @@ const CATEGORY_STYLE: Record<ToolCategory, string> = {
   METRIC: 'bg-apa-teal text-white',
 };
 
-const CATEGORIES = ['FORM', 'GUIDE', 'LEGAL', 'METRIC'] as const;
-
-export default async function ToolsPage({
+export default async function ToolsGatewayPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const sp = await searchParams;
-  const t = await getTranslations('Tools');
-  const isFr = locale === 'fr';
+  const fr = locale !== 'en';
+  const t = await getTranslations('ToolsGateway');
 
-  const pillarFilter = typeof sp.pillar === 'string' && sp.pillar ? sp.pillar : undefined;
-  const catFilter =
-    typeof sp.cat === 'string' && (CATEGORIES as readonly string[]).includes(sp.cat)
-      ? (sp.cat as ToolCategory)
-      : undefined;
-  const q = typeof sp.q === 'string' ? sp.q.trim() : '';
-
-  const where: Prisma.ToolWhereInput = {
-    ...(pillarFilter ? { pillar: { code: pillarFilter } } : {}),
-    ...(catFilter ? { category: catFilter } : {}),
-    ...(q
-      ? {
-          OR: isFr
-            ? [
-                { nameFr: { contains: q, mode: 'insensitive' } },
-                { descFr: { contains: q, mode: 'insensitive' } },
-              ]
-            : [
-                { nameEn: { contains: q, mode: 'insensitive' } },
-                { descEn: { contains: q, mode: 'insensitive' } },
-              ],
-        }
-      : {}),
+  const [tools, pillars] = await Promise.all([
+    prisma.tool.findMany({ orderBy: { number: 'asc' }, include: { pillar: true } }),
+    prisma.pillar.findMany({ orderBy: { order: 'asc' } }),
+  ]);
+  const toolByNumber = new Map(tools.map((t) => [t.number, t]));
+  const pillarName = (code: string) => {
+    const p = pillars.find((x) => x.code === code);
+    return p ? (fr ? p.nameFr : p.nameEn) : code;
   };
 
-  const [pillars, tools] = await Promise.all([
-    prisma.pillar.findMany({ orderBy: { order: 'asc' } }),
-    prisma.tool.findMany({
-      where,
-      orderBy: { number: 'asc' },
-      include: { pillar: true },
-    }),
-  ]);
+  const journeyLabel: Record<string, string> = {
+    'investors-dfis': fr ? 'Investisseurs & DFI' : 'Investors & DFIs',
+    'multinationals-esg': fr ? 'Multinationales & ESG' : 'Multinationals & ESG',
+    'government-agencies': fr ? 'Gouvernements & Agences' : 'Government & Agencies',
+    'foundations-grantmakers': fr ? 'Fondations & Bailleurs' : 'Foundations & Grantmakers',
+    'celebrities-ambassadors': fr ? 'Célébrités & Ambassadeurs' : 'Celebrities & Ambassadors',
+    diaspora: 'Diaspora',
+  };
+
+  const conciergeTools = Object.fromEntries(
+    CONCIERGE_RULES.map((r) => {
+      const tool = toolByNumber.get(r.toolNumber)!;
+      return [
+        r.toolNumber,
+        {
+          number: tool.number,
+          slug: tool.slug,
+          name: fr ? tool.nameFr : tool.nameEn,
+          launchPath: `/${locale}${launchPath(tool.number, tool.slug)}`,
+        },
+      ];
+    })
+  );
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <SectionHeader num={t('secnum')} title={t('title')} subtitle={t('intro')} />
+      <SectionHeader num="04" title={t('title')} subtitle={t('intro')} />
 
-      {/* Pillar summary chips */}
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {pillars.map((p) => (
+      {/* Navigation philosophy strip */}
+      <div className="mt-6 flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wide text-apa-grey">
+        {(t.raw('flow') as string[]).map((step, i, arr) => (
+          <span key={step} className="flex items-center gap-2">
+            <span className={i === 0 ? 'text-apa-green' : ''}>{step}</span>
+            {i < arr.length - 1 ? <span className="text-apa-gold">→</span> : null}
+          </span>
+        ))}
+      </div>
+
+      {/* ── AI CONCIERGE ── */}
+      <div className="mt-8">
+        <AiConcierge
+          locale={locale}
+          rules={CONCIERGE_RULES.map((r) => ({
+            id: r.id,
+            label: fr ? r.labelFr : r.labelEn,
+            solutionId: r.solutionId,
+            toolNumber: r.toolNumber,
+          }))}
+          solutions={SOLUTIONS.map((s) => ({
+            id: s.id,
+            code: s.code,
+            name: fr ? s.nameFr : s.nameEn,
+            pillars: s.pillars,
+            journeySlug: s.journeySlug,
+            certification: fr ? s.certificationFr : s.certificationEn,
+          }))}
+          tools={conciergeTools}
+          journeyLabels={journeyLabel}
+        />
+      </div>
+
+      {/* Solution jump-nav */}
+      <nav className="mt-8 flex flex-wrap gap-2" aria-label={t('solutionsNav')}>
+        {SOLUTIONS.map((s) => (
           <a
-            key={p.code}
-            href={`?pillar=${p.code}`}
-            className={`apa-box block p-3 transition-shadow hover:shadow-md ${
-              pillarFilter === p.code ? 'ring-2 ring-apa-gold' : ''
-            }`}
+            key={s.id}
+            href={`#${s.id}`}
+            className="rounded-full border border-apa-line bg-white px-3 py-1.5 text-xs font-semibold text-apa-navy transition-colors hover:border-apa-green hover:text-apa-green"
           >
-            <span className="font-bold text-apa-navy">
-              {p.code} · {isFr ? p.nameFr : p.nameEn}
-            </span>
+            {s.code} · {fr ? s.nameFr : s.nameEn}
           </a>
         ))}
-      </div>
+      </nav>
 
-      {/* Filters — plain GET form, zero client JS */}
-      <form
-        method="GET"
-        className="mt-8 flex flex-wrap items-end gap-3 rounded-apa border border-apa-line bg-apa-soft p-4"
-      >
-        <label className="flex flex-col gap-1 text-xs font-semibold text-apa-grey">
-          {t('filterPillar')}
-          <select
-            name="pillar"
-            defaultValue={pillarFilter ?? ''}
-            className="rounded-md border border-apa-line bg-white px-3 py-2 text-sm text-apa-ink"
-          >
-            <option value="">{t('all')}</option>
-            {pillars.map((p) => (
-              <option key={p.code} value={p.code}>
-                {p.code} — {isFr ? p.nameFr : p.nameEn}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="flex flex-col gap-1 text-xs font-semibold text-apa-grey">
-          {t('filterCategory')}
-          <select
-            name="cat"
-            defaultValue={catFilter ?? ''}
-            className="rounded-md border border-apa-line bg-white px-3 py-2 text-sm text-apa-ink"
-          >
-            <option value="">{t('all')}</option>
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {t(`categories.${c}`)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="flex min-w-48 flex-1 flex-col gap-1 text-xs font-semibold text-apa-grey">
-          {t('search')}
-          <input
-            type="search"
-            name="q"
-            defaultValue={q}
-            placeholder={t('searchPlaceholder')}
-            className="rounded-md border border-apa-line bg-white px-3 py-2 text-sm text-apa-ink"
-          />
-        </label>
-        <button
-          type="submit"
-          className="rounded-md bg-apa-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-apa-green-mid"
-        >
-          {t('search')}
-        </button>
-        <a
-          href="?"
-          className="px-2 py-2 text-sm font-medium text-apa-grey hover:text-apa-green"
-        >
-          {t('reset')}
-        </a>
-      </form>
-
-      <p className="mt-4 text-sm font-semibold text-apa-grey">
-        {t('shown', { count: tools.length })}
-      </p>
-
-      {/* Tool cards */}
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
-        {tools.map((tool) => (
-          <article
-            key={tool.number}
-            className="flex flex-col rounded-apa border border-apa-line bg-white p-5 transition-shadow hover:shadow-md"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <span className="text-xs font-bold uppercase tracking-wide text-apa-grey">
-                {t('toolNumber', { number: String(tool.number).padStart(2, '0') })} ·{' '}
-                {tool.pillar.code}
-              </span>
-              <span
-                className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${CATEGORY_STYLE[tool.category]}`}
-              >
-                {t(`categories.${tool.category}`)}
-              </span>
+      {/* ── SOLUTIONS × TOOLS ── */}
+      {SOLUTIONS.map((s) => {
+        const solutionTools = tools.filter((tool) => solutionOf(tool.number).id === s.id);
+        return (
+          <section key={s.id} id={s.id} className="mt-14 scroll-mt-20">
+            {/* Solution header */}
+            <div className="rounded-apa-lg border border-apa-line bg-apa-soft p-6">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="apa-secnum text-sm">{s.code}</span>
+                <h2 className="text-xl font-bold text-apa-green">{fr ? s.nameFr : s.nameEn}</h2>
+                <span className="ml-auto text-xs font-semibold text-apa-grey">
+                  {t('toolsCount', { count: solutionTools.length })}
+                </span>
+              </div>
+              <p className="mt-3 text-sm font-semibold italic text-apa-navy">
+                {fr ? s.challengeFr : s.challengeEn}
+              </p>
+              <div className="mt-4 grid gap-4 text-sm md:grid-cols-2 lg:grid-cols-3">
+                <div><dt className="text-[11px] font-bold uppercase text-apa-grey">{t('purpose')}</dt><dd className="mt-0.5">{fr ? s.purposeFr : s.purposeEn}</dd></div>
+                <div><dt className="text-[11px] font-bold uppercase text-apa-grey">{t('context')}</dt><dd className="mt-0.5">{fr ? s.contextFr : s.contextEn}</dd></div>
+                <div><dt className="text-[11px] font-bold uppercase text-apa-grey">{t('outcomes')}</dt><dd className="mt-0.5">{fr ? s.outcomesFr : s.outcomesEn}</dd></div>
+                <div><dt className="text-[11px] font-bold uppercase text-apa-grey">{t('value')}</dt><dd className="mt-0.5">{fr ? s.valueFr : s.valueEn}</dd></div>
+                <div><dt className="text-[11px] font-bold uppercase text-apa-grey">{t('frameworks')}</dt><dd className="mt-0.5">{s.pillars.map(pillarName).join(' · ')}</dd></div>
+                <div>
+                  <dt className="text-[11px] font-bold uppercase text-apa-grey">{t('certification')}</dt>
+                  <dd className="mt-0.5">{fr ? s.certificationFr : s.certificationEn}</dd>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link href={`/journeys#${s.journeySlug}`} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-apa-green ring-1 ring-apa-line hover:ring-apa-green">
+                  {t('journey')}: {journeyLabel[s.journeySlug]}
+                </Link>
+                <Link href="/certification" className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-apa-navy ring-1 ring-apa-line hover:ring-apa-green">
+                  {t('viewPathway')}
+                </Link>
+              </div>
             </div>
-            <h2 className="mt-2 font-bold text-apa-navy">
-              {isFr ? tool.nameFr : tool.nameEn}
-            </h2>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-apa-ink">
-              {isFr ? tool.descFr : tool.descEn}
-            </p>
-            <AccessToolButton
-              slug={tool.slug}
-              workspacePath={toolWorkspaceUrl(tool.slug, locale)}
-            />
-          </article>
-        ))}
-      </div>
+
+            {/* Tool cards */}
+            <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {solutionTools.map((tool) => {
+                const meta = CATEGORY_META[tool.category];
+                const isAi = AI_RECOMMENDED.has(tool.number);
+                return (
+                  <article key={tool.number} className="flex flex-col rounded-apa border border-apa-line bg-white p-5 transition-shadow hover:shadow-md">
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-xs font-bold uppercase tracking-wide text-apa-grey">
+                        #{String(tool.number).padStart(2, '0')} · {tool.pillar.code}
+                      </span>
+                      <span className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${CATEGORY_STYLE[tool.category]}`}>
+                        {t(`categories.${tool.category}`)}
+                      </span>
+                    </div>
+                    <h3 className="mt-2 font-bold text-apa-navy">
+                      {fr ? tool.nameFr : tool.nameEn}
+                    </h3>
+                    {isAi ? (
+                      <span className="mt-1 inline-block self-start rounded-full bg-apa-gold-bright px-2 py-0.5 text-[9px] font-extrabold uppercase text-apa-ink">
+                        ★ {t('aiRecommended')}
+                      </span>
+                    ) : null}
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-apa-ink">
+                      {fr ? tool.descFr : tool.descEn}
+                    </p>
+                    <dl className="mt-3 grid grid-cols-2 gap-1.5 text-[11px] text-apa-grey">
+                      <div><dt className="inline font-bold">{t('domain')}: </dt><dd className="inline">{pillarName(tool.pillar.code)}</dd></div>
+                      <div><dt className="inline font-bold">{t('complexity')}: </dt><dd className="inline">{fr ? meta.complexityFr : meta.complexityEn}</dd></div>
+                      <div><dt className="inline font-bold">{t('duration')}: </dt><dd className="inline">{fr ? meta.timeFr : meta.timeEn}</dd></div>
+                      <div><dt className="inline font-bold">{t('cert')}: </dt><dd className="inline">{fr ? meta.certFr : meta.certEn}</dd></div>
+                    </dl>
+                    <LaunchToolButton
+                      launchPath={`/${locale}${launchPath(tool.number, tool.slug)}`}
+                      label={t('launch')}
+                    />
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }
