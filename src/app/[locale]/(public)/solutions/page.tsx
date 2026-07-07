@@ -1,6 +1,8 @@
 export const dynamic = 'force-dynamic';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
+import { dbAvailable } from '@/infrastructure/prisma/client';
+import { DBNotReady } from '@/components/site/db-not-ready';
 import { Link } from '@/i18n/navigation';
 import { prisma } from '@/infrastructure/prisma/client';
 import {
@@ -37,6 +39,7 @@ export default async function SolutionsCatalogPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  if (!dbAvailable) return <DBNotReady locale={locale} />;
   const fr = locale !== 'en';
   const sp = await searchParams;
   const t = await getTranslations('SolutionsCatalog');

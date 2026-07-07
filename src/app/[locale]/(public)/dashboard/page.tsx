@@ -1,6 +1,8 @@
 export const dynamic = 'force-dynamic';
 import { setRequestLocale } from 'next-intl/server';
 import { prisma } from '@/infrastructure/prisma/client';
+import { dbAvailable } from '@/infrastructure/prisma/client';
+import { DBNotReady } from '@/components/site/db-not-ready';
 import {
   ACRI_VERSION,
   CRITERIA,
@@ -69,6 +71,7 @@ export default async function ExecutiveDashboardPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  if (!dbAvailable) return <DBNotReady locale={locale} />;
   const sp = await searchParams;
   const fr = locale !== 'en';
 

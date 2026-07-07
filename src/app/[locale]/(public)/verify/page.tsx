@@ -1,6 +1,8 @@
 export const dynamic = 'force-dynamic';
 import { getFormatter, getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
+import { dbAvailable } from '@/infrastructure/prisma/client';
+import { DBNotReady } from '@/components/site/db-not-ready';
 import { prisma } from '@/infrastructure/prisma/client';
 import type { CertificateStatus } from '@/generated/prisma/client';
 
@@ -19,6 +21,7 @@ export default async function VerifyPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  if (!dbAvailable) return <DBNotReady locale={locale} />;
   const sp = await searchParams;
   const t = await getTranslations('Verify');
   const format = await getFormatter();

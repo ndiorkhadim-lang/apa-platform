@@ -1,6 +1,8 @@
 export const dynamic = 'force-dynamic';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
+import { dbAvailable } from '@/infrastructure/prisma/client';
+import { DBNotReady } from '@/components/site/db-not-ready';
 import { AiConcierge } from '@/components/solutions/ai-concierge';
 import { LaunchToolButton } from '@/components/tools/launch-tool-button';
 import { Link } from '@/i18n/navigation';
@@ -29,6 +31,7 @@ export default async function ToolsGatewayPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  if (!dbAvailable) return <DBNotReady locale={locale} />;
   const fr = locale !== 'en';
   const t = await getTranslations('ToolsGateway');
 

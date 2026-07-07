@@ -1,6 +1,8 @@
 export const dynamic = 'force-dynamic';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import { dbAvailable } from '@/infrastructure/prisma/client';
+import { DBNotReady } from '@/components/site/db-not-ready';
 import { prisma } from '@/infrastructure/prisma/client';
 
 const REGION_ORDER = ['West', 'East', 'Central', 'North', 'Southern'] as const;
@@ -155,6 +157,7 @@ export default async function ChampionsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  if (!dbAvailable) return <DBNotReady locale={locale} />;
   const c = C[locale === 'en' ? 'en' : 'fr'];
   const isFr = locale !== 'en';
 

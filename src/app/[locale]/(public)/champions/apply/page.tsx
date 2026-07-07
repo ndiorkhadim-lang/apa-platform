@@ -2,6 +2,8 @@ export const dynamic = 'force-dynamic';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
+import { dbAvailable } from '@/infrastructure/prisma/client';
+import { DBNotReady } from '@/components/site/db-not-ready';
 import { prisma } from '@/infrastructure/prisma/client';
 import { ChampionApplicationForm } from '@/components/champions/application-form';
 import { GLOBAL_HUBS } from '@/domain/about/leadership';
@@ -41,6 +43,7 @@ export default async function ChampionApplyPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  if (!dbAvailable) return <DBNotReady locale={locale} />;
   const c = COPY[locale === 'en' ? 'en' : 'fr'];
 
   const session = await getSession();
