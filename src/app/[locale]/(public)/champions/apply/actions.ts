@@ -16,6 +16,8 @@ const draftSchema = z.object({
   dateOfBirth: z.string().max(20).optional(),
   nationality: z.string().max(80).optional(),
   countryResidence: z.string().max(80).optional(),
+  regionalHub: z.string().max(40).optional(),
+  preferredRegion: z.string().max(60).optional(),
   city: z.string().max(80).optional(),
   phone: z.string().max(40).optional(),
   email: z.string().max(200).optional(),

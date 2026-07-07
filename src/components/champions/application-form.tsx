@@ -17,6 +17,7 @@ const T = {
     f: {
       firstName: 'Prénom *', lastName: 'Nom *', gender: 'Genre', dateOfBirth: 'Date de naissance',
       nationality: 'Nationalité *', countryResidence: 'Pays de résidence *', city: 'Ville *',
+      regionalHub: 'Hub mondial de rattachement', preferredRegion: 'Région de travail préférée',
       phone: 'Téléphone *', email: 'Email *', linkedin: 'LinkedIn', website: 'Site web',
       position: 'Poste actuel *', organization: 'Organisation *', industry: 'Secteur',
       yearsExperience: "Années d'expérience *", education: 'Diplôme le plus élevé *',
@@ -57,6 +58,7 @@ const T = {
     f: {
       firstName: 'First name *', lastName: 'Last name *', gender: 'Gender', dateOfBirth: 'Date of birth',
       nationality: 'Nationality *', countryResidence: 'Country of residence *', city: 'City *',
+      regionalHub: 'Global hub affiliation', preferredRegion: 'Preferred working region',
       phone: 'Phone *', email: 'Email *', linkedin: 'LinkedIn', website: 'Website',
       position: 'Current position *', organization: 'Organization *', industry: 'Industry',
       yearsExperience: 'Years of experience *', education: 'Highest education *',
@@ -110,11 +112,15 @@ export function ChampionApplicationForm({
   locale,
   initial,
   nations,
+  hubs,
+  regions,
   submitted,
 }: {
   locale: string;
   initial: DraftInput;
   nations: { code: string; name: string }[];
+  hubs: { code: string; label: string }[];
+  regions: string[];
   submitted: boolean;
 }) {
   const t = T[(locale as L) in T ? (locale as L) : 'fr'];
@@ -243,6 +249,34 @@ export function ChampionApplicationForm({
           </select>
         </Field>
         {text('city')}
+        <Field label={t.f.regionalHub}>
+          <select
+            value={String(d.regionalHub ?? '')}
+            onChange={(e) => set('regionalHub')(e.target.value)}
+            className={inputCls}
+          >
+            <option value="" />
+            {hubs.map((h) => (
+              <option key={h.code} value={h.code}>
+                {h.label}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label={t.f.preferredRegion}>
+          <select
+            value={String(d.preferredRegion ?? '')}
+            onChange={(e) => set('preferredRegion')(e.target.value)}
+            className={inputCls}
+          >
+            <option value="" />
+            {regions.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
+        </Field>
         {text('phone')}
         {text('email', 'email')}
         {text('linkedin')}

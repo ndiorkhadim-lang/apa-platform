@@ -3,7 +3,16 @@ import { Link } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
 import { prisma } from '@/infrastructure/prisma/client';
 import { ChampionApplicationForm } from '@/components/champions/application-form';
+import { GLOBAL_HUBS } from '@/domain/about/leadership';
 import type { DraftInput } from './actions';
+
+const REGION_LABEL: Record<string, { en: string; fr: string }> = {
+  West: { en: 'West Africa', fr: 'Afrique de l’Ouest' },
+  East: { en: 'East Africa', fr: 'Afrique de l’Est' },
+  Central: { en: 'Central Africa', fr: 'Afrique Centrale' },
+  North: { en: 'North Africa', fr: 'Afrique du Nord' },
+  Southern: { en: 'Southern Africa', fr: 'Afrique Australe' },
+};
 
 const COPY = {
   fr: {
@@ -71,6 +80,8 @@ export default async function ChampionApplyPage({
               code: n.code,
               name: locale === 'en' ? n.nameEn : n.nameFr,
             }))}
+            hubs={GLOBAL_HUBS.map((h) => ({ code: h.code, label: `${h.flag} ${h.city}` }))}
+            regions={Object.values(REGION_LABEL).map((r) => (locale === 'en' ? r.en : r.fr))}
           />
         ) : (
           <div className="apa-gradient rounded-apa-lg p-8 text-white">

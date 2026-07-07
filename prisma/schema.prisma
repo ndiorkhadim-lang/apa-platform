@@ -555,6 +555,8 @@ model ChampionApplication {
   dateOfBirth      String?
   nationality      String?
   countryResidence String?
+  regionalHub      String? // one of the 5 global capital hubs (or none)
+  preferredRegion  String? // preferred working region
   city             String?
   phone            String?
   email            String?
