@@ -114,6 +114,7 @@ model User {
   auditLogs    AuditLog[]
   toolSessions ToolSession[]
   championApp  ChampionApplication?
+  cspaRuns     CspaRun[]
 
   @@map("users")
 }
@@ -478,6 +479,53 @@ model IntelligenceBrief {
   @@index([nationId, minTier])
   @@index([published, category])
   @@map("intelligence_briefs")
+}
+
+// ─────────────────────────────────────────────
+// C-SPA — Core Strategic Paradigm Audit (assessment engine)
+// ─────────────────────────────────────────────
+
+/// Versioned question bank — regenerable from the Master Document.
+/// The engine renders whatever this table contains: no hardcoded questions.
+model CspaQuestion {
+  id        String @id @default(cuid())
+  version   String @default("cspa-v1")
+  section   String // S1..S6 (section metadata lives in domain/cspa)
+  order     Int
+  textEn    String
+  textFr    String
+  /// 4 option labels, index = score value 0..3 (Traditional → Institutionalized)
+  optionsEn Json
+  optionsFr Json
+
+  @@unique([version, section, order])
+  @@index([version])
+  @@map("cspa_questions")
+}
+
+enum CspaRunStatus {
+  DRAFT
+  COMPLETED
+}
+
+/// A user's diagnostic run — draft/resume, then frozen results.
+model CspaRun {
+  id            String        @id @default(cuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  version       String        @default("cspa-v1")
+  status        CspaRunStatus @default(DRAFT)
+  answers       Json? // { [questionId]: 0..3 }
+  sectionScores Json? // { S1: 0..100, ... }
+  composite     Int? // 0..100 — gate ≥ 70
+  maturity      String? // TRADITIONAL | TRANSITIONAL | TRANSFORMATIONAL | CSV_LEADER
+  startedAt     DateTime      @default(now())
+  completedAt   DateTime?
+  updatedAt     DateTime      @updatedAt
+
+  @@index([userId, status])
+  @@index([status, completedAt])
+  @@map("cspa_runs")
 }
 
 // ─────────────────────────────────────────────
