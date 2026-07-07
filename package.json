@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "db:apply": "node scripts/db-apply.mjs",
@@ -12,7 +12,11 @@
     "db:generate": "prisma generate",
     "db:studio": "prisma studio",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate",
+    "db:deploy": "node scripts/db-apply.mjs",
+    "db:seed:all": "tsx prisma/seed.ts && node scripts/seed-acri.mjs && node scripts/seed-cspa.mjs",
+    "db:migrate:prod": "prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
