@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
 import { Link } from '@/i18n/navigation';

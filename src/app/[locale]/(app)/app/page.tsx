@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link, redirect } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';

@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getFormatter, getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
 import { prisma } from '@/infrastructure/prisma/client';
