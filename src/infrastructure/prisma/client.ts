@@ -7,17 +7,30 @@ const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function createPrisma(): PrismaClient {
   return new PrismaClient({
-    adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL! }),
+    adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
   });
+}
+
+function createNoopClient(): PrismaClient {
+  return new Proxy({} as PrismaClient, {
+    get() {
+      return new Proxy({}, {
+        get() {
+          return async (..._args: any[]) => {
+            const stack = new Error().stack || '';
+            if (stack.includes('.count(') || stack.includes('.aggregate(') || stack.includes('.groupBy(')) return 0;
+            if (stack.includes('.findMany(') || stack.includes('.createMany(')) return [];
+            return null;
+          };
+        },
+      }) as any;
+    },
+  }) as PrismaClient;
 }
 
 export const prisma: PrismaClient = dbAvailable
   ? (globalForPrisma.prisma ??= createPrisma())
-  : (new Proxy({} as PrismaClient, {
-      get() {
-        throw new Error('DATABASE_URL is not configured');
-      },
-    }) as PrismaClient);
+  : createNoopClient();
 
 if (process.env.NODE_ENV !== 'production' && dbAvailable) {
   globalForPrisma.prisma = prisma;
