@@ -1,5 +1,6 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import { APA_CONTACT, APA_SOCIALS } from '@/domain/site/contact';
 
 const FOOTER_GROUPS = [
   {
@@ -22,16 +23,19 @@ const FOOTER_GROUPS = [
 ];
 
 export async function SiteFooter() {
-  const [t, tNav, tFooterNav] = await Promise.all([
+  const [t, tNav, tFooterNav, locale] = await Promise.all([
     getTranslations('Footer'),
     getTranslations('Nav'),
     getTranslations('FooterNav'),
+    getLocale(),
   ]);
+  const fr = locale !== 'en';
 
   return (
     <footer className="apa-gradient text-white">
       <div className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[2fr_1fr_1fr_1.3fr]">
+          {/* Brand + mantra */}
           <div>
             <p className="text-lg italic text-apa-gold-bright">{t('mantra')}</p>
             <div className="apa-rule my-6" />
@@ -41,6 +45,7 @@ export async function SiteFooter() {
             </blockquote>
           </div>
 
+          {/* Platform + Certification nav */}
           {FOOTER_GROUPS.map((group) => (
             <nav key={group.titleKey} aria-label={tFooterNav(group.titleKey)}>
               <h2 className="text-xs font-bold uppercase tracking-wider text-apa-gold-bright">
@@ -49,20 +54,14 @@ export async function SiteFooter() {
               <ul className="mt-4 space-y-2 text-sm">
                 {group.links.map((l) => (
                   <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="text-apa-mint transition-colors hover:text-white"
-                    >
+                    <Link href={l.href} className="text-apa-mint transition-colors hover:text-white">
                       {tNav(l.key)}
                     </Link>
                   </li>
                 ))}
                 {group.titleKey === 'certification' ? (
                   <li>
-                    <Link
-                      href="/verify"
-                      className="text-apa-mint transition-colors hover:text-white"
-                    >
+                    <Link href="/verify" className="text-apa-mint transition-colors hover:text-white">
                       /verify
                     </Link>
                   </li>
@@ -70,6 +69,49 @@ export async function SiteFooter() {
               </ul>
             </nav>
           ))}
+
+          {/* Contact us */}
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-apa-gold-bright">
+              {tFooterNav('contactUs')}
+            </h2>
+            <address className="mt-4 space-y-1.5 text-sm not-italic text-apa-mint">
+              <p className="font-semibold text-white">{APA_CONTACT.entity}</p>
+              <p>{fr ? APA_CONTACT.addressFr : APA_CONTACT.addressEn}</p>
+              <p>
+                <a href={`mailto:${APA_CONTACT.email}`} className="transition-colors hover:text-white">
+                  {APA_CONTACT.email}
+                </a>
+              </p>
+              <p>
+                <a href={`tel:${APA_CONTACT.phoneHref}`} className="transition-colors hover:text-white">
+                  {APA_CONTACT.phone}
+                </a>
+              </p>
+              <p>
+                <a href={APA_CONTACT.website} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+                  theapaafrica.org
+                </a>
+              </p>
+            </address>
+
+            {/* Social links */}
+            <div className="mt-4 flex gap-2">
+              {APA_SOCIALS.map((s) => (
+                <a
+                  key={s.key}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  title={s.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10 text-sm font-bold text-apa-gold-bright transition-colors hover:bg-apa-gold-bright hover:text-apa-ink"
+                >
+                  {s.glyph}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         <p className="mt-10 border-t border-white/15 pt-6 text-xs text-apa-sage">

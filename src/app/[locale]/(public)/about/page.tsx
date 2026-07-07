@@ -87,18 +87,11 @@ export default async function AboutPage({
                 <div>
                   <h3 className="text-xl font-bold text-apa-navy">{f.name}</h3>
                   <p className="text-sm font-semibold text-apa-gold">{fr ? f.roleFr : f.roleEn}</p>
-                  <div className="mt-2 flex gap-3 text-xs">
-                    {f.linkedin ? (
-                      <a href={f.linkedin} target="_blank" rel="noopener noreferrer" className="font-semibold text-apa-green hover:underline">
-                        LinkedIn ↗
-                      </a>
-                    ) : null}
-                    {f.email ? (
-                      <a href={`mailto:${f.email}`} className="font-semibold text-apa-green hover:underline">
-                        {f.email}
-                      </a>
-                    ) : null}
-                  </div>
+                  {f.email ? (
+                    <a href={`mailto:${f.email}`} className="mt-2 inline-block text-xs font-semibold text-apa-green hover:underline">
+                      {f.email}
+                    </a>
+                  ) : null}
                 </div>
               </div>
 

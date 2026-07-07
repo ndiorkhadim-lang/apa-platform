@@ -356,10 +356,11 @@
     "cols": { "channel": "Canal", "detail": "Détail" },
     "rows": [
       { "channel": "Entité", "detail": "APA Sénégal SARL — Accountable Partners for Africa™" },
+      { "channel": "Adresse", "detail": "Siège continental · Dakar, Sénégal" },
       { "channel": "Email", "detail": "pape@theapaafrica.org" },
       { "channel": "Téléphone", "detail": "+221 78 839 15 84" },
       { "channel": "Site web", "detail": "https://www.theapaafrica.org/" },
-      { "channel": "Portails", "detail": "Portail CVP · Réseau WenA · Réservation d'Audit Niveau 1" }
+      { "channel": "Réseaux", "detail": "LinkedIn · YouTube · X (Twitter) — @ApaAfrica" }
     ],
     "downloadTitle": "Télécharger le Dossier de Pré-Qualification",
     "downloadDesc": "Accessible via un court formulaire de qualification (nom, email professionnel, organisation, pays), puis remise immédiate du dossier PDF."
@@ -440,7 +441,8 @@
   "FooterNav": {
     "platform": "Plateforme",
     "certification": "Certification",
-    "contact": "Contact"
+    "contact": "Contact",
+    "contactUs": "Nous contacter"
   },
   "Footer": {
     "mantra": "« L'éthique en Alpha. La confiance comme monnaie. La redevabilité comme souveraineté. »",

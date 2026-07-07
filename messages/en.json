@@ -356,10 +356,11 @@
     "cols": { "channel": "Channel", "detail": "Detail" },
     "rows": [
       { "channel": "Entity", "detail": "APA Senegal SARL — Accountable Partners for Africa™" },
+      { "channel": "Address", "detail": "Continental HQ · Dakar, Senegal" },
       { "channel": "Email", "detail": "pape@theapaafrica.org" },
       { "channel": "Phone", "detail": "+221 78 839 15 84" },
       { "channel": "Website", "detail": "https://www.theapaafrica.org/" },
-      { "channel": "Portals", "detail": "CVP Portal · WenA Network · Tier 1 Audit Booking" }
+      { "channel": "Socials", "detail": "LinkedIn · YouTube · X (Twitter) — @ApaAfrica" }
     ],
     "downloadTitle": "Download the Pre-Qualification Deck",
     "downloadDesc": "Available through a short qualification form (name, work email, organization, country), followed by immediate delivery of the PDF deck."
@@ -440,7 +441,8 @@
   "FooterNav": {
     "platform": "Platform",
     "certification": "Certification",
-    "contact": "Contact"
+    "contact": "Contact",
+    "contactUs": "Contact us"
   },
   "Footer": {
     "mantra": "\"Ethics into Alpha. Trust as Currency. Accountability as Sovereignty.\"",

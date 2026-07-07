@@ -23,6 +23,7 @@ export interface Founder {
 export const FOUNDERS: Founder[] = [
   {
     slug: 'aisha-babangida',
+    photo: '/founders/aisha-babangida.jpg',
     name: 'Aisha Babangida',
     roleEn: 'Founder · Visionary President',
     roleFr: 'Fondatrice · Présidente Visionnaire',
@@ -33,10 +34,10 @@ export const FOUNDERS: Founder[] = [
     messageEn: '“We do not ask for a seat at the table. We rebuild the table so accountability is structural.”',
     messageFr: '« Nous ne demandons pas une place à la table. Nous reconstruisons la table pour que la redevabilité soit structurelle. »',
     expertise: ['Women’s economic empowerment', 'Decolonization', 'Co-governance', 'Endogenous knowledge systems'],
-    linkedin: 'https://www.linkedin.com/company/theapaafrica',
   },
   {
     slug: 'pape-samb',
+    photo: '/founders/pape-samb.jpg',
     name: 'Pape Samb',
     roleEn: 'Co-Founder · CEO · Principal Architect — GRC Strategist',
     roleFr: 'Co-Fondateur · CEO · Architecte Principal — Stratège GRC',
@@ -47,7 +48,6 @@ export const FOUNDERS: Founder[] = [
     messageEn: '“Accountability is not a compliance cost. It is an economic alpha generator.”',
     messageFr: '« La redevabilité n’est pas un coût de conformité. C’est un générateur d’alpha économique. »',
     expertise: ['GRC methodology', 'Authenticity Premium™', 'Systemic investment', 'Certification architecture'],
-    linkedin: 'https://www.linkedin.com/company/theapaafrica',
     email: 'pape@theapaafrica.org',
   },
 ];
