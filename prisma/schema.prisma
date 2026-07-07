@@ -190,10 +190,27 @@ model Nation {
 
   organizations Organization[]
   briefs        IntelligenceBrief[]
+  acriScores    AcriScore[]
 
   @@index([isPriority])
   @@index([region])
   @@map("nations")
+}
+
+/// ACRI — per-criterion score (criterion 1–7, 0–100), versioned by dataset.
+/// dataVersion "illustrative-v1" = traceable decomposition of the Atlas
+/// composite, pending live datasets (WB WGI, TI CPI, AfCFTA, GSMA, …).
+model AcriScore {
+  id          String @id @default(cuid())
+  nationId    String
+  nation      Nation @relation(fields: [nationId], references: [id], onDelete: Cascade)
+  criterion   Int // 1..7
+  score       Int // 0..100
+  dataVersion String @default("illustrative-v1")
+
+  @@unique([nationId, criterion, dataVersion])
+  @@index([dataVersion, criterion])
+  @@map("acri_scores")
 }
 
 // ─────────────────────────────────────────────
