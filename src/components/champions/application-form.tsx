@@ -110,6 +110,7 @@ function Field({
 
 export function ChampionApplicationForm({
   locale,
+  type = 'CHAMPION',
   initial,
   nations,
   hubs,
@@ -117,6 +118,7 @@ export function ChampionApplicationForm({
   submitted,
 }: {
   locale: string;
+  type?: 'CHAMPION' | 'ADVISOR';
   initial: DraftInput;
   nations: { code: string; name: string }[];
   hubs: { code: string; label: string }[];
@@ -185,7 +187,7 @@ export function ChampionApplicationForm({
 
   function onSave() {
     start(async () => {
-      await saveDraft(d, locale);
+      await saveDraft(d, locale, type);
       setSavedMsg(true);
       setErrors(null);
       setWordErr(null);
@@ -194,7 +196,7 @@ export function ChampionApplicationForm({
 
   function onSubmit() {
     start(async () => {
-      const res = await submitApplication(d, locale);
+      const res = await submitApplication(d, locale, type);
       if (res.ok) {
         setDone(true);
       } else if ('wordCount' in res && res.wordCount) {

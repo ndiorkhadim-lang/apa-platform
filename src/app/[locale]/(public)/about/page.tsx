@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { Avatar } from '@/components/about/avatar';
-import { FOUNDERS, ADVISORS, CAREER_PATH } from '@/domain/about/leadership';
+import {
+  FOUNDERS,
+  ADVISORS,
+  CHAMPIONS_SHOWCASE,
+  CAREER_PATH,
+} from '@/domain/about/leadership';
 
 export async function generateMetadata({
   params,
@@ -14,10 +19,131 @@ export async function generateMetadata({
   return {
     title: fr ? 'À propos — APA™' : 'About — APA™',
     description: fr
-      ? 'Mission, direction et ambition d’Accountable Partners for Africa : la gouvernance vérifiable comme standard continental.'
-      : 'The mission, leadership and ambition of Accountable Partners for Africa: verifiable governance as a continental standard.',
+      ? 'Direction, gouvernance et communauté d’Accountable Partners for Africa : fondateurs, conseil consultatif mondial et réseau de champions.'
+      : 'The leadership, governance and community of Accountable Partners for Africa: founders, global advisory board and champions network.',
   };
 }
+
+const T = {
+  fr: {
+    heroKicker: 'Institution · Panafricaine · Bilingue',
+    heroTitle: 'Une institution panafricaine de gouvernance, bâtie sur la redevabilité.',
+    heroLead:
+      'APA construit la confiance et garantit un impact mesurable dans le développement africain — par des partenariats équitables, l’autonomisation des femmes et une gouvernance éthique érigée en standard.',
+    leadershipTitle: 'Direction & Double Leadership',
+    leadershipSub:
+      'APA est co-dirigée par deux figures complémentaires : la vision humanitaire et l’architecture stratégique de la gouvernance.',
+    keyThemes: 'Axes clés',
+    mvvTitle: 'Mission, Vision & Proposition de Valeur',
+    mission: 'Mission',
+    missionBody:
+      'Bâtir la confiance et livrer un impact mesurable dans le développement africain en menant des projets qui autonomisent les femmes, défendent une conduite d’affaires éthique et décolonisent les modèles d’aide traditionnels.',
+    vision: 'Vision',
+    visionBody:
+      'Une Afrique où le développement est porté par des partenariats équitables, où les femmes sont à l’avant-garde de l’autonomisation économique, et où l’éthique des affaires est le standard d’une croissance durable.',
+    valueProp: 'Proposition de Valeur',
+    valuePropBody:
+      'Agence de mise en œuvre spécialisée, APA bâtit la confiance et garantit un impact mesurable en livrant des initiatives de développement complexes dans les délais et le budget. Notre méthodologie d’investissement systémique permet de comprendre les systèmes sous-jacents, d’identifier les points de levier stratégiques et d’engager gouvernements, communautés, investisseurs et institutions pour des résultats collectifs durables.',
+    boardTitle: 'Conseil Consultatif Mondial',
+    boardSub:
+      'Un conseil de dirigeants issus des institutions qui façonnent la gouvernance et le capital en Afrique.',
+    advisorRecruitTitle: 'Devenir Membre du Conseil Consultatif Mondial',
+    advisorWhy: 'Pourquoi rejoindre',
+    advisorWhyBody:
+      'Orienter la stratégie d’une institution panafricaine de gouvernance et prêter votre expertise à un standard continental reconnu des gouvernements, DFI et BMD.',
+    advisorResp: 'Responsabilités',
+    advisorRespBody:
+      'Conseil stratégique trimestriel, revue des cadres méthodologiques, mise en relation institutionnelle et parrainage des champions nationaux.',
+    advisorContribution: 'Contribution attendue',
+    advisorContributionBody:
+      'Expertise sectorielle (gouvernance, finance, droit, politique publique), crédibilité institutionnelle et disponibilité pour ~6h/mois.',
+    advisorBenefits: 'Bénéfices',
+    advisorBenefitsBody:
+      'Reconnaissance de premier plan, accès à l’Intelligence APA, participation aux briefings exécutifs et rayonnement continental.',
+    advisorProcess: 'Processus de sélection',
+    advisorProcessBody:
+      'Candidature → présélection sous 10 jours ouvrés → entretien avec la Direction → nomination.',
+    advisorCta: 'Candidater au Conseil Consultatif Mondial',
+    championsShowcaseTitle: 'Le Réseau des Champions APA',
+    championsShowcaseSub:
+      'Nos champions portent le standard APA dans leur pays. Profils illustratifs répartis sur le continent — remplaçables par de vrais profils.',
+    championBadge: 'Champion APA',
+    demoNote: 'Démonstration visuelle · profils illustratifs',
+    becomeChampionTitle: 'Devenir Champion APA',
+    championMission: 'Mission',
+    championMissionBody: 'Porter le standard APA dans votre pays et animer le pipeline de certification.',
+    championResp: 'Responsabilités',
+    championRespBody: 'Déploiement des 63 outils, mobilisation institutionnelle, reporting au hub continental.',
+    championBenefits: 'Bénéfices',
+    championBenefitsBody: 'Formation certifiante, réseau DFI, accès Intelligence, badge & certificat numérique.',
+    championCriteria: 'Critères de sélection',
+    championCriteriaBody: '8+ ans d’expérience, intégrité, leadership, bilinguisme FR/EN, expertise pertinente.',
+    careerTitle: 'Progression de carrière',
+    careerNote:
+      '« Une fois approuvés comme Champions APA, les membres deviennent éligibles pour évoluer vers les rôles de Facilitateur, Master Trainer et Auditeur Global, via les parcours de certification et de leadership d’APA. »',
+    championCta: 'Candidater — Devenir Champion APA',
+    discoverProgram: 'Découvrir le programme',
+  },
+  en: {
+    heroKicker: 'Institution · Pan-African · Bilingual',
+    heroTitle: 'A Pan-African governance institution, built on accountability.',
+    heroLead:
+      'APA builds trust and guarantees measurable impact in African development — through equitable partnerships, women’s empowerment and ethical business set as the standard.',
+    leadershipTitle: 'Leadership & Dual Direction',
+    leadershipSub:
+      'APA is co-led by two complementary figures: humanitarian vision and strategic governance architecture.',
+    keyThemes: 'Key themes',
+    mvvTitle: 'Mission, Vision & Value Proposition',
+    mission: 'Mission',
+    missionBody:
+      'To build trust and deliver measurable impact in African development by implementing projects that empower women, champion ethical business, and decolonize traditional aid models.',
+    vision: 'Vision',
+    visionBody:
+      'An Africa where development is driven by equitable partnerships, women are at the forefront of economic empowerment, and ethical business is the standard for sustainable growth.',
+    valueProp: 'Value Proposition',
+    valuePropBody:
+      'As a specialized implementing agency, Accountable Partners for Africa (APA) builds trust and guarantees measurable impact by delivering complex development initiatives on time and within budget. Our systemic investing methodology enables us to understand underlying systems, identify strategic leverage points and engage governments, communities, investors and institutions to achieve sustainable collective outcomes.',
+    boardTitle: 'Global Advisory Board',
+    boardSub:
+      'A board of leaders drawn from the institutions that shape governance and capital in Africa.',
+    advisorRecruitTitle: 'Become a Member of the Global Advisory Board',
+    advisorWhy: 'Why join',
+    advisorWhyBody:
+      'Steer the strategy of a Pan-African governance institution and lend your expertise to a continental standard recognized by governments, DFIs and MDBs.',
+    advisorResp: 'Responsibilities',
+    advisorRespBody:
+      'Quarterly strategic counsel, review of methodological frameworks, institutional introductions and sponsorship of national champions.',
+    advisorContribution: 'Expected contribution',
+    advisorContributionBody:
+      'Sector expertise (governance, finance, law, public policy), institutional credibility and availability of ~6h/month.',
+    advisorBenefits: 'Benefits',
+    advisorBenefitsBody:
+      'Premier recognition, APA Intelligence access, participation in executive briefings and continental reach.',
+    advisorProcess: 'Selection process',
+    advisorProcessBody:
+      'Application → screening within 10 business days → interview with the Direction → appointment.',
+    advisorCta: 'Apply to Join the Global Advisory Board',
+    championsShowcaseTitle: 'The APA Champions Network',
+    championsShowcaseSub:
+      'Our champions carry the APA standard in their country. Illustrative profiles spread across the continent — replaceable with real profiles.',
+    championBadge: 'APA Champion',
+    demoNote: 'Visual demonstration · placeholder profiles',
+    becomeChampionTitle: 'Become an APA Champion',
+    championMission: 'Mission',
+    championMissionBody: 'Carry the APA standard in your country and drive the certification pipeline.',
+    championResp: 'Responsibilities',
+    championRespBody: 'Deploying the 63 tools, institutional mobilization, reporting to the continental hub.',
+    championBenefits: 'Benefits',
+    championBenefitsBody: 'Certifying training, DFI network, Intelligence access, digital badge & certificate.',
+    championCriteria: 'Selection criteria',
+    championCriteriaBody: '8+ years of experience, integrity, leadership, FR/EN bilingualism, relevant expertise.',
+    careerTitle: 'Career progression',
+    careerNote:
+      '“Once approved as an APA Champion, members become eligible to progress toward Facilitator, Master Trainer and Global Auditor roles through APA’s certification and leadership pathways.”',
+    championCta: 'Apply to Become an APA Champion',
+    discoverProgram: 'Discover the program',
+  },
+} as const;
 
 export default async function AboutPage({
   params,
@@ -27,27 +153,19 @@ export default async function AboutPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const fr = locale !== 'en';
-  const t = await getTranslations('About');
-
-  const values = t.raw('values') as { name: string; desc: string }[];
+  const t = T[fr ? 'fr' : 'en'];
 
   return (
     <div>
       {/* ═════ HERO ═════ */}
       <section className="apa-gradient text-white">
         <div className="mx-auto max-w-6xl px-4 py-20">
-          <span className="apa-badge">
-            {fr ? 'Institution · Panafricaine · Bilingue' : 'Institution · Pan-African · Bilingual'}
-          </span>
+          <span className="apa-badge">{t.heroKicker}</span>
           <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
-            {fr
-              ? 'Faire de la redevabilité vérifiable le standard de l’Afrique.'
-              : 'Making verifiable accountability Africa’s standard.'}
+            {t.heroTitle}
           </h1>
           <div className="apa-rule my-6" />
-          <p className="max-w-2xl text-base leading-relaxed text-apa-mint">
-            {fr ? t('mission') : t('mission')}
-          </p>
+          <p className="max-w-2xl text-base leading-relaxed text-apa-mint">{t.heroLead}</p>
           <div className="mt-8 flex flex-wrap gap-6 text-sm">
             {[
               ['54', fr ? 'nations — la vision' : 'nations — the vision'],
@@ -64,17 +182,11 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* ═════ SECTION 1 — FOUNDERS (top of page) ═════ */}
+      {/* ═════ SECTION 1 — FOUNDERS ═════ */}
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="text-2xl font-bold text-apa-green">
-          {fr ? 'Direction & Double Leadership' : 'Leadership & Dual Direction'}
-        </h2>
+        <h2 className="text-2xl font-bold text-apa-green">{t.leadershipTitle}</h2>
         <div className="mt-2 h-[3px] w-full bg-apa-gold" />
-        <p className="mt-3 max-w-2xl text-sm text-apa-grey">
-          {fr
-            ? 'APA est co-dirigée par deux figures complémentaires : la vision humanitaire et l’architecture stratégique.'
-            : 'APA is co-led by two complementary figures: humanitarian vision and strategic architecture.'}
-        </p>
+        <p className="mt-3 max-w-2xl text-sm text-apa-grey">{t.leadershipSub}</p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           {FOUNDERS.map((f) => (
@@ -98,16 +210,15 @@ export default async function AboutPage({
               <p className="mt-5 text-sm leading-relaxed text-apa-ink">{fr ? f.bioFr : f.bioEn}</p>
 
               <div className="apa-box mt-5 p-4">
-                <p className="text-[11px] font-bold uppercase tracking-wide text-apa-grey">
-                  {fr ? 'Vision' : 'Vision'}
-                </p>
+                <p className="text-[11px] font-bold uppercase tracking-wide text-apa-grey">Vision</p>
                 <p className="mt-1 text-sm text-apa-navy">{fr ? f.visionFr : f.visionEn}</p>
               </div>
               <blockquote className="mt-3 border-l-4 border-apa-gold pl-4 text-sm italic text-apa-ink">
                 {fr ? f.messageFr : f.messageEn}
               </blockquote>
 
-              <div className="mt-5 flex flex-wrap gap-1.5">
+              <p className="mt-5 text-[11px] font-bold uppercase tracking-wide text-apa-grey">{t.keyThemes}</p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
                 {f.expertise.map((e) => (
                   <span key={e} className="rounded-full border border-apa-sage bg-apa-soft px-2.5 py-0.5 text-[11px] font-semibold text-apa-green">
                     {e}
@@ -119,49 +230,33 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* ═════ MISSION / VISION / VALUES ═════ */}
+      {/* ═════ SECTION 2 — MISSION / VISION / VALUE ═════ */}
       <section className="bg-apa-soft">
         <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="text-2xl font-bold text-apa-green">
-            {fr ? 'Mission, Vision & Valeurs' : 'Mission, Vision & Values'}
-          </h2>
+          <h2 className="text-2xl font-bold text-apa-green">{t.mvvTitle}</h2>
           <div className="mt-2 h-[3px] w-full bg-apa-gold" />
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="apa-box bg-white p-5">
-              <h3 className="font-bold text-apa-green">{t('missionTitle')}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{t('mission')}</p>
+            <div className="apa-box bg-white p-6">
+              <h3 className="font-bold text-apa-green">{t.mission}</h3>
+              <p className="mt-2 text-sm leading-relaxed">{t.missionBody}</p>
             </div>
-            <div className="apa-box apa-box-gold bg-white p-5">
-              <h3 className="font-bold text-apa-green">{t('visionTitle')}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{t('vision')}</p>
+            <div className="apa-box apa-box-gold bg-white p-6">
+              <h3 className="font-bold text-apa-green">{t.vision}</h3>
+              <p className="mt-2 text-sm leading-relaxed">{t.visionBody}</p>
             </div>
-            <div className="apa-box apa-box-navy bg-white p-5">
-              <h3 className="font-bold text-apa-green">{t('valuePropTitle')}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{t('valueProp')}</p>
+            <div className="apa-box apa-box-navy bg-white p-6">
+              <h3 className="font-bold text-apa-green">{t.valueProp}</h3>
+              <p className="mt-2 text-sm leading-relaxed">{t.valuePropBody}</p>
             </div>
-          </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v) => (
-              <div key={v.name} className="rounded-apa border border-apa-line bg-white p-4">
-                <span className="font-bold text-apa-navy">{v.name}</span>
-                <p className="mt-1 text-sm text-apa-grey">{v.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* ═════ SECTION 2 — GLOBAL ADVISORY BOARD ═════ */}
+      {/* ═════ SECTION 3 — GLOBAL ADVISORY BOARD ═════ */}
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="text-2xl font-bold text-apa-green">
-          {fr ? 'Conseil Consultatif Mondial' : 'Global Advisory Board'}
-        </h2>
+        <h2 className="text-2xl font-bold text-apa-green">{t.boardTitle}</h2>
         <div className="mt-2 h-[3px] w-full bg-apa-gold" />
-        <p className="mt-3 max-w-2xl text-sm text-apa-grey">
-          {fr
-            ? 'Un conseil de dirigeants issus des institutions qui façonnent la gouvernance et le capital en Afrique.'
-            : 'A board of leaders drawn from the institutions that shape governance and capital in Africa.'}
-        </p>
+        <p className="mt-3 max-w-2xl text-sm text-apa-grey">{t.boardSub}</p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ADVISORS.map((a) => (
@@ -175,13 +270,9 @@ export default async function AboutPage({
                   </p>
                 </div>
               </div>
-              <p className="mt-3 text-sm font-semibold text-apa-green">
-                {fr ? a.titleFr : a.titleEn}
-              </p>
+              <p className="mt-3 text-sm font-semibold text-apa-green">{fr ? a.titleFr : a.titleEn}</p>
               <p className="text-xs text-apa-grey">{a.organization}</p>
-              <p className="mt-2 text-sm leading-relaxed text-apa-ink">
-                {fr ? a.expertiseFr : a.expertiseEn}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-apa-ink">{fr ? a.expertiseFr : a.expertiseEn}</p>
               {a.linkedin ? (
                 <a href={a.linkedin} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-xs font-semibold text-apa-green hover:underline">
                   LinkedIn ↗
@@ -192,23 +283,95 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* ═════ SECTION 3 — BECOME AN APA CHAMPION ═════ */}
+      {/* ═════ SECTION 4 — BECOME A GLOBAL ADVISOR ═════ */}
+      <section className="apa-gradient text-white">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <span className="apa-badge">{fr ? 'Conseil Consultatif Mondial' : 'Global Advisory Board'}</span>
+          <h2 className="mt-5 text-3xl font-bold">{t.advisorRecruitTitle}</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              [t.advisorWhy, t.advisorWhyBody],
+              [t.advisorResp, t.advisorRespBody],
+              [t.advisorContribution, t.advisorContributionBody],
+              [t.advisorBenefits, t.advisorBenefitsBody],
+              [t.advisorProcess, t.advisorProcessBody],
+            ].map(([h, b]) => (
+              <div key={h} className="rounded-apa border border-white/20 bg-white/10 p-4">
+                <h3 className="font-bold text-apa-gold-bright">{h}</h3>
+                <p className="mt-1.5 text-sm text-apa-mint">{b}</p>
+              </div>
+            ))}
+          </div>
+          <Link
+            href="/champions/apply?type=advisor"
+            className="mt-8 inline-block rounded-md bg-apa-gold-bright px-8 py-3.5 text-base font-bold text-apa-ink transition-colors hover:bg-apa-gold"
+          >
+            {t.advisorCta} →
+          </Link>
+        </div>
+      </section>
+
+      {/* ═════ SECTION 5 — APA CHAMPIONS SHOWCASE ═════ */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-bold text-apa-green">{t.championsShowcaseTitle}</h2>
+            <p className="mt-1 text-sm text-apa-grey">{t.championsShowcaseSub}</p>
+          </div>
+          <span className="rounded-full border border-apa-line bg-apa-soft px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-apa-grey">
+            {t.demoNote}
+          </span>
+        </div>
+        <div className="mt-2 h-[3px] w-full bg-apa-gold" />
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {CHAMPIONS_SHOWCASE.map((ch) => (
+            <article key={ch.name} className="rounded-apa-lg border border-apa-line bg-white p-5 transition-shadow hover:shadow-md">
+              <div className="flex items-center gap-4">
+                <Avatar name={ch.name} size={64} />
+                <div>
+                  <h3 className="font-bold text-apa-navy">{ch.name}</h3>
+                  <p className="text-xs font-semibold text-apa-grey">
+                    {ch.flag} {ch.country} · {ch.region}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <span className="rounded-full bg-apa-green px-2.5 py-0.5 text-[10px] font-extrabold uppercase text-white">
+                  ★ {t.championBadge}
+                </span>
+                <span className="text-sm font-semibold text-apa-green">{fr ? ch.roleFr : ch.roleEn}</span>
+              </div>
+              <p className="text-xs text-apa-grey">{ch.organization}</p>
+              <p className="mt-2 text-sm leading-relaxed text-apa-ink">{fr ? ch.bioFr : ch.bioEn}</p>
+              <p className="mt-2 text-xs font-semibold text-apa-navy">{fr ? ch.expertiseFr : ch.expertiseEn}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ═════ SECTION 6 — BECOME AN APA CHAMPION ═════ */}
       <section className="apa-gradient text-white">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <span className="apa-badge">{fr ? 'Programme Champions APA™' : 'APA™ Champions Program'}</span>
-          <h2 className="mt-5 text-3xl font-bold">
-            {fr ? 'Devenez Champion APA' : 'Become an APA Champion'}
-          </h2>
-          <p className="mt-3 max-w-2xl text-apa-mint">
-            {fr
-              ? 'Portez le standard APA dans votre pays. Menez le changement de gouvernance, ouvrez le capital, et bâtissez une carrière au sein d’un réseau continental.'
-              : 'Carry the APA standard in your country. Lead governance change, unlock capital, and build a career inside a continental network.'}
-          </p>
+          <h2 className="mt-5 text-3xl font-bold">{t.becomeChampionTitle}</h2>
 
-          {/* Career progression timeline */}
-          <h3 className="mt-10 text-lg font-bold text-apa-gold-bright">
-            {fr ? 'Progression de carrière' : 'Career progression'}
-          </h3>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              [t.championMission, t.championMissionBody],
+              [t.championResp, t.championRespBody],
+              [t.championBenefits, t.championBenefitsBody],
+              [t.championCriteria, t.championCriteriaBody],
+            ].map(([h, b]) => (
+              <div key={h} className="rounded-apa border border-white/20 bg-white/10 p-4">
+                <h3 className="font-bold text-apa-gold-bright">{h}</h3>
+                <p className="mt-1.5 text-sm text-apa-mint">{b}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Career pathway */}
+          <h3 className="mt-10 text-lg font-bold text-apa-gold-bright">{t.careerTitle}</h3>
           <div className="mt-4 flex flex-wrap items-stretch gap-2">
             {CAREER_PATH.map((step, i, arr) => (
               <div key={step.code} className="flex flex-1 items-center gap-2" style={{ minWidth: 130 }}>
@@ -228,37 +391,20 @@ export default async function AboutPage({
               </div>
             ))}
           </div>
-          <p className="apa-box apa-box-gold mt-5 bg-white/10 p-4 text-sm text-apa-mint">
-            {fr
-              ? '« Une fois approuvés comme Champions APA, les membres deviennent éligibles pour évoluer vers les rôles de Facilitateur, Master Trainer et Auditeur Global, via les parcours de certification et de leadership d’APA. »'
-              : '“Once approved as an APA Champion, members become eligible to progress toward Facilitator, Master Trainer and Global Auditor roles through APA’s certification and leadership pathways.”'}
-          </p>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {[
-              [fr ? 'Rôle' : 'Role', fr ? 'Ambassadeur officiel : déploiement des 63 outils, animation du pipeline de certification.' : 'Official ambassador: deploying the 63 tools, driving the certification pipeline.'],
-              [fr ? 'Impact' : 'Impact', fr ? 'Compression de la prime de risque (300–500 pb), déblocage d’IDE, entités locales rendues bancables.' : 'Risk-premium compression (300–500 bps), FDI unlocked, local entities made bankable.'],
-              [fr ? 'Bénéfices' : 'Benefits', fr ? 'Formation certifiante, réseau DFI, accès Intelligence, badge & certificat numérique.' : 'Certifying training, DFI network, Intelligence access, digital badge & certificate.'],
-            ].map(([h, d]) => (
-              <div key={h} className="rounded-apa border border-white/20 bg-white/10 p-4">
-                <h4 className="font-bold text-apa-gold-bright">{h}</h4>
-                <p className="mt-1 text-sm text-apa-mint">{d}</p>
-              </div>
-            ))}
-          </div>
+          <p className="apa-box apa-box-gold mt-5 bg-white/10 p-4 text-sm text-apa-mint">{t.careerNote}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/champions/apply"
               className="rounded-md bg-apa-gold-bright px-8 py-3.5 text-base font-bold text-apa-ink transition-colors hover:bg-apa-gold"
             >
-              {fr ? 'Candidater — Devenir Champion APA' : 'Apply to Become an APA Champion'} →
+              {t.championCta} →
             </Link>
             <Link
               href="/champions"
               className="rounded-md border border-apa-gold-bright px-8 py-3.5 text-base font-semibold text-apa-gold-bright transition-colors hover:bg-apa-gold-bright hover:text-apa-ink"
             >
-              {fr ? 'Découvrir le programme' : 'Discover the program'}
+              {t.discoverProgram}
             </Link>
           </div>
         </div>

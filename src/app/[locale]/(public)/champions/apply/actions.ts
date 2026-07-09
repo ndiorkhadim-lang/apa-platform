@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { prisma } from '@/infrastructure/prisma/client';
 import { sendEmail, emailTemplates } from '@/infrastructure/email/send';
 import { getSession } from '@/lib/session';
-import type { Prisma } from '@/generated/prisma/client';
+import type { ApplicationType, Prisma } from '@/generated/prisma/client';
 
 const WORD_LIMIT = 1000;
 
@@ -64,14 +64,18 @@ function wordCount(...texts: (string | undefined)[]): number {
 }
 
 /** Create-or-update the caller's draft (Save Draft / Resume Later). */
-export async function saveDraft(input: DraftInput, locale: string) {
+export async function saveDraft(
+  input: DraftInput,
+  locale: string,
+  type: ApplicationType = 'CHAMPION'
+) {
   const user = await requireUser();
   const data = draftSchema.parse(input);
 
   const app = await prisma.championApplication.upsert({
-    where: { userId: user.id },
+    where: { userId_type: { userId: user.id, type } },
     update: data as Prisma.ChampionApplicationUpdateInput,
-    create: { userId: user.id, email: user.email, ...data },
+    create: { userId: user.id, type, email: user.email, ...data },
   });
 
   if (app.status !== 'DRAFT') throw new Error('ALREADY_SUBMITTED');
@@ -102,7 +106,11 @@ const REQUIRED_FOR_SUBMIT = [
 ] as const;
 
 /** Submit: validates completeness, word limit and declarations, then locks the file. */
-export async function submitApplication(input: DraftInput, locale: string) {
+export async function submitApplication(
+  input: DraftInput,
+  locale: string,
+  type: ApplicationType = 'CHAMPION'
+) {
   const user = await requireUser();
   const data = draftSchema.parse(input);
 
@@ -126,13 +134,13 @@ export async function submitApplication(input: DraftInput, locale: string) {
   }
 
   const existing = await prisma.championApplication.findUnique({
-    where: { userId: user.id },
+    where: { userId_type: { userId: user.id, type } },
     select: { status: true },
   });
   if (existing && existing.status !== 'DRAFT') throw new Error('ALREADY_SUBMITTED');
 
   const app = await prisma.championApplication.upsert({
-    where: { userId: user.id },
+    where: { userId_type: { userId: user.id, type } },
     update: {
       ...(data as Prisma.ChampionApplicationUpdateInput),
       status: 'SUBMITTED',
@@ -140,6 +148,7 @@ export async function submitApplication(input: DraftInput, locale: string) {
     },
     create: {
       userId: user.id,
+      type,
       ...data,
       status: 'SUBMITTED',
       submittedAt: new Date(),
@@ -149,13 +158,13 @@ export async function submitApplication(input: DraftInput, locale: string) {
   await prisma.auditLog.create({
     data: {
       actorId: user.id,
-      action: 'champion.application.submit',
+      action: `${type === 'ADVISOR' ? 'advisor' : 'champion'}.application.submit`,
       entityType: 'ChampionApplication',
       entityId: app.id,
     },
   });
 
-  const tpl = emailTemplates.championSubmitted(data.firstName ?? user.name, locale);
+  const tpl = emailTemplates.championSubmitted(data.firstName ?? user.name, locale, type);
   await sendEmail({ to: data.email ?? user.email, ...tpl });
 
   revalidatePath(`/${locale}/champions/apply`);

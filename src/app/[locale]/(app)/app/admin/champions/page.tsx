@@ -136,6 +136,9 @@ export default async function AdminChampionsPage({
           {apps.map((a) => (
             <details key={a.id} className="rounded-apa-lg border border-apa-line bg-white">
               <summary className="flex cursor-pointer flex-wrap items-center gap-3 px-5 py-4">
+                <span className={`rounded px-2 py-0.5 text-[10px] font-extrabold uppercase ${a.type === 'ADVISOR' ? 'bg-apa-gold text-apa-ink' : 'bg-apa-green text-white'}`}>
+                  {a.type === 'ADVISOR' ? (locale === 'fr' ? 'Conseiller' : 'Advisor') : (locale === 'fr' ? 'Champion' : 'Champion')}
+                </span>
                 <span className="font-bold text-apa-navy">
                   {a.firstName} {a.lastName}
                 </span>

@@ -29,7 +29,7 @@ export default async function AppHomePage({
 
   const { prisma } = await import('@/infrastructure/prisma/client');
   const championApp = await prisma.championApplication.findUnique({
-    where: { userId: user.id },
+    where: { userId_type: { userId: user.id, type: 'CHAMPION' } },
     select: { status: true },
   });
 

@@ -43,22 +43,25 @@ const shell = (title: string, body: string) => `
 </div>`;
 
 export const emailTemplates = {
-  championSubmitted: (name: string, locale: string) =>
-    locale === 'fr'
+  championSubmitted: (name: string, locale: string, type: 'CHAMPION' | 'ADVISOR' = 'CHAMPION') => {
+    const progFr = type === 'ADVISOR' ? 'Conseil Consultatif Mondial APA™' : 'Programme Champions APA™';
+    const progEn = type === 'ADVISOR' ? 'APA™ Global Advisory Board' : 'APA™ Champions Program';
+    return locale === 'fr'
       ? {
-          subject: 'Candidature Champion APA™ bien reçue',
+          subject: `Candidature ${type === 'ADVISOR' ? 'Conseiller' : 'Champion'} APA™ bien reçue`,
           html: shell(
             'Candidature reçue',
-            `<p>Bonjour ${name},</p><p>Votre candidature au <b>Programme Champions APA™</b> a bien été soumise. Notre comité l'examine sous <b>10 jours ouvrés</b> ; vous suivrez chaque étape (présélection, entretien, décision) depuis votre espace.</p><p><i>« L'éthique en Alpha. La confiance comme monnaie. »</i></p>`
+            `<p>Bonjour ${name},</p><p>Votre candidature au <b>${progFr}</b> a bien été soumise. Notre comité l'examine sous <b>10 jours ouvrés</b> ; vous suivrez chaque étape (présélection, entretien, décision) depuis votre espace.</p><p><i>« L'éthique en Alpha. La confiance comme monnaie. »</i></p>`
           ),
         }
       : {
-          subject: 'APA™ Champion application received',
+          subject: `APA™ ${type === 'ADVISOR' ? 'Advisory Board' : 'Champion'} application received`,
           html: shell(
             'Application received',
-            `<p>Hello ${name},</p><p>Your <b>APA™ Champions Program</b> application has been submitted. Our committee reviews it within <b>10 business days</b>; you can track every stage (screening, interview, decision) from your workspace.</p><p><i>"Ethics into Alpha. Trust as Currency."</i></p>`
+            `<p>Hello ${name},</p><p>Your <b>${progEn}</b> application has been submitted. Our committee reviews it within <b>10 business days</b>; you can track every stage (screening, interview, decision) from your workspace.</p><p><i>"Ethics into Alpha. Trust as Currency."</i></p>`
           ),
-        },
+        };
+  },
   championStatusChange: (name: string, status: string, locale: string) =>
     locale === 'fr'
       ? {

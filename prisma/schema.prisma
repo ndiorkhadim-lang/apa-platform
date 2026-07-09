@@ -113,7 +113,7 @@ model User {
   trustAudits  TrustAudit[]  @relation("AuditorAudits")
   auditLogs    AuditLog[]
   toolSessions ToolSession[]
-  championApp  ChampionApplication?
+  championApps ChampionApplication[]
   cspaRuns     CspaRun[]
 
   @@map("users")
@@ -541,11 +541,18 @@ enum ChampionAppStatus {
   REJECTED
 }
 
+/// Same recruitment workflow serves two programs.
+enum ApplicationType {
+  CHAMPION
+  ADVISOR
+}
+
 /// One application per user; DRAFT is resumable, then flows through the pipeline.
 model ChampionApplication {
   id     String            @id @default(cuid())
-  userId String            @unique
+  userId String
   user   User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type   ApplicationType   @default(CHAMPION)
   status ChampionAppStatus @default(DRAFT)
 
   // Personal
@@ -599,8 +606,9 @@ model ChampionApplication {
 
   reviews ChampionReview[]
 
+  @@unique([userId, type])
+  @@index([type, status, submittedAt])
   @@index([status, countryResidence])
-  @@index([status, submittedAt])
   @@map("champion_applications")
 }
 

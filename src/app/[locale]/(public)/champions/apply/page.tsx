@@ -7,6 +7,7 @@ import { DBNotReady } from '@/components/site/db-not-ready';
 import { prisma } from '@/infrastructure/prisma/client';
 import { ChampionApplicationForm } from '@/components/champions/application-form';
 import { GLOBAL_HUBS } from '@/domain/about/leadership';
+import type { ApplicationType } from '@/generated/prisma/client';
 import type { DraftInput } from './actions';
 
 const REGION_LABEL: Record<string, { en: string; fr: string }> = {
@@ -17,40 +18,67 @@ const REGION_LABEL: Record<string, { en: string; fr: string }> = {
   Southern: { en: 'Southern Africa', fr: 'Afrique Australe' },
 };
 
-const COPY = {
+const COPY: Record<ApplicationType, { fr: { title: string; sub: string }; en: { title: string; sub: string } }> = {
+  CHAMPION: {
+    fr: {
+      title: 'Candidature — Programme Champions APA™',
+      sub: 'Dossier professionnel en 5 sections. Enregistrez votre brouillon et reprenez à tout moment ; à la soumission, votre dossier entre en présélection (réponse sous 10 jours ouvrés).',
+    },
+    en: {
+      title: 'Application — APA™ Champions Program',
+      sub: 'Professional file in 5 sections. Save your draft and resume anytime; on submission your file enters screening (answer within 10 business days).',
+    },
+  },
+  ADVISOR: {
+    fr: {
+      title: 'Candidature — Conseil Consultatif Mondial APA™',
+      sub: 'Rejoignez le Conseil qui oriente la stratégie d’APA. Dossier professionnel en 5 sections, brouillon récupérable ; réponse du comité sous 10 jours ouvrés.',
+    },
+    en: {
+      title: 'Application — APA™ Global Advisory Board',
+      sub: 'Join the board that steers APA’s strategy. Professional 5-section file, recoverable draft; committee reply within 10 business days.',
+    },
+  },
+};
+
+const GATE = {
   fr: {
-    title: 'Candidature — Programme Champions APA™',
-    sub: 'Dossier professionnel en 5 sections. Enregistrez votre brouillon et reprenez à tout moment ; à la soumission, votre dossier entre en présélection (réponse sous 10 jours ouvrés).',
-    gateTitle: 'Créez votre compte pour candidater',
-    gateBody: 'Votre candidature est liée à votre compte APA : brouillon récupérable, suivi de statut en temps réel (présélection → entretien → décision) et onboarding numérique si vous êtes retenu·e.',
-    gateCta: 'Créer un compte gratuit',
-    gateCta2: 'Déjà un compte ? Se connecter',
+    title: 'Créez votre compte pour candidater',
+    body: 'Votre candidature est liée à votre compte APA : brouillon récupérable, suivi de statut en temps réel (présélection → entretien → décision) et onboarding numérique si vous êtes retenu·e.',
+    cta: 'Créer un compte gratuit',
+    cta2: 'Déjà un compte ? Se connecter',
   },
   en: {
-    title: 'Application — APA™ Champions Program',
-    sub: 'Professional file in 5 sections. Save your draft and resume anytime; on submission your file enters screening (answer within 10 business days).',
-    gateTitle: 'Create your account to apply',
-    gateBody: 'Your application is tied to your APA account: recoverable draft, real-time status tracking (screening → interview → decision) and digital onboarding if selected.',
-    gateCta: 'Create a free account',
-    gateCta2: 'Already have an account? Sign in',
+    title: 'Create your account to apply',
+    body: 'Your application is tied to your APA account: recoverable draft, real-time status tracking (screening → interview → decision) and digital onboarding if selected.',
+    cta: 'Create a free account',
+    cta2: 'Already have an account? Sign in',
   },
 } as const;
 
-export default async function ChampionApplyPage({
+export default async function ApplyPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
   if (!dbAvailable) return <DBNotReady locale={locale} />;
-  const c = COPY[locale === 'en' ? 'en' : 'fr'];
+  const sp = await searchParams;
+  const type: ApplicationType = sp.type === 'advisor' ? 'ADVISOR' : 'CHAMPION';
+  const c = COPY[type][locale === 'en' ? 'en' : 'fr'];
+  const g = GATE[locale === 'en' ? 'en' : 'fr'];
+  const applyPath = `/champions/apply${type === 'ADVISOR' ? '?type=advisor' : ''}`;
 
   const session = await getSession();
 
   const [app, nations] = await Promise.all([
     session
-      ? prisma.championApplication.findUnique({ where: { userId: session.user.id } })
+      ? prisma.championApplication.findUnique({
+          where: { userId_type: { userId: session.user.id, type } },
+        })
       : null,
     prisma.nation.findMany({
       orderBy: locale === 'en' ? { nameEn: 'asc' } : { nameFr: 'asc' },
@@ -63,7 +91,7 @@ export default async function ChampionApplyPage({
         Object.entries(app).filter(
           ([k, v]) =>
             v !== null &&
-            !['id', 'userId', 'status', 'submittedAt', 'createdAt', 'updatedAt'].includes(k)
+            !['id', 'userId', 'type', 'status', 'submittedAt', 'createdAt', 'updatedAt'].includes(k)
         )
       )
     : { email: session?.user.email };
@@ -78,6 +106,7 @@ export default async function ChampionApplyPage({
         {session ? (
           <ChampionApplicationForm
             locale={locale}
+            type={type}
             initial={initial}
             submitted={Boolean(app && app.status !== 'DRAFT')}
             nations={nations.map((n) => ({
@@ -89,20 +118,20 @@ export default async function ChampionApplyPage({
           />
         ) : (
           <div className="apa-gradient rounded-apa-lg p-8 text-white">
-            <h2 className="text-xl font-bold">{c.gateTitle}</h2>
-            <p className="mt-3 max-w-xl text-sm text-apa-mint">{c.gateBody}</p>
+            <h2 className="text-xl font-bold">{g.title}</h2>
+            <p className="mt-3 max-w-xl text-sm text-apa-mint">{g.body}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href="/sign-up?redirect=/champions/apply"
+                href={`/sign-up?redirect=${applyPath}`}
                 className="rounded-md bg-apa-gold-bright px-5 py-2.5 text-sm font-semibold text-apa-ink transition-colors hover:bg-apa-gold"
               >
-                {c.gateCta} →
+                {g.cta} →
               </Link>
               <Link
-                href="/sign-in?redirect=/champions/apply"
+                href={`/sign-in?redirect=${applyPath}`}
                 className="rounded-md border border-apa-gold-bright px-5 py-2.5 text-sm font-semibold text-apa-gold-bright transition-colors hover:bg-apa-gold-bright hover:text-apa-ink"
               >
-                {c.gateCta2}
+                {g.cta2}
               </Link>
             </div>
           </div>
