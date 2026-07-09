@@ -111,6 +111,8 @@ function Field({
 export function ChampionApplicationForm({
   locale,
   type = 'CHAMPION',
+  authenticated = true,
+  signInHref = '/sign-in',
   initial,
   nations,
   hubs,
@@ -119,6 +121,8 @@ export function ChampionApplicationForm({
 }: {
   locale: string;
   type?: 'CHAMPION' | 'ADVISOR';
+  authenticated?: boolean;
+  signInHref?: string;
   initial: DraftInput;
   nations: { code: string; name: string }[];
   hubs: { code: string; label: string }[];
@@ -185,7 +189,16 @@ export function ChampionApplicationForm({
     );
   }
 
+  function requireAuthRedirect() {
+    if (!authenticated) {
+      window.location.href = `/${locale}${signInHref.startsWith('/') ? signInHref : `/${signInHref}`}`;
+      return true;
+    }
+    return false;
+  }
+
   function onSave() {
+    if (requireAuthRedirect()) return;
     start(async () => {
       await saveDraft(d, locale, type);
       setSavedMsg(true);
@@ -195,6 +208,7 @@ export function ChampionApplicationForm({
   }
 
   function onSubmit() {
+    if (requireAuthRedirect()) return;
     start(async () => {
       const res = await submitApplication(d, locale, type);
       if (res.ok) {

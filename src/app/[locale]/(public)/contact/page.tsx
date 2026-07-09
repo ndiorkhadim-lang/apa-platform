@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionHeader } from '@/components/site/section-header';
+import { APA_OFFICES } from '@/domain/site/contact';
 import { submitContact, submitPrequal } from './actions';
 
 interface Impact {
@@ -115,6 +116,24 @@ export default async function ContactPage({
               ))}
             </tbody>
           </table>
+
+          {/* The 3 official offices */}
+          <h3 className="mt-8 text-lg font-bold text-apa-green">
+            {locale === 'fr' ? 'Nos bureaux' : 'Our offices'}
+          </h3>
+          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+            {APA_OFFICES.map((o) => (
+              <address key={o.country} className="rounded-apa border border-apa-line bg-white p-4 text-sm not-italic">
+                <p className="font-bold text-apa-navy">
+                  {o.flag} {o.country}
+                  {o.isHQ ? <span className="ml-2 rounded bg-apa-green px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">HQ</span> : null}
+                </p>
+                {o.lines.map((line) => (
+                  <p key={line} className="mt-0.5 text-apa-grey">{line}</p>
+                ))}
+              </address>
+            ))}
+          </div>
 
           <h3 id="contact-form" className="mt-10 text-lg font-bold text-apa-green">
             {tForm('title')}

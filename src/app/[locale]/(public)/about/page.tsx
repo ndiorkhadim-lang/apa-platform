@@ -157,16 +157,15 @@ export default async function AboutPage({
 
   return (
     <div>
-      {/* ═════ HERO ═════ */}
+      {/* ═════ HERO (compact) ═════ */}
       <section className="apa-gradient text-white">
-        <div className="mx-auto max-w-6xl px-4 py-20">
+        <div className="mx-auto max-w-6xl px-4 py-10">
           <span className="apa-badge">{t.heroKicker}</span>
-          <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
+          <h1 className="mt-4 max-w-3xl text-3xl font-bold leading-tight sm:text-4xl">
             {t.heroTitle}
           </h1>
-          <div className="apa-rule my-6" />
-          <p className="max-w-2xl text-base leading-relaxed text-apa-mint">{t.heroLead}</p>
-          <div className="mt-8 flex flex-wrap gap-6 text-sm">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-apa-mint">{t.heroLead}</p>
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
             {[
               ['54', fr ? 'nations — la vision' : 'nations — the vision'],
               ['63', fr ? 'outils GRC propriétaires' : 'proprietary GRC tools'],
@@ -174,7 +173,7 @@ export default async function AboutPage({
               ['5', fr ? 'hubs de capital mondiaux' : 'global capital hubs'],
             ].map(([n, l]) => (
               <div key={l}>
-                <span className="text-2xl font-extrabold text-apa-gold-bright">{n}</span>
+                <span className="text-xl font-extrabold text-apa-gold-bright">{n}</span>
                 <span className="ml-2 text-apa-mint">{l}</span>
               </div>
             ))}
@@ -182,8 +181,32 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* ═════ SECTION 1 — FOUNDERS ═════ */}
+      {/* ═════ SECTION — MISSION / VISION / VALUE (premium, first) ═════ */}
       <section className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="text-2xl font-bold text-apa-green">{t.mvvTitle}</h2>
+        <div className="mt-2 h-[3px] w-full bg-apa-gold" />
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {[
+            { key: 'M', title: t.mission, body: t.missionBody, accent: 'apa-gradient text-white', label: fr ? 'text-apa-gold-bright' : 'text-apa-gold-bright', text: 'text-apa-mint' },
+            { key: 'V', title: t.vision, body: t.visionBody, accent: 'bg-white ring-2 ring-apa-gold', label: 'text-apa-green', text: 'text-apa-ink' },
+            { key: 'P', title: t.valueProp, body: t.valuePropBody, accent: 'bg-white ring-1 ring-apa-line', label: 'text-apa-green', text: 'text-apa-ink' },
+          ].map((c) => (
+            <article
+              key={c.key}
+              className={`relative overflow-hidden rounded-apa-lg p-7 shadow-sm transition-transform hover:-translate-y-1 ${c.accent}`}
+            >
+              <span className="absolute -right-3 -top-4 text-7xl font-black opacity-10">{c.key}</span>
+              <h3 className={`text-lg font-bold ${c.label}`}>{c.title}</h3>
+              <div className={`mt-2 h-0.5 w-10 ${c.key === 'M' ? 'bg-apa-gold-bright' : 'bg-apa-gold'}`} />
+              <p className={`mt-4 text-sm leading-relaxed ${c.text}`}>{c.body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ═════ SECTION 1 — FOUNDERS ═════ */}
+      <section className="bg-apa-soft">
+       <div className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-2xl font-bold text-apa-green">{t.leadershipTitle}</h2>
         <div className="mt-2 h-[3px] w-full bg-apa-gold" />
         <p className="mt-3 max-w-2xl text-sm text-apa-grey">{t.leadershipSub}</p>
@@ -228,28 +251,7 @@ export default async function AboutPage({
             </article>
           ))}
         </div>
-      </section>
-
-      {/* ═════ SECTION 2 — MISSION / VISION / VALUE ═════ */}
-      <section className="bg-apa-soft">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-          <h2 className="text-2xl font-bold text-apa-green">{t.mvvTitle}</h2>
-          <div className="mt-2 h-[3px] w-full bg-apa-gold" />
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="apa-box bg-white p-6">
-              <h3 className="font-bold text-apa-green">{t.mission}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{t.missionBody}</p>
-            </div>
-            <div className="apa-box apa-box-gold bg-white p-6">
-              <h3 className="font-bold text-apa-green">{t.vision}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{t.visionBody}</p>
-            </div>
-            <div className="apa-box apa-box-navy bg-white p-6">
-              <h3 className="font-bold text-apa-green">{t.valueProp}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{t.valuePropBody}</p>
-            </div>
-          </div>
-        </div>
+       </div>
       </section>
 
       {/* ═════ SECTION 3 — GLOBAL ADVISORY BOARD ═════ */}

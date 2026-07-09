@@ -102,40 +102,44 @@ export default async function ApplyPage({
       <div className="apa-rule my-4" />
       <p className="text-sm text-apa-grey">{c.sub}</p>
 
-      <div className="mt-8">
-        {session ? (
-          <ChampionApplicationForm
-            locale={locale}
-            type={type}
-            initial={initial}
-            submitted={Boolean(app && app.status !== 'DRAFT')}
-            nations={nations.map((n) => ({
-              code: n.code,
-              name: locale === 'en' ? n.nameEn : n.nameFr,
-            }))}
-            hubs={GLOBAL_HUBS.map((h) => ({ code: h.code, label: `${h.flag} ${h.city}` }))}
-            regions={Object.values(REGION_LABEL).map((r) => (locale === 'en' ? r.en : r.fr))}
-          />
-        ) : (
-          <div className="apa-gradient rounded-apa-lg p-8 text-white">
-            <h2 className="text-xl font-bold">{g.title}</h2>
-            <p className="mt-3 max-w-xl text-sm text-apa-mint">{g.body}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href={`/sign-up?redirect=${applyPath}`}
-                className="rounded-md bg-apa-gold-bright px-5 py-2.5 text-sm font-semibold text-apa-ink transition-colors hover:bg-apa-gold"
-              >
-                {g.cta} →
-              </Link>
-              <Link
-                href={`/sign-in?redirect=${applyPath}`}
-                className="rounded-md border border-apa-gold-bright px-5 py-2.5 text-sm font-semibold text-apa-gold-bright transition-colors hover:bg-apa-gold-bright hover:text-apa-ink"
-              >
-                {g.cta2}
-              </Link>
-            </div>
+      {/* Sign-in prompt for anonymous visitors — the form stays fully visible below */}
+      {!session ? (
+        <div className="apa-box apa-box-gold mt-6 flex flex-wrap items-center justify-between gap-3 p-4">
+          <p className="text-sm text-apa-ink">
+            <span className="font-bold text-apa-green">{g.title}.</span> {g.body}
+          </p>
+          <div className="flex shrink-0 gap-2">
+            <Link
+              href={`/sign-up?redirect=${applyPath}`}
+              className="rounded-md bg-apa-green px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-apa-green-mid"
+            >
+              {g.cta}
+            </Link>
+            <Link
+              href={`/sign-in?redirect=${applyPath}`}
+              className="rounded-md border border-apa-green px-4 py-2 text-sm font-semibold text-apa-green transition-colors hover:bg-apa-green hover:text-white"
+            >
+              {g.cta2}
+            </Link>
           </div>
-        )}
+        </div>
+      ) : null}
+
+      <div className="mt-8">
+        <ChampionApplicationForm
+          locale={locale}
+          type={type}
+          authenticated={Boolean(session)}
+          signInHref={`/sign-in?redirect=${applyPath}`}
+          initial={initial}
+          submitted={Boolean(app && app.status !== 'DRAFT')}
+          nations={nations.map((n) => ({
+            code: n.code,
+            name: locale === 'en' ? n.nameEn : n.nameFr,
+          }))}
+          hubs={GLOBAL_HUBS.map((h) => ({ code: h.code, label: `${h.flag} ${h.city}` }))}
+          regions={Object.values(REGION_LABEL).map((r) => (locale === 'en' ? r.en : r.fr))}
+        />
       </div>
     </div>
   );
