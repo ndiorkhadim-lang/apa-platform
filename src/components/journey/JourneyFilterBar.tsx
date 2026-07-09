@@ -1,25 +1,34 @@
 'use client';
 
+import { useMemo } from 'react';
 import type { JourneyFilters, RoleFilter } from '@/types/journey';
-import { ROLE_META, DIFFICULTIES } from '@/types/journey';
+import { ROLE_META, ROLE_ORDER, DIFFICULTIES, PRIORITY_COUNTRIES, REGIONS } from '@/types/journey';
 
-const ROLE_TABS: (RoleFilter | 'ALL')[] = ['ALL', 'OBSERVER', 'PRACTITIONER'];
+const ROLE_TABS: (RoleFilter | 'ALL')[] = ['ALL', ...ROLE_ORDER];
 
 export function JourneyFilterBar({
   filters,
   onChange,
-  countries,
   themes,
   priceMax,
 }: {
   filters: JourneyFilters;
   onChange: (next: Partial<JourneyFilters>) => void;
-  countries: string[];
   themes: string[];
   priceMax: number;
 }) {
   const select =
     'rounded-md border border-apa-line bg-white px-3 py-2 text-sm text-apa-ink focus:border-apa-green focus:outline-none';
+
+  // Country list is the full 22-nation priority set (scalable), optionally
+  // narrowed by the selected region and searchable via the native datalist.
+  const countryOptions = useMemo(() => {
+    const list =
+      filters.region === 'ALL'
+        ? PRIORITY_COUNTRIES
+        : PRIORITY_COUNTRIES.filter((c) => c.region === filters.region);
+    return [...list].sort((a, b) => a.name.localeCompare(b.name));
+  }, [filters.region]);
 
   return (
     <div className="rounded-apa-lg border border-apa-line bg-apa-soft p-4">
@@ -27,7 +36,7 @@ export function JourneyFilterBar({
       <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by role">
         {ROLE_TABS.map((r) => {
           const active = filters.role === r;
-          const label = r === 'ALL' ? 'All' : ROLE_META[r].label;
+          const label = r === 'ALL' ? 'All Roles' : ROLE_META[r].label;
           return (
             <button
               key={r}
@@ -62,13 +71,33 @@ export function JourneyFilterBar({
           />
         </label>
         <label className="flex flex-col gap-1 text-[11px] font-bold uppercase text-apa-grey">
-          Country
-          <select value={filters.country} onChange={(e) => onChange({ country: e.target.value })} className={select}>
-            <option value="ALL">All countries</option>
-            {countries.map((c) => (
-              <option key={c} value={c}>{c}</option>
+          Region
+          <select
+            value={filters.region}
+            onChange={(e) => onChange({ region: e.target.value, country: 'ALL' })}
+            className={select}
+          >
+            <option value="ALL">All regions</option>
+            {REGIONS.map((r) => (
+              <option key={r} value={r}>{r} Africa</option>
             ))}
           </select>
+        </label>
+        <label className="flex flex-col gap-1 text-[11px] font-bold uppercase text-apa-grey">
+          Country
+          <input
+            type="text"
+            list="apa-country-list"
+            value={filters.country === 'ALL' ? '' : filters.country}
+            onChange={(e) => onChange({ country: e.target.value.trim() === '' ? 'ALL' : e.target.value })}
+            placeholder="All countries"
+            className={`${select} min-w-44`}
+          />
+          <datalist id="apa-country-list">
+            {countryOptions.map((c) => (
+              <option key={c.code} value={c.name}>{c.flag} {c.name}</option>
+            ))}
+          </datalist>
         </label>
         <label className="flex flex-col gap-1 text-[11px] font-bold uppercase text-apa-grey">
           Difficulty
@@ -103,7 +132,7 @@ export function JourneyFilterBar({
         <button
           type="button"
           onClick={() =>
-            onChange({ role: 'ALL', country: 'ALL', difficulty: 'ALL', theme: 'ALL', maxPrice: null, search: '' })
+            onChange({ role: 'ALL', country: 'ALL', region: 'ALL', difficulty: 'ALL', theme: 'ALL', maxPrice: null, search: '' })
           }
           className="px-2 py-2 text-sm font-medium text-apa-grey hover:text-apa-green"
         >

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { Journey, JourneyFilters, JourneyUserType } from '@/types/journey';
+import { PRIORITY_COUNTRIES } from '@/types/journey';
 import { JourneyFilterBar } from './JourneyFilterBar';
 import { JourneyCard } from './JourneyCard';
 import { SubmitActivityForm } from './SubmitActivityForm';
@@ -9,11 +10,14 @@ import { SubmitActivityForm } from './SubmitActivityForm';
 const DEFAULT_FILTERS: JourneyFilters = {
   role: 'ALL',
   country: 'ALL',
+  region: 'ALL',
   difficulty: 'ALL',
   theme: 'ALL',
   maxPrice: null,
   search: '',
 };
+
+const COUNTRY_REGION = new Map(PRIORITY_COUNTRIES.map((c) => [c.name, c.region]));
 
 export function JourneyBrowser({
   journeys,
@@ -32,7 +36,6 @@ export function JourneyBrowser({
   );
   const [filters, setFilters] = useState<JourneyFilters>(DEFAULT_FILTERS);
 
-  const countries = useMemo(() => [...new Set(journeys.map((j) => j.country))].sort(), [journeys]);
   const themes = useMemo(() => [...new Set(journeys.flatMap((j) => j.themes))].sort(), [journeys]);
   const priceMax = useMemo(() => Math.max(...journeys.map((j) => j.priceUSD), 7000), [journeys]);
 
@@ -40,6 +43,7 @@ export function JourneyBrowser({
     const q = filters.search.trim().toLowerCase();
     return journeys.filter((j) => {
       if (filters.role !== 'ALL' && j.roleFilter !== filters.role) return false;
+      if (filters.region !== 'ALL' && COUNTRY_REGION.get(j.country) !== filters.region) return false;
       if (filters.country !== 'ALL' && j.country !== filters.country) return false;
       if (filters.difficulty !== 'ALL' && j.difficulty !== filters.difficulty) return false;
       if (filters.theme !== 'ALL' && !j.themes.includes(filters.theme)) return false;
@@ -86,7 +90,6 @@ export function JourneyBrowser({
           <JourneyFilterBar
             filters={filters}
             onChange={(next) => setFilters((f) => ({ ...f, ...next }))}
-            countries={countries}
             themes={themes}
             priceMax={priceMax}
           />

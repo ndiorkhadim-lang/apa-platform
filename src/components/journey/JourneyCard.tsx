@@ -2,11 +2,6 @@ import { Link } from '@/i18n/navigation';
 import type { Journey, JourneyUserType } from '@/types/journey';
 import { ROLE_META } from '@/types/journey';
 
-const ROLE_BADGE: Record<string, string> = {
-  OBSERVER: 'bg-apa-teal text-white',
-  PRACTITIONER: 'bg-apa-navy text-apa-gold-bright',
-};
-
 const DIFFICULTY_BADGE: Record<string, string> = {
   Pioneer: 'bg-apa-green text-white',
   Explorer: 'bg-apa-gold text-apa-ink',
@@ -36,7 +31,7 @@ export function JourneyCard({
           <div className="apa-gradient h-full w-full" />
         )}
         <span
-          className={`absolute left-3 top-3 rounded px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide ${ROLE_BADGE[journey.roleFilter]}`}
+          className={`absolute left-3 top-3 rounded px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide ${ROLE_META[journey.roleFilter].badge}`}
         >
           {ROLE_META[journey.roleFilter].label}
         </span>
