@@ -23,6 +23,18 @@ export const auth = betterAuth({
         defaultValue: 'USER',
         input: false, // never accepted from the client
       },
+      // Onboarding personalization — accepted from the client at sign-up.
+      // Purely a personalization signal; it never elevates privileges.
+      apaRelationship: {
+        type: 'string',
+        required: false,
+        input: true,
+      },
+      apaInterests: {
+        type: 'string',
+        required: false,
+        input: true,
+      },
     },
   },
   socialProviders: {

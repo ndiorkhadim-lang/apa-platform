@@ -104,6 +104,10 @@ model User {
   emailVerified Boolean      @default(false)
   image         String?
   platformRole  PlatformRole @default(USER)
+  // Onboarding personalization — self-declared relationship & interests.
+  // NOT an authorization grant: platformRole remains the RBAC source of truth.
+  apaRelationship String?
+  apaInterests    String? // comma-separated interest-area ids
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
