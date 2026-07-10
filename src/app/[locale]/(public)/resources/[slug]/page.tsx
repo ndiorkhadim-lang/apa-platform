@@ -7,6 +7,7 @@ import { RESOURCE_TYPE_META, SOLUTION_LABEL, PILLAR_LABEL } from '@/types/resour
 import type { Resource } from '@/types/resource';
 import { ResourceActions } from '@/components/resources/ResourceActions';
 import { ResourceCard } from '@/components/resources/ResourceCard';
+import { PodcastPlayer, VideoPlayer, InProductionCard } from '@/components/resources/MediaPlayer';
 
 const compact = (n: number) => Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
 const fmtDate = (iso: string) => new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -91,9 +92,16 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
         <span className="line-clamp-1 text-apa-navy">{r.title}</span>
       </nav>
 
-      {/* Hero */}
+      {/* Hero — investigations get a large banner over their poster */}
       <header className="overflow-hidden rounded-apa-lg border border-apa-line">
-        <div className="apa-gradient px-6 py-10 text-white sm:px-10">
+        <div
+          className={`apa-gradient relative px-6 text-white sm:px-10 ${r.type === 'Investigation' ? 'py-16 sm:py-24' : 'py-10'}`}
+          style={
+            r.type === 'Investigation' && r.posterImage
+              ? { backgroundImage: `linear-gradient(157deg, rgba(10,92,54,.92) 0%, rgba(11,92,78,.9) 48%, rgba(13,43,78,.94) 100%), url(${r.posterImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+              : undefined
+          }
+        >
           <div className="flex flex-wrap items-center gap-2">
             <span className={`rounded px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide ${meta.badge}`}>{meta.icon} {r.type}</span>
             {r.certificationBadge ? <span className="rounded bg-apa-gold-bright px-2 py-0.5 text-[10px] font-bold uppercase text-apa-ink">🎓 {r.certificationBadge}</span> : null}
@@ -111,6 +119,33 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
           </div>
         </div>
       </header>
+
+      {/* Media experience — podcast player / video player */}
+      {r.videoUrl || r.audioUrl || r.series ? (
+        <div className="mt-6">
+          {r.videoUrl ? (
+            <VideoPlayer src={r.videoUrl} poster={r.posterImage} title={r.title} />
+          ) : r.audioUrl ? (
+            <PodcastPlayer
+              src={r.audioUrl}
+              poster={r.posterImage}
+              title={r.title}
+              series={r.series}
+              episode={r.episode}
+              durationSec={r.mediaDurationSec}
+            />
+          ) : (
+            <InProductionCard
+              title={r.title}
+              series={r.series}
+              episode={r.episode}
+              poster={r.posterImage}
+              docUrl={r.downloadDocUrl}
+              docLabel={r.downloadDocLabel}
+            />
+          )}
+        </div>
+      ) : null}
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_320px]">
         {/* Main */}
@@ -141,6 +176,76 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
             </ul>
           </Section>
 
+          {/* Investigation: the numbers (chart) */}
+          {r.stats?.length ? (
+            <Section id="numbers" num="§" title="The Numbers">
+              <div className="space-y-4">
+                {r.stats.map((s) => (
+                  <div key={s.label}>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-sm font-semibold">{s.label}</span>
+                      <span className="text-lg font-bold text-apa-green">{s.value}</span>
+                    </div>
+                    <div className="mt-1.5 h-3 overflow-hidden rounded-full bg-apa-soft">
+                      <div className="apa-gradient h-full transition-all" style={{ width: `${s.pct}%` }} />
+                    </div>
+                    {s.note ? <div className="mt-1 text-xs text-apa-grey">{s.note}</div> : null}
+                  </div>
+                ))}
+              </div>
+            </Section>
+          ) : null}
+
+          {/* Investigation: interactive timeline */}
+          {r.timeline?.length ? (
+            <Section id="timeline" num="⧗" title="The Trail — Follow the Money">
+              <ol className="relative ml-3 space-y-6 border-l-2 border-apa-gold pl-6">
+                {r.timeline.map((t) => (
+                  <li key={t.title} className="relative">
+                    <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border-2 border-apa-gold bg-white" />
+                    <div className="text-[11px] font-bold uppercase tracking-wide text-apa-bronze">{t.label}</div>
+                    <h3 className="mt-0.5 font-bold text-apa-navy">{t.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed">{t.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </Section>
+          ) : null}
+
+          {/* Long-form body (Read Online) */}
+          {r.fullContent?.length ? (
+            <Section id="report" num="¶" title="The Full Report">
+              <div className="space-y-6">
+                {r.fullContent.map((sec) => (
+                  <div key={sec.heading}>
+                    <h3 className="font-bold text-apa-navy">{sec.heading}</h3>
+                    <div className="mt-2 space-y-3">
+                      {sec.paragraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Section>
+          ) : null}
+
+          {/* Transcript (podcast / video) */}
+          {r.transcript?.length ? (
+            <Section id="transcript" num="TR" title={r.type === 'Podcast' ? 'Episode Transcript' : 'Transcript'}>
+              <details open className="group">
+                <summary className="cursor-pointer text-sm font-semibold text-apa-green">Toggle transcript</summary>
+                <div className="mt-4 space-y-3 border-l-2 border-apa-line pl-4">
+                  {r.transcript.map((t, i) => (
+                    <p key={i} className="text-sm leading-relaxed">
+                      {t.time ? <span className="mr-2 font-mono text-xs text-apa-grey">[{t.time}]</span> : null}
+                      {t.speaker ? <strong className="text-apa-navy">{t.speaker} — </strong> : null}
+                      {t.text}
+                    </p>
+                  ))}
+                </div>
+              </details>
+            </Section>
+          ) : null}
+
           <Section id="ecosystem" num="05" title="Connected in the APA Ecosystem">
             <div className="grid gap-4 sm:grid-cols-2">
               <Chips label="Related Solutions" items={r.relatedSolutions.map((s) => ({ key: s, text: SOLUTION_LABEL[s] ?? s, href: '/solutions' }))} />
@@ -153,7 +258,15 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
           </Section>
 
           <Section id="actions" num="06" title="Downloads & Actions">
-            <ResourceActions slug={r.slug} title={r.title} hasPdf={r.hasPdf} fileSizeKb={r.fileSizeKb} />
+            <ResourceActions
+              slug={r.slug}
+              title={r.title}
+              hasPdf={r.hasPdf}
+              fileSizeKb={r.fileSizeKb}
+              locale={locale}
+              downloadDocUrl={r.downloadDocUrl ?? (r.audioUrl ? r.audioUrl : undefined)}
+              downloadDocLabel={r.downloadDocLabel ?? (r.audioUrl ? 'Download audio (MP3)' : undefined)}
+            />
           </Section>
 
           {rel.length ? (

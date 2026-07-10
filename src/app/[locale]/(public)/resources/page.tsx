@@ -18,6 +18,10 @@ const byDownloads = [...RESOURCES].filter((r) => r.hasPdf).sort((a, b) => b.down
 const trending = [...RESOURCES].filter((r) => r.trending).sort((a, b) => b.views - a.views);
 const recent = [...RESOURCES].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 const editors = [...RESOURCES].filter((r) => r.featured).sort((a, b) => b.rating - a.rating);
+const investigation = RESOURCES.find((r) => r.type === 'Investigation');
+const mediaResources = RESOURCES.filter((r) => r.audioUrl || r.videoUrl || r.series).sort(
+  (a, b) => b.publishedAt.localeCompare(a.publishedAt)
+);
 
 export default async function ResourcesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -52,6 +56,90 @@ export default async function ResourcesPage({ params }: { params: Promise<{ loca
       </section>
 
       <div className="mx-auto max-w-6xl px-4 py-12">
+        {/* Featured Investigation */}
+        {investigation ? (
+          <section aria-label="Featured investigation" className="mb-14">
+            <Link
+              href={`/resources/${investigation.slug}`}
+              className="group block overflow-hidden rounded-apa-lg border border-apa-line shadow-md transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              <div
+                className="relative px-6 py-14 text-white sm:px-12 sm:py-20"
+                style={{
+                  backgroundImage: `linear-gradient(157deg, rgba(10,92,54,.93) 0%, rgba(11,92,78,.9) 48%, rgba(13,43,78,.95) 100%)${investigation.posterImage ? `, url(${investigation.posterImage})` : ''}`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                <span className="rounded bg-apa-bronze px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white">
+                  🔍 Featured Investigation
+                </span>
+                <h2 className="mt-5 max-w-3xl text-3xl font-bold leading-tight sm:text-5xl">{investigation.title}</h2>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-apa-mint">{investigation.executiveSummary}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-apa-sage">
+                  <span>⏱ {investigation.readingMinutes} min read</span>
+                  <span>·</span>
+                  <span>{investigation.author}</span>
+                  <span>·</span>
+                  <span className="text-apa-gold-bright">★ {investigation.rating.toFixed(1)}</span>
+                </div>
+                <span className="mt-7 inline-block rounded-md bg-white px-6 py-3 text-sm font-bold text-apa-green transition-colors group-hover:bg-apa-soft">
+                  Read the investigation →
+                </span>
+              </div>
+            </Link>
+          </section>
+        ) : null}
+
+        {/* Podcasts & Films */}
+        {mediaResources.length ? (
+          <section aria-labelledby="media-h" className="mb-14">
+            <span className="apa-secnum text-sm">✦</span>
+            <h2 id="media-h" className="mt-3 text-2xl font-bold text-apa-navy">Podcasts &amp; Films</h2>
+            <div className="apa-rule my-3" />
+            <p className="max-w-2xl text-sm text-apa-grey">
+              The Proof — APA’s flagship audio &amp; film series. Listen, watch, read the transcript, download the assets.
+            </p>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {mediaResources.map((m) => (
+                <Link
+                  key={m.id}
+                  href={`/resources/${m.slug}`}
+                  className="group overflow-hidden rounded-apa-lg border border-apa-line bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="relative h-40 overflow-hidden">
+                    {m.posterImage ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={m.posterImage} alt="" className="h-full w-full object-cover transition-transform group-hover:scale-105" />
+                    ) : (
+                      <div className="apa-gradient h-full w-full" />
+                    )}
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-lg text-apa-green shadow-lg transition-transform group-hover:scale-110">▶</span>
+                    </span>
+                    <span className="absolute left-2 top-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold uppercase text-white">
+                      {m.type === 'Podcast' ? '🎙 Podcast' : '🎬 Film'}
+                    </span>
+                    {m.mediaDurationSec ? (
+                      <span className="absolute bottom-2 right-2 rounded bg-black/70 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                        {Math.round(m.mediaDurationSec / 60)} min
+                      </span>
+                    ) : null}
+                  </div>
+                  <div className="p-4">
+                    {m.series ? (
+                      <div className="text-[10px] font-bold uppercase tracking-wide text-apa-gold-bright">
+                        {m.series}{m.episode ? ` · Ep. ${m.episode}` : ''}
+                      </div>
+                    ) : null}
+                    <h3 className="mt-1 line-clamp-2 text-sm font-bold leading-snug text-apa-navy group-hover:text-apa-green">{m.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {/* Learning paths */}
         <section aria-labelledby="paths-h">
           <div className="flex flex-wrap items-end justify-between gap-3">

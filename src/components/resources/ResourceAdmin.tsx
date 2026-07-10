@@ -130,13 +130,19 @@ function CreateResourceForm({ onSubmit }: { onSubmit: (scheduled: boolean) => vo
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <div className="text-[11px] font-bold uppercase text-apa-grey">Upload file</div>
+          <div className="text-[11px] font-bold uppercase text-apa-grey">Upload assets</div>
           <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-apa-lg border-2 border-dashed border-apa-line p-6 text-center hover:border-apa-green">
             <span className="text-2xl">⬆️</span>
-            <span className="mt-1 text-xs font-semibold text-apa-navy">Upload PDF / Video</span>
-            <span className="text-[11px] text-apa-grey">Drag & drop or click</span>
-            <input type="file" className="hidden" />
+            <span className="mt-1 text-xs font-semibold text-apa-navy">PDF · DOCX · Video · Audio · PowerPoint · Images</span>
+            <span className="text-[11px] text-apa-grey">Drag &amp; drop or click — multiple files supported</span>
+            <input type="file" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.mov,.webm,.mp3,.m4a,.wav,.png,.jpg,.jpeg,.webp" className="hidden" />
           </label>
+          <ul className="mt-3 space-y-1 text-[11px] text-apa-grey">
+            <li>✦ Auto-generated on upload: <strong className="text-apa-navy">branded cover page</strong> (APA publication template)</li>
+            <li>✦ <strong className="text-apa-navy">Metadata &amp; reading time</strong> extracted from the document</li>
+            <li>✦ <strong className="text-apa-navy">Preview &amp; thumbnail</strong> rendered automatically</li>
+            <li>✦ <strong className="text-apa-navy">AI summary</strong> drafted for review before publication</li>
+          </ul>
         </div>
         <div>
           <div className="text-[11px] font-bold uppercase text-apa-grey">Governance domains</div>

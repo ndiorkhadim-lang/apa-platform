@@ -106,3 +106,60 @@ body {
 .animate-fade-up {
   animation: apa-fade-up 0.4s ease both;
 }
+
+/* ── APA Official Publication (branded PDF via print) ──── */
+
+/* Running footer: hidden on screen, repeats on every printed page */
+.pub-running-footer {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 12mm 18mm 12mm;
+  }
+
+  /* Hide the site chrome when printing a publication */
+  body:has(.apa-publication) header,
+  body:has(.apa-publication) footer:not(.pub-footer),
+  body:has(.apa-publication) nav {
+    display: none !important;
+  }
+  body:has(.apa-publication) {
+    background: white !important;
+  }
+
+  .apa-publication {
+    font-size: 12px;
+  }
+
+  /* Watermark + running footer repeat on each page (fixed elements print per-page) */
+  .pub-watermark {
+    position: fixed !important;
+  }
+  .pub-running-footer {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8px;
+    letter-spacing: 0.04em;
+    color: #5b6b66;
+    padding: 2mm 0;
+    border-top: 0.5px solid #d9e2df;
+    background: white;
+  }
+
+  .pub-section {
+    break-inside: avoid-page;
+  }
+
+  /* Ensure brand colors survive print */
+  .apa-publication * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

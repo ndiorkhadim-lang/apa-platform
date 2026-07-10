@@ -24,6 +24,7 @@ export const RESOURCE_TYPES = [
   'Policy Brief',
   'Certification Guide',
   'Implementation Manual',
+  'Investigation',
 ] as const;
 export type ResourceType = (typeof RESOURCE_TYPES)[number];
 
@@ -43,6 +44,7 @@ export const RESOURCE_TYPE_META: Record<ResourceType, { icon: string; badge: str
   'Policy Brief': { icon: '📝', badge: 'bg-apa-gold/20 text-apa-bronze' },
   'Certification Guide': { icon: '🎓', badge: 'bg-apa-gold-bright/20 text-apa-bronze' },
   'Implementation Manual': { icon: '⚙️', badge: 'bg-apa-navy/10 text-apa-navy' },
+  Investigation: { icon: '🔍', badge: 'bg-apa-bronze text-white' },
 };
 
 export const INDUSTRIES = [
@@ -85,6 +87,26 @@ export const SORT_OPTIONS = [
 ] as const;
 export type SortOption = (typeof SORT_OPTIONS)[number];
 
+// ── Media & publication structures ───────────────────────
+export interface TranscriptEntry {
+  speaker?: string; // e.g. 'PAPE SAMB' — omitted for narration
+  time?: string; // mm:ss marker (optional)
+  text: string;
+}
+
+export interface TimelineEntry {
+  label: string; // e.g. 'Leak nº1' or a year
+  title: string;
+  text: string;
+}
+
+export interface StatEntry {
+  label: string;
+  value: string; // display value, e.g. '$80B'
+  pct: number; // 0..100 — drives the chart bar
+  note?: string;
+}
+
 // ── The Resource entity ──────────────────────────────────
 export interface Resource {
   id: string;
@@ -124,7 +146,26 @@ export interface Resource {
   // downloadable
   hasPdf: boolean;
   fileSizeKb?: number;
-  mediaUrl?: string; // video/podcast/webinar
+  mediaUrl?: string; // external media link (YouTube channel etc.)
+
+  // publication (branded APA template)
+  version?: string; // e.g. '1.0' — printed on the publication
+  fullContent?: { heading: string; paragraphs: string[] }[]; // long-form body for Read Online / PDF
+
+  // media assets (podcast / video)
+  audioUrl?: string; // local /media/*.mp3 — podcast episodes
+  videoUrl?: string; // local /media/*.mp4 — video pages
+  posterImage?: string; // player poster / episode art
+  mediaDurationSec?: number;
+  series?: string; // e.g. 'The Proof'
+  episode?: number;
+  transcript?: TranscriptEntry[];
+  downloadDocUrl?: string; // slides / screenplay / report file
+  downloadDocLabel?: string;
+
+  // investigation extras
+  timeline?: TimelineEntry[];
+  stats?: StatEntry[];
 
   // analytics
   views: number;

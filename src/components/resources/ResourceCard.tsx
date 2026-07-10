@@ -8,16 +8,30 @@ const compact = (n: number) => Intl.NumberFormat('en-US', { notation: 'compact',
 
 export function ResourceCard({ resource, priority }: { resource: Resource; priority?: boolean }) {
   const meta = RESOURCE_TYPE_META[resource.type];
+  const isMedia = Boolean(resource.audioUrl || resource.videoUrl || resource.series);
+  const cover = resource.coverImage ?? resource.posterImage;
+  const cta = resource.videoUrl ? '▶ Watch' : resource.audioUrl ? '▶ Listen' : 'Read';
+  const mediaMin = resource.mediaDurationSec ? Math.round(resource.mediaDurationSec / 60) : null;
   return (
     <article className="group flex flex-col overflow-hidden rounded-apa-lg border border-apa-line bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
       {/* Cover */}
       <Link href={`/resources/${resource.slug}`} className="relative block h-36 w-full overflow-hidden">
-        {resource.coverImage ? (
+        {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={resource.coverImage} alt="" className="h-full w-full object-cover transition-transform group-hover:scale-105" />
+          <img src={cover} alt="" className="h-full w-full object-cover transition-transform group-hover:scale-105" />
         ) : (
           <div className="apa-gradient flex h-full w-full items-center justify-center text-4xl opacity-90">{meta.icon}</div>
         )}
+        {isMedia ? (
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-lg text-apa-green shadow-lg transition-transform group-hover:scale-110">▶</span>
+          </span>
+        ) : null}
+        {mediaMin ? (
+          <span className="absolute bottom-2 right-2 rounded bg-black/70 px-1.5 py-0.5 text-[10px] font-bold text-white">
+            {mediaMin} min
+          </span>
+        ) : null}
         <span className={`absolute left-3 top-3 rounded px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide ${meta.badge}`}>
           {resource.type}
         </span>
@@ -67,7 +81,7 @@ export function ResourceCard({ resource, priority }: { resource: Resource; prior
             href={`/resources/${resource.slug}`}
             className="flex-1 rounded-md border border-apa-green px-3 py-2 text-center text-sm font-semibold text-apa-green transition-colors hover:bg-apa-green hover:text-white"
           >
-            Read
+            {cta}
           </Link>
           <BookmarkButton slug={resource.slug} />
         </div>
