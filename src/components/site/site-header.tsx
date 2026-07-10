@@ -15,7 +15,7 @@ interface NavChild {
   href: string;
 }
 interface NavItem {
-  key: 'home' | 'about' | 'journeys' | 'framework' | 'solutions' | 'aiConcierge';
+  key: 'home' | 'about' | 'journeys' | 'framework' | 'solutions' | 'resources' | 'aiConcierge';
   href: string;
   children?: NavChild[];
 }
@@ -42,6 +42,7 @@ const NAV: NavItem[] = [
     ],
   },
   { key: 'solutions', href: '/solutions' },
+  { key: 'resources', href: '/resources' },
   { key: 'aiConcierge', href: '/intelligence' },
 ];
 
