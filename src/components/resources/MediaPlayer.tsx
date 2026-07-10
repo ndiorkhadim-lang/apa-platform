@@ -159,6 +159,51 @@ export function PodcastPlayer({
   );
 }
 
+/** Media hosted on an external platform (YouTube) — presented as media, never as an article. */
+export function ExternalMediaCard({
+  title,
+  href,
+  poster,
+  kind,
+}: {
+  title: string;
+  href: string;
+  poster?: string;
+  kind: 'video' | 'audio';
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block overflow-hidden rounded-apa-lg border border-apa-line bg-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
+    >
+      <div className="relative">
+        {poster ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={poster} alt="" className="aspect-video w-full object-cover" />
+        ) : (
+          <div className="apa-gradient flex aspect-video w-full items-center justify-center text-6xl">
+            {kind === 'video' ? '🎬' : '🎙️'}
+          </div>
+        )}
+        <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-2xl text-apa-green shadow-xl transition-transform group-hover:scale-110">▶</span>
+        </span>
+      </div>
+      <div className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="min-w-0">
+          <div className="truncate font-bold text-apa-navy">{title}</div>
+          <div className="text-xs text-apa-grey">{kind === 'video' ? 'Watch' : 'Listen'} on the official APA YouTube channel</div>
+        </div>
+        <span className="shrink-0 rounded-md bg-apa-green px-4 py-2 text-xs font-bold text-white">
+          {kind === 'video' ? '▶ Watch' : '▶ Listen'} ↗
+        </span>
+      </div>
+    </a>
+  );
+}
+
 export function InProductionCard({
   title,
   series,

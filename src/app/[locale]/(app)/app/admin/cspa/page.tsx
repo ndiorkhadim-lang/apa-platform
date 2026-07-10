@@ -4,6 +4,8 @@ import { redirect } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
 import { prisma } from '@/infrastructure/prisma/client';
 import { CSPA_PASS, SECTIONS } from '@/domain/cspa/engine';
+import { DemoBanner } from '@/components/site/demo-banner';
+import { DEMO_MODE } from '@/lib/demo';
 
 /** Administrator interface — completed C-SPA runs, funnel stats. */
 export default async function AdminCspaPage({
@@ -16,19 +18,24 @@ export default async function AdminCspaPage({
   const fr = locale !== 'en';
   const session = await getSession();
   const role = (session?.user as { platformRole?: string } | undefined)?.platformRole;
-  if (!session) redirect({ href: '/sign-in?redirect=/app/admin/cspa', locale });
-  if (role !== 'ADMIN_APA') redirect({ href: '/app', locale });
+  const demo = !session && DEMO_MODE;
+  // Demo Mode shows the console shell only — user runs (personal data) are
+  // never loaded without a real ADMIN_APA session.
+  if (!session && !DEMO_MODE) redirect({ href: '/sign-in?redirect=/app/admin/cspa', locale });
+  if (session && role !== 'ADMIN_APA') redirect({ href: '/app', locale });
 
   const format = await getFormatter();
-  const [runs, drafts] = await Promise.all([
-    prisma.cspaRun.findMany({
-      where: { status: 'COMPLETED' },
-      orderBy: { completedAt: 'desc' },
-      include: { user: { select: { name: true, email: true } } },
-      take: 200,
-    }),
-    prisma.cspaRun.count({ where: { status: 'DRAFT' } }),
-  ]);
+  const [runs, drafts] = demo
+    ? [[], 0]
+    : await Promise.all([
+        prisma.cspaRun.findMany({
+          where: { status: 'COMPLETED' },
+          orderBy: { completedAt: 'desc' },
+          include: { user: { select: { name: true, email: true } } },
+          take: 200,
+        }),
+        prisma.cspaRun.count({ where: { status: 'DRAFT' } }),
+      ]);
   const passed = runs.filter((r) => (r.composite ?? 0) >= CSPA_PASS).length;
   const avg = runs.length
     ? (runs.reduce((a, r) => a + (r.composite ?? 0), 0) / runs.length).toFixed(1)
@@ -36,6 +43,14 @@ export default async function AdminCspaPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
+      {demo ? (
+        <DemoBanner
+          locale={locale}
+          note={fr
+            ? 'Aperçu administratif — la console est visible, mais les diagnostics des utilisateurs exigent une session admin APA.'
+            : 'Administrative preview — the console layout is viewable, but user diagnostics require an APA admin session.'}
+        />
+      ) : null}
       <h1 className="text-2xl font-bold text-apa-green">
         {fr ? 'Admin — Diagnostics C-SPA' : 'Admin — C-SPA Diagnostics'}
       </h1>

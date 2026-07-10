@@ -3,6 +3,8 @@ import { getFormatter, setRequestLocale } from 'next-intl/server';
 import { redirect } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
 import { prisma } from '@/infrastructure/prisma/client';
+import { DemoBanner } from '@/components/site/demo-banner';
+import { DEMO_MODE } from '@/lib/demo';
 import type { ChampionAppStatus, Prisma } from '@/generated/prisma/client';
 import { reviewApplication } from './actions';
 
@@ -55,8 +57,11 @@ export default async function AdminChampionsPage({
   setRequestLocale(locale);
   const session = await getSession();
   const role = (session?.user as { platformRole?: string } | undefined)?.platformRole;
-  if (!session) redirect({ href: '/sign-in?redirect=/app/admin/champions', locale });
-  if (role !== 'ADMIN_APA') redirect({ href: '/app', locale });
+  const demo = !session && DEMO_MODE;
+  // Demo Mode shows the console shell only — applicant PII is never loaded
+  // without a real ADMIN_APA session.
+  if (!session && !DEMO_MODE) redirect({ href: '/sign-in?redirect=/app/admin/champions', locale });
+  if (session && role !== 'ADMIN_APA') redirect({ href: '/app', locale });
 
   const sp = await searchParams;
   const c = C[locale === 'en' ? 'en' : 'fr'];
@@ -82,19 +87,29 @@ export default async function AdminChampionsPage({
       : {}),
   };
 
-  const [apps, total, pending] = await Promise.all([
-    prisma.championApplication.findMany({
-      where,
-      orderBy: { submittedAt: 'desc' },
-      include: { reviews: { orderBy: { createdAt: 'desc' }, take: 3 } },
-      take: 100,
-    }),
-    prisma.championApplication.count({ where: { status: { not: 'DRAFT' } } }),
-    prisma.championApplication.count({ where: { status: { in: ['SUBMITTED', 'SCREENING', 'INTERVIEW'] } } }),
-  ]);
+  const [apps, total, pending] = demo
+    ? [[], 0, 0]
+    : await Promise.all([
+        prisma.championApplication.findMany({
+          where,
+          orderBy: { submittedAt: 'desc' },
+          include: { reviews: { orderBy: { createdAt: 'desc' }, take: 3 } },
+          take: 100,
+        }),
+        prisma.championApplication.count({ where: { status: { not: 'DRAFT' } } }),
+        prisma.championApplication.count({ where: { status: { in: ['SUBMITTED', 'SCREENING', 'INTERVIEW'] } } }),
+      ]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
+      {demo ? (
+        <DemoBanner
+          locale={locale}
+          note={locale === 'en'
+            ? 'Administrative preview — the console layout is viewable, but applicant records (personal data) require an APA admin session.'
+            : 'Aperçu administratif — la console est visible, mais les dossiers candidats (données personnelles) exigent une session admin APA.'}
+        />
+      ) : null}
       <h1 className="text-2xl font-bold text-apa-green">{c.title}</h1>
       <div className="apa-rule my-4" />
       <p className="text-sm text-apa-grey">{c.sub}</p>

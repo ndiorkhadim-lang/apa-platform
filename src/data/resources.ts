@@ -564,7 +564,9 @@ export const RESOURCES: Resource[] = [
     relatedSolutions: ['s2', 's5'], relatedFrameworks: ['IV', 'VI'], relatedTools: [10, 27, 28],
     relatedJourneys: ['senegal-esg-practitioner-immersion'], relatedCertifications: ['APA Certified Institution'],
     hasPdf: false,
+    audioUrl: '/media/80-milliards-mefiance.mp3',
     posterImage: '/media/poster-proof-podcast.jpg',
+    mediaDurationSec: 266,
     series: 'The Proof', episode: 2,
     downloadDocUrl: '/docs/APA_Ep02_80_Billion_Screenplay.pdf',
     downloadDocLabel: 'Download episode screenplay (PDF)',
@@ -589,7 +591,7 @@ export const RESOURCES: Resource[] = [
       'The Proof — Episode 1 on film. Same company, +300–500 basis points, just for being African. APA calls it a proof gap, not a risk gap — and shows how verification erases it.',
     executiveOverview:
       'This episode film stages the founding confrontation of the APA thesis: a journalist challenges the founders on the 300–500 basis-point penalty African companies pay for identical fundamentals. The answer reframes half a century of country-risk pricing — the gap measures missing, verifiable proof of governance, and an African-owned standard the whole world can verify is what closes it.',
-    purpose: 'Give executives and investors a 2-minute cinematic entry point into the Authenticity Premium™ thesis.',
+    purpose: 'Give executives and investors a 4-minute cinematic entry point into the Authenticity Premium™ thesis.',
     businessValue: 'A board-room-ready asset that reframes the cost of capital conversation in one screening.',
     keyInsights: [
       'The 300–500 bps penalty prices perception, not fundamentals.',
@@ -597,7 +599,7 @@ export const RESOURCES: Resource[] = [
       'The standard must be African-owned and world-verifiable to be credible on both sides.',
     ],
     aiSummary:
-      'A 2-minute episode film: the +300–500 bps “Africa penalty” is a proof gap, not a risk gap — and an African-owned, globally-verifiable standard erases it.',
+      'A 4-minute episode film: the +300–500 bps “Africa penalty” is a proof gap, not a risk gap — and an African-owned, globally-verifiable standard erases it.',
     ...A.samb,
     publishedAt: '2026-06-25', updatedAt: '2026-06-25', readingMinutes: 3,
     language: 'English', otherLanguages: ['French'],
@@ -606,9 +608,9 @@ export const RESOURCES: Resource[] = [
     relatedSolutions: ['s3', 's4'], relatedFrameworks: ['II', 'VI'], relatedTools: [3, 21],
     relatedJourneys: ['rwanda-sovereign-capital-co-architecture'], relatedCertifications: ['APA Certified Institution'],
     hasPdf: false,
-    videoUrl: '/media/the-500-point-penalty.mp4',
-    posterImage: '/media/poster-500-point.jpg',
-    mediaDurationSec: 127,
+    videoUrl: '/media/500-point-penalty-notebooklm.mp4',
+    posterImage: '/media/poster-500-real.jpg',
+    mediaDurationSec: 239,
     series: 'The Proof', episode: 1,
     transcript: [
       { speaker: 'THE JOURNALIST', text: 'They say Africa is risky. What if we’ve had the wrong word for fifty years?' },
@@ -691,7 +693,9 @@ export const RESOURCES: Resource[] = [
     relatedJourneys: ['senegal-esg-practitioner-immersion', 'rwanda-sovereign-capital-co-architecture'],
     relatedCertifications: ['APA Certified Institution'],
     hasPdf: true, fileSizeKb: 6400, version: '1.0',
-    posterImage: '/media/poster-presentation.jpg',
+    videoUrl: '/media/anatomy-80-billion.mp4',
+    posterImage: '/media/poster-anatomy.jpg',
+    mediaDurationSec: 197,
     timeline: [
       { label: 'Leak nº1', title: 'The 500-Point Penalty', text: 'Identical fundamentals, +300–500 bps for African domicile. The uncertainty premium alone drains tens of billions in excess interest — capital that never reaches operations.' },
       { label: 'Leak nº2', title: 'The 70% Failure Rate', text: 'Projects collapse not from lack of money but from broken trust: communities never heard, grievances never processed, buy-in never structured. Every abandonment is countable value destroyed.' },

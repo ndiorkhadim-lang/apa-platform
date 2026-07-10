@@ -7,7 +7,7 @@ import { RESOURCE_TYPE_META, SOLUTION_LABEL, PILLAR_LABEL } from '@/types/resour
 import type { Resource } from '@/types/resource';
 import { ResourceActions } from '@/components/resources/ResourceActions';
 import { ResourceCard } from '@/components/resources/ResourceCard';
-import { PodcastPlayer, VideoPlayer, InProductionCard } from '@/components/resources/MediaPlayer';
+import { PodcastPlayer, VideoPlayer, InProductionCard, ExternalMediaCard } from '@/components/resources/MediaPlayer';
 
 const compact = (n: number) => Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
 const fmtDate = (iso: string) => new Date(iso).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -120,8 +120,9 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
         </div>
       </header>
 
-      {/* Media experience — podcast player / video player */}
-      {r.videoUrl || r.audioUrl || r.series ? (
+      {/* Media experience — audio ALWAYS opens as a podcast, video ALWAYS as
+          a player; external media links out as media, never as an article. */}
+      {r.videoUrl || r.audioUrl || r.series || r.mediaUrl ? (
         <div className="mt-6">
           {r.videoUrl ? (
             <VideoPlayer src={r.videoUrl} poster={r.posterImage} title={r.title} />
@@ -133,6 +134,13 @@ export default async function ResourceDetailPage({ params }: { params: Promise<{
               series={r.series}
               episode={r.episode}
               durationSec={r.mediaDurationSec}
+            />
+          ) : r.mediaUrl ? (
+            <ExternalMediaCard
+              title={r.title}
+              href={r.mediaUrl}
+              poster={r.posterImage}
+              kind={r.type === 'Podcast' ? 'audio' : 'video'}
             />
           ) : (
             <InProductionCard

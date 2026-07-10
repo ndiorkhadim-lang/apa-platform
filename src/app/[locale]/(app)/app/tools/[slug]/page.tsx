@@ -7,6 +7,8 @@ import { prisma } from '@/infrastructure/prisma/client';
 import { BLUEPRINTS } from '@/domain/tools/workspace-blueprint';
 import { SOLUTIONS, solutionOf, journeyOf } from '@/domain/solutions/ecosystem';
 import { ToolWorkspace } from '@/components/tools/tool-workspace';
+import { DemoBanner } from '@/components/site/demo-banner';
+import { DEMO_MODE } from '@/lib/demo';
 import { ensureSession } from './actions';
 
 export default async function ToolWorkspacePage({
@@ -18,7 +20,8 @@ export default async function ToolWorkspacePage({
   setRequestLocale(locale);
 
   const session = await getSession();
-  if (!session) {
+  const demo = !session && DEMO_MODE;
+  if (!session && !DEMO_MODE) {
     redirect({ href: `/sign-in?redirect=/app/tools/${slug}`, locale });
   }
 
@@ -35,19 +38,22 @@ export default async function ToolWorkspacePage({
   const isFr = locale === 'fr';
   const blueprint = BLUEPRINTS[tool.category];
 
-  // Ensure a working session and load history + reports
-  const sessionId = await ensureSession(tool.id);
-  const [toolSession, allSessions] = await Promise.all([
-    prisma.toolSession.findUnique({
-      where: { id: sessionId },
-      include: { reports: { orderBy: { createdAt: 'desc' } } },
-    }),
-    prisma.toolSession.findMany({
-      where: { userId: session!.user.id, toolId: tool.id },
-      orderBy: { updatedAt: 'desc' },
-      include: { _count: { select: { reports: true } } },
-    }),
-  ]);
+  // Ensure a working session and load history + reports (skipped in Demo Mode
+  // — sessions are persisted state and stay behind authentication).
+  const sessionId = session ? await ensureSession(tool.id) : null;
+  const [toolSession, allSessions] = sessionId
+    ? await Promise.all([
+        prisma.toolSession.findUnique({
+          where: { id: sessionId },
+          include: { reports: { orderBy: { createdAt: 'desc' } } },
+        }),
+        prisma.toolSession.findMany({
+          where: { userId: session!.user.id, toolId: tool.id },
+          orderBy: { updatedAt: 'desc' },
+          include: { _count: { select: { reports: true } } },
+        }),
+      ])
+    : [null, []];
 
   const name = isFr ? tool.nameFr : tool.nameEn;
   const benefits = isFr ? blueprint.benefitsFr : blueprint.benefitsEn;
@@ -103,17 +109,40 @@ export default async function ToolWorkspacePage({
 
       {/* Workspace (form + results + export) */}
       <div className="mt-10 rounded-apa-lg border border-apa-line bg-white p-6">
-        <ToolWorkspace
-          sessionId={sessionId}
-          slug={slug}
-          locale={locale}
-          toolName={name}
-          category={tool.category}
-          fields={blueprint.fields}
-          initialData={(toolSession?.data as Record<string, unknown>) ?? {}}
-          outputKind={blueprint.outputKind}
-        />
+        {sessionId ? (
+          <ToolWorkspace
+            sessionId={sessionId}
+            slug={slug}
+            locale={locale}
+            toolName={name}
+            category={tool.category}
+            fields={blueprint.fields}
+            initialData={(toolSession?.data as Record<string, unknown>) ?? {}}
+            outputKind={blueprint.outputKind}
+          />
+        ) : (
+          <div className="apa-box apa-box-gold p-5 text-sm">
+            <p className="font-bold text-apa-navy">
+              🎭 {isFr ? 'Mode Démo — atelier en aperçu' : 'Demo Mode — workspace preview'}
+            </p>
+            <p className="mt-1.5 text-apa-ink">
+              {isFr
+                ? 'Le formulaire interactif, le calcul des résultats et l’export de rapports fonctionnent avec un compte (les sessions sont sauvegardées). Créez un compte gratuit pour lancer une session de travail sur cet outil.'
+                : 'The interactive form, results computation and report export run with an account (sessions are saved). Create a free account to start a working session on this tool.'}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Link href="/sign-up" className="rounded-md bg-apa-green px-4 py-2 text-xs font-bold text-white hover:bg-apa-green-mid">
+                {isFr ? 'Créer un compte gratuit' : 'Create a free account'}
+              </Link>
+              <Link href="/app/cspa" className="rounded-md border border-apa-line px-4 py-2 text-xs font-semibold text-apa-navy hover:border-apa-green">
+                {isFr ? 'Essayer le diagnostic C-SPA (démo complète)' : 'Try the C-SPA diagnostic (full demo)'}
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
+
+      {demo ? <div className="mt-6"><DemoBanner locale={locale} /></div> : null}
 
       {/* Saved reports */}
       <section className="mt-10">

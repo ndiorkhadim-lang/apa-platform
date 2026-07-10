@@ -3,6 +3,7 @@
 import { useMemo, useState, useTransition } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { saveCspaDraft, submitCspa } from '@/app/[locale]/(app)/app/cspa/actions';
+import { scoreRun, CSPA_PASS, MATURITY_LEVELS, SECTIONS as ENGINE_SECTIONS, type CspaResult } from '@/domain/cspa/engine';
 
 interface Q {
   id: string;
@@ -38,18 +39,23 @@ export function CspaAssessment({
   sections,
   questions,
   initialAnswers,
+  demo = false,
 }: {
   locale: string;
   sections: SectionMeta[];
   questions: Q[];
   initialAnswers: Record<string, number>;
+  demo?: boolean;
 }) {
   const t = L[locale === 'en' ? 'en' : 'fr'];
+  const fr = locale !== 'en';
   const router = useRouter();
   const [answers, setAnswers] = useState<Record<string, number>>(initialAnswers);
   const [step, setStep] = useState(0);
   const [savedMsg, setSavedMsg] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [demoNotice, setDemoNotice] = useState<string | null>(null);
+  const [demoResult, setDemoResult] = useState<CspaResult | null>(null);
   const [pending, start] = useTransition();
 
   const current = sections[step];
@@ -61,6 +67,10 @@ export function CspaAssessment({
   const pct = Math.round((answered / questions.length) * 100);
 
   function onSave() {
+    if (demo) {
+      setDemoNotice(fr ? '🎭 Mode Démo — enregistrement désactivé.' : '🎭 Demo Mode — saving disabled.');
+      return;
+    }
     start(async () => {
       await saveCspaDraft(answers, locale);
       setSavedMsg(true);
@@ -68,6 +78,18 @@ export function CspaAssessment({
   }
 
   function onSubmit() {
+    if (demo) {
+      const unanswered = questions.filter((q) => answers[q.id] === undefined).length;
+      if (unanswered > 0) {
+        setError(`${unanswered} ${t.missing}`);
+        return;
+      }
+      // Compute the score locally — nothing persisted in Demo Mode.
+      setDemoResult(scoreRun(questions, answers));
+      setDemoNotice(null);
+      setError(null);
+      return;
+    }
     start(async () => {
       const res = await submitCspa(answers, locale);
       if (!res.ok) {
@@ -76,6 +98,69 @@ export function CspaAssessment({
       }
       router.refresh();
     });
+  }
+
+  // ── Demo results preview (client-computed, never saved) ──
+  if (demo && demoResult) {
+    const level = MATURITY_LEVELS.find((m) => m.level === demoResult.maturity)!;
+    const R = 64;
+    const circ = 2 * Math.PI * R;
+    return (
+      <div>
+        <div className="apa-box apa-box-gold mb-6 p-3 text-sm font-semibold">
+          🎭 {fr
+            ? 'Aperçu des résultats (Mode Démo) — ce score n’est pas enregistré. Créez un compte pour un audit officiel.'
+            : 'Results preview (Demo Mode) — this score is not saved. Create an account for an official audit.'}
+        </div>
+        <div className="grid gap-6 rounded-apa-lg border border-apa-line bg-white p-6 sm:grid-cols-[auto_1fr]">
+          <svg viewBox="0 0 160 160" className="mx-auto h-40 w-40" role="img" aria-label={`Score ${demoResult.composite}/100`}>
+            <circle cx="80" cy="80" r={R} fill="none" stroke="#e3eae7" strokeWidth="13" />
+            <circle
+              cx="80" cy="80" r={R} fill="none"
+              stroke={demoResult.passed ? '#0A5C36' : '#C9A24B'}
+              strokeWidth="13" strokeLinecap="round"
+              strokeDasharray={`${(demoResult.composite / 100) * circ} ${circ}`}
+              transform="rotate(-90 80 80)"
+            />
+            <text x="80" y="76" textAnchor="middle" fontSize="30" fontWeight="800" fill="#0A5C36">{demoResult.composite}</text>
+            <text x="80" y="98" textAnchor="middle" fontSize="12" fill="#5b6b66">/100 · gate {CSPA_PASS}</text>
+          </svg>
+          <div>
+            <span className={`inline-block rounded px-3 py-1 text-xs font-extrabold uppercase tracking-wide ${demoResult.passed ? 'bg-apa-green text-white' : 'bg-apa-gold text-apa-ink'}`}>
+              {fr ? level.labelFr : level.labelEn}
+            </span>
+            <p className="mt-3 text-sm leading-relaxed text-apa-ink">{fr ? level.descFr : level.descEn}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setDemoResult(null)}
+                className="rounded-md border border-apa-line px-4 py-2 text-sm font-semibold text-apa-grey hover:border-apa-green hover:text-apa-green"
+              >
+                {fr ? '← Revenir au questionnaire' : '← Back to the questionnaire'}
+              </button>
+            </div>
+          </div>
+        </div>
+        <h2 className="mt-8 text-lg font-bold text-apa-green">{fr ? 'Maturité par section' : 'Maturity by section'}</h2>
+        <div className="mt-4 space-y-2.5">
+          {ENGINE_SECTIONS.map((s) => {
+            const v = demoResult.sectionScores[s.code] ?? 0;
+            return (
+              <div key={s.code} className="flex items-center gap-3">
+                <span className="w-56 shrink-0 text-xs font-bold text-apa-navy">
+                  {s.code} · {fr ? s.nameFr : s.nameEn}
+                  <span className="ml-1 font-normal text-apa-grey">({s.weight}%)</span>
+                </span>
+                <div className="h-4 flex-1 overflow-hidden rounded bg-apa-soft">
+                  <div className={`h-full rounded ${v >= 60 ? 'apa-gradient' : 'bg-apa-gold'}`} style={{ width: `${v}%` }} />
+                </div>
+                <span className="w-10 text-right text-sm font-bold text-apa-green">{v}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -151,6 +236,7 @@ export function CspaAssessment({
 
       {error ? <p role="alert" className="apa-box apa-box-gold mt-5 p-3 text-sm">{error}</p> : null}
       {savedMsg ? <p className="mt-5 text-sm font-semibold text-apa-green">{t.saved}</p> : null}
+      {demoNotice ? <p role="status" className="apa-box apa-box-gold mt-5 p-3 text-sm font-semibold">{demoNotice}</p> : null}
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <button type="button" disabled={step === 0} onClick={() => setStep((s) => s - 1)}

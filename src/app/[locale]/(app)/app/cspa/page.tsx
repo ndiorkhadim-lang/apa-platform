@@ -14,6 +14,8 @@ import {
   type Maturity,
 } from '@/domain/cspa/engine';
 import { CspaAssessment } from '@/components/cspa/assessment';
+import { DemoBanner } from '@/components/site/demo-banner';
+import { DEMO_MODE } from '@/lib/demo';
 import { restartCspa } from './actions';
 
 export default async function CspaPage({
@@ -25,13 +27,16 @@ export default async function CspaPage({
   setRequestLocale(locale);
   const fr = locale !== 'en';
   const session = await getSession();
-  if (!session) redirect({ href: '/sign-in?redirect=/app/cspa', locale });
+  const demo = !session && DEMO_MODE;
+  if (!session && !DEMO_MODE) redirect({ href: '/sign-in?redirect=/app/cspa', locale });
 
   const [latest, questions] = await Promise.all([
-    prisma.cspaRun.findFirst({
-      where: { userId: session!.user.id, version: CSPA_VERSION },
-      orderBy: { updatedAt: 'desc' },
-    }),
+    session
+      ? prisma.cspaRun.findFirst({
+          where: { userId: session.user.id, version: CSPA_VERSION },
+          orderBy: { updatedAt: 'desc' },
+        })
+      : Promise.resolve(null),
     prisma.cspaQuestion.findMany({
       where: { version: CSPA_VERSION },
       orderBy: [{ section: 'asc' }, { order: 'asc' }],
@@ -42,6 +47,14 @@ export default async function CspaPage({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
+      {demo ? (
+        <DemoBanner
+          locale={locale}
+          note={fr
+            ? 'Diagnostic C-SPA en aperçu complet — parcourez les 6 sections et calculez un score d’essai. Les résultats ne sont pas enregistrés.'
+            : 'Full C-SPA preview — walk the 6 sections and compute a trial score. Results are not saved.'}
+        />
+      ) : null}
       <span className="apa-secnum text-sm">C-SPA</span>
       <h1 className="mt-2 text-2xl font-bold text-apa-green sm:text-3xl">
         {fr ? 'Audit du Paradigme Stratégique Fondamental' : 'Core Strategic Paradigm Audit'}
@@ -53,12 +66,44 @@ export default async function CspaPage({
           : `Proprietary executive diagnostic (tool #3): locates your organization between the traditional/transactional paradigm and the transformational Creating-Shared-Value (CSV) paradigm. ${questions.length} questions · 6 weighted sections · certification gate ≥ ${CSPA_PASS}.`}
       </p>
 
+      {/* Welcome & methodology (always visible; central to the demo walkthrough) */}
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+        <div className="apa-box p-4">
+          <h2 className="text-sm font-bold text-apa-navy">{fr ? '1 · Bienvenue' : '1 · Welcome'}</h2>
+          <p className="mt-1.5 text-xs leading-relaxed text-apa-ink">
+            {fr
+              ? 'Le C-SPA est la porte d’entrée de la certification APA. Il documente le paradigme réel de votre direction — avant tout engagement de capital.'
+              : 'The C-SPA is the entry gate of APA certification. It documents your leadership’s actual paradigm — before any capital is committed.'}
+          </p>
+        </div>
+        <div className="apa-box apa-box-gold p-4">
+          <h2 className="text-sm font-bold text-apa-navy">{fr ? '2 · Méthodologie' : '2 · Methodology'}</h2>
+          <p className="mt-1.5 text-xs leading-relaxed text-apa-ink">
+            {fr
+              ? `${SECTIONS.length} sections pondérées · ${questions.length} questions · score composite Σ wᵢ·sᵢ sur 100 · seuil de passage ≥ ${CSPA_PASS} · échelle de maturité en ${MATURITY_LEVELS.length} niveaux.`
+              : `${SECTIONS.length} weighted sections · ${questions.length} questions · composite score Σ wᵢ·sᵢ out of 100 · pass gate ≥ ${CSPA_PASS} · ${MATURITY_LEVELS.length}-level maturity ladder.`}
+          </p>
+        </div>
+        <div className="apa-box apa-box-navy p-4">
+          <h2 className="text-sm font-bold text-apa-navy">{fr ? '3 · Vers la certification' : '3 · Certification pathway'}</h2>
+          <p className="mt-1.5 text-xs leading-relaxed text-apa-ink">
+            {fr
+              ? 'Score ≥ 70 : accès à l’étape 2 du parcours (déploiement des outils & assemblage des preuves), puis vérification communautaire et revue d’assurance.'
+              : 'Score ≥ 70 unlocks step 2 of the pathway (tool deployment & evidence assembly), then community verification and assurance review.'}{' '}
+            <Link href="/certification" className="font-semibold text-apa-green underline">
+              {fr ? 'Voir le parcours complet →' : 'See the full pathway →'}
+            </Link>
+          </p>
+        </div>
+      </div>
+
       <div className="mt-8">
         {showResults ? (
           <CspaResults locale={locale} run={latest!} />
         ) : (
           <CspaAssessment
             locale={locale}
+            demo={demo}
             sections={SECTIONS.map((s) => ({
               code: s.code,
               name: fr ? s.nameFr : s.nameEn,

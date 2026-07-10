@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link, redirect } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
 import { SignOutButton } from '@/components/auth/sign-out-button';
+import { DemoBanner } from '@/components/site/demo-banner';
+import { DEMO_MODE, DEMO_USER } from '@/lib/demo';
 
 interface AppCard {
   title: string;
@@ -19,22 +21,27 @@ export default async function AppHomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const session = await getSession();
-  if (!session) redirect({ href: '/sign-in', locale });
+  const demo = !session && DEMO_MODE;
+  if (!session && !DEMO_MODE) redirect({ href: '/sign-in', locale });
 
   const t = await getTranslations('AppHome');
-  const user = session!.user;
+  const user = session?.user ?? DEMO_USER;
   const role = (user as { platformRole?: string }).platformRole ?? 'USER';
   const cards = t.raw('cards') as AppCard[];
   const isFr = locale !== 'en';
 
-  const { prisma } = await import('@/infrastructure/prisma/client');
-  const championApp = await prisma.championApplication.findUnique({
-    where: { userId_type: { userId: user.id, type: 'CHAMPION' } },
-    select: { status: true },
-  });
+  let championApp: { status: string } | null = null;
+  if (session) {
+    const { prisma } = await import('@/infrastructure/prisma/client');
+    championApp = await prisma.championApplication.findUnique({
+      where: { userId_type: { userId: user.id, type: 'CHAMPION' } },
+      select: { status: true },
+    });
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
+      {demo ? <DemoBanner locale={locale} /> : null}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-apa-green sm:text-3xl">
@@ -49,7 +56,7 @@ export default async function AppHomePage({
             </span>
           </p>
         </div>
-        <SignOutButton />
+        {demo ? null : <SignOutButton />}
       </div>
 
       <h2 className="mt-12 text-xl font-bold text-apa-green">{t('nextTitle')}</h2>

@@ -24,7 +24,9 @@ export default async function CspaReportPage({
   setRequestLocale(locale);
   const fr = locale !== 'en';
   const session = await getSession();
-  if (!session) redirect({ href: '/sign-in?redirect=/app/cspa/report', locale });
+  // Demo Mode note: the trial score preview lives on /app/cspa — the formal
+  // report requires a saved, authenticated run, so guests go there instead.
+  if (!session) redirect({ href: '/app/cspa', locale });
 
   const run = await prisma.cspaRun.findFirst({
     where: { userId: session!.user.id, version: CSPA_VERSION, status: 'COMPLETED' },

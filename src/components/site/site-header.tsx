@@ -5,6 +5,7 @@ import { getSession } from '@/lib/session';
 import { LocaleSwitcher } from './locale-switcher';
 import { MobileNav, type MobileGroup } from './mobile-nav';
 import { UserMenu } from './user-menu';
+import { DEMO_MODE } from '@/lib/demo';
 
 /**
  * Primary IA (aligned with theapaafrica.org):
@@ -110,6 +111,14 @@ export async function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2.5">
+          {!session && DEMO_MODE ? (
+            <span
+              className="hidden rounded-full border border-apa-gold bg-apa-gold/10 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-apa-bronze sm:block"
+              title="Demo Mode — read-only preview. Create an account for the full experience."
+            >
+              🎭 Preview Mode
+            </span>
+          ) : null}
           <LocaleSwitcher />
           <Link
             href="/certification"
