@@ -53,6 +53,22 @@ export async function reviewApplication(formData: FormData) {
       where: { id: app.id },
       data: { status: input.decision },
     });
+    // Approving a PARTNER application grants Journey Partner status,
+    // unlocking the Partner Dashboard (submit & manage journey proposals).
+    if (app.type === 'PARTNER' && input.decision === 'ACCEPTED') {
+      await prisma.user.update({
+        where: { id: app.userId },
+        data: { journeyPartner: true },
+      });
+      await prisma.auditLog.create({
+        data: {
+          actorId: admin.id,
+          action: 'journey.partner.granted',
+          entityType: 'User',
+          entityId: app.userId,
+        },
+      });
+    }
     await prisma.auditLog.create({
       data: {
         actorId: admin.id,

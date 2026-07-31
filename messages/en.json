@@ -33,12 +33,48 @@
     "ctaNavigator": "Ask the Navigator",
     "ctaCertify": "Get Certified",
     "items": [
-      { "slug": "investors-dfis", "audience": "Investors & DFIs", "heading": "De-risk African capital deployment", "body": "Convert development intent into verifiable, institutionally-credible outcomes. APA satisfies IFC PS1-type governance conditions and compresses the risk premium 300–500 bps.", "cta": "Reduce my Trust Tax™ · Risk & Territory Audit" },
-      { "slug": "multinationals-esg", "audience": "Multinationals & ESG", "heading": "Audit-shield your African supply chain", "body": "Meet CSDDD, the UK Bribery Act and LkSG with end-to-end, verifiable supplier accountability.", "cta": "Fortune 500 Audit Shield · C-SPA" },
-      { "slug": "government-agencies", "audience": "Government & Agencies", "heading": "A national enterprise governance standard", "body": "Embed APA as the verification layer that makes public-private projects bankable and auditable — the sovereign-to-enterprise chain.", "cta": "Public-Sector Policy Advisory" },
-      { "slug": "foundations-grantmakers", "audience": "Foundations & Grantmakers", "heading": "Turn grants into investment-grade outcomes", "body": "APA is the certification layer that converts grant-funded enterprises into institutionally bankable ones — capital 300–500 bps cheaper.", "cta": "MAE Toolkit · Certification" },
-      { "slug": "celebrities-ambassadors", "audience": "Celebrities & Ambassadors", "heading": "Protect your name before you endorse", "body": "Test ethical brand compliance and embed a Moral Exit Clause before any endorsement contract.", "cta": "Tool 41 — Accountable Endorsement" },
-      { "slug": "diaspora", "audience": "Diaspora", "heading": "Deploy capital & expertise, accountably", "body": "A structured on-ramp to convert remittances and expertise into ethically-governed equity engagement.", "cta": "Diaspora Sovereign Capital Pathway" }
+      {
+        "slug": "investors-dfis",
+        "audience": "Investors & DFIs",
+        "heading": "De-risk African capital deployment",
+        "body": "Convert development intent into verifiable, institutionally-credible outcomes. APA satisfies IFC PS1-type governance conditions and compresses the risk premium 300–500 bps.",
+        "cta": "Reduce my Trust Tax™ · Risk & Territory Audit"
+      },
+      {
+        "slug": "multinationals-esg",
+        "audience": "Multinationals & ESG",
+        "heading": "Audit-shield your African supply chain",
+        "body": "Meet CSDDD, the UK Bribery Act and LkSG with end-to-end, verifiable supplier accountability.",
+        "cta": "Fortune 500 Audit Shield · C-SPA"
+      },
+      {
+        "slug": "government-agencies",
+        "audience": "Government & Agencies",
+        "heading": "A national enterprise governance standard",
+        "body": "Embed APA as the verification layer that makes public-private projects bankable and auditable — the sovereign-to-enterprise chain.",
+        "cta": "Public-Sector Policy Advisory"
+      },
+      {
+        "slug": "foundations-grantmakers",
+        "audience": "Foundations & Grantmakers",
+        "heading": "Turn grants into investment-grade outcomes",
+        "body": "APA is the certification layer that converts grant-funded enterprises into institutionally bankable ones — capital 300–500 bps cheaper.",
+        "cta": "MAE Toolkit · Certification"
+      },
+      {
+        "slug": "celebrities-ambassadors",
+        "audience": "Celebrities & Ambassadors",
+        "heading": "Protect your name before you endorse",
+        "body": "Test ethical brand compliance and embed a Moral Exit Clause before any endorsement contract.",
+        "cta": "Tool 41 — Accountable Endorsement"
+      },
+      {
+        "slug": "diaspora",
+        "audience": "Diaspora",
+        "heading": "Deploy capital & expertise, accountably",
+        "body": "A structured on-ramp to convert remittances and expertise into ethically-governed equity engagement.",
+        "cta": "Diaspora Sovereign Capital Pathway"
+      }
     ]
   },
   "Verify": {
@@ -52,7 +88,11 @@
     "issued": "Issued on",
     "expires": "Expires on",
     "status": "Status",
-    "statuses": { "ACTIVE": "ACTIVE — valid certificate", "EXPIRED": "EXPIRED", "REVOKED": "REVOKED" }
+    "statuses": {
+      "ACTIVE": "ACTIVE — valid certificate",
+      "EXPIRED": "EXPIRED",
+      "REVOKED": "REVOKED"
+    }
   },
   "Home": {
     "topbar": "GRC Standard™ · Auditable · Pan-African · Bilingual FR/EN",
@@ -70,12 +110,30 @@
     "execWhyBody": "APA™ operationalizes accountability through precision diagnostics, mandate enforcement and trust infrastructure. The Authenticity Premium™ makes it a measurable financial asset: certified enterprises save 300–500 basis points in cost of capital.",
     "kpisTitle": "Key indicators",
     "kpis": {
-      "fdi": { "value": "$80B+", "label": "Annual FDI deficit addressed" },
-      "bps": { "value": "300–500 bps", "label": "Cost-of-capital penalty eliminated" },
-      "tools": { "value": "63+", "label": "Proprietary GRC tools" },
-      "nations": { "value": "54 nations", "label": "Targeted Africa coverage" },
-      "valuation": { "value": "$2.5M", "label": "Valuation uplift / certified entity" },
-      "months": { "value": "12 months", "label": "Continental deployment" }
+      "fdi": {
+        "value": "$80B+",
+        "label": "Annual FDI deficit addressed"
+      },
+      "bps": {
+        "value": "300–500 bps",
+        "label": "Cost-of-capital penalty eliminated"
+      },
+      "tools": {
+        "value": "63+",
+        "label": "Proprietary GRC tools"
+      },
+      "nations": {
+        "value": "54 nations",
+        "label": "Targeted Africa coverage"
+      },
+      "valuation": {
+        "value": "$2.5M",
+        "label": "Valuation uplift / certified entity"
+      },
+      "months": {
+        "value": "12 months",
+        "label": "Continental deployment"
+      }
     },
     "arcTitle": "3-Beat Engagement Arc — Understand › Engage › Become Accountable",
     "arc1Step": "01 · Understand",
@@ -146,7 +204,14 @@
   "ToolsGateway": {
     "title": "Governance Gateway — Solutions & 63 Tools",
     "intro": "Don’t pick a tool. Start from your challenge: the AI Concierge routes you to the right Solution, which unfolds its frameworks, tools and certification pathway.",
-    "flow": ["Business challenge", "APA Solution", "Framework", "Tool", "Assessment", "Certification"],
+    "flow": [
+      "Business challenge",
+      "APA Solution",
+      "Framework",
+      "Tool",
+      "Assessment",
+      "Certification"
+    ],
     "solutionsNav": "Jump to a solution",
     "toolsCount": "{count} tools",
     "purpose": "Purpose",
@@ -163,7 +228,12 @@
     "cert": "Cert.",
     "aiRecommended": "AI recommended",
     "launch": "Launch tool",
-    "categories": { "FORM": "Form", "GUIDE": "Guide", "LEGAL": "Legal instrument", "METRIC": "Metric" }
+    "categories": {
+      "FORM": "Form",
+      "GUIDE": "Guide",
+      "LEGAL": "Legal instrument",
+      "METRIC": "Metric"
+    }
   },
   "SolutionsCatalog": {
     "secnum": "06",
@@ -210,29 +280,96 @@
     "title": "Live GRC Dashboard — Real-Time Analytics",
     "subtitle": "Authenticity Premium™ · Trust Tax™ · Sigma-Suppression™ · Project Success · FDI Pipeline",
     "kpis": [
-      { "value": "87.3%", "label": "Authenticity Premium™ (+4.2% vs Q3)" },
-      { "value": "12.4%", "label": "Trust Tax™ rate (↓ from 18.1%)" },
-      { "value": "2.1σ", "label": "Sigma-Suppression™ (target <1.5σ)" },
-      { "value": "74%", "label": "Project Success Rate (↑ 11 pts/yr)" },
-      { "value": "$2.3B", "label": "FDI unlocked (year to date)" },
-      { "value": "63/63", "label": "Tools deployed (100% active)" }
+      {
+        "value": "87.3%",
+        "label": "Authenticity Premium™ (+4.2% vs Q3)"
+      },
+      {
+        "value": "12.4%",
+        "label": "Trust Tax™ rate (↓ from 18.1%)"
+      },
+      {
+        "value": "2.1σ",
+        "label": "Sigma-Suppression™ (target <1.5σ)"
+      },
+      {
+        "value": "74%",
+        "label": "Project Success Rate (↑ 11 pts/yr)"
+      },
+      {
+        "value": "$2.3B",
+        "label": "FDI unlocked (year to date)"
+      },
+      {
+        "value": "63/63",
+        "label": "Tools deployed (100% active)"
+      }
     ],
     "topTitle": "Authenticity Premium™ by country (Top 6)",
     "topCountries": [
-      { "flag": "🇲🇦", "name": "Morocco", "score": 91 },
-      { "flag": "🇷🇼", "name": "Rwanda", "score": 88 },
-      { "flag": "🇸🇳", "name": "Senegal", "score": 87 },
-      { "flag": "🇰🇪", "name": "Kenya", "score": 84 },
-      { "flag": "🇳🇬", "name": "Nigeria", "score": 79 },
-      { "flag": "🇬🇭", "name": "Ghana", "score": 76 }
+      {
+        "flag": "🇲🇦",
+        "name": "Morocco",
+        "score": 91
+      },
+      {
+        "flag": "🇷🇼",
+        "name": "Rwanda",
+        "score": 88
+      },
+      {
+        "flag": "🇸🇳",
+        "name": "Senegal",
+        "score": 87
+      },
+      {
+        "flag": "🇰🇪",
+        "name": "Kenya",
+        "score": 84
+      },
+      {
+        "flag": "🇳🇬",
+        "name": "Nigeria",
+        "score": 79
+      },
+      {
+        "flag": "🇬🇭",
+        "name": "Ghana",
+        "score": 76
+      }
     ],
     "regionTitle": "Project Success Rate by region",
-    "regionCols": { "region": "Region", "countries": "Countries", "success": "Success", "fdi": "FDI" },
+    "regionCols": {
+      "region": "Region",
+      "countries": "Countries",
+      "success": "Success",
+      "fdi": "FDI"
+    },
     "regionRows": [
-      { "region": "West Africa", "countries": 6, "success": "78%", "fdi": "$820M" },
-      { "region": "East Africa", "countries": 5, "success": "83%", "fdi": "$640M" },
-      { "region": "Central Africa", "countries": 4, "success": "69%", "fdi": "$410M" },
-      { "region": "North Africa", "countries": 7, "success": "81%", "fdi": "$450M" }
+      {
+        "region": "West Africa",
+        "countries": 6,
+        "success": "78%",
+        "fdi": "$820M"
+      },
+      {
+        "region": "East Africa",
+        "countries": 5,
+        "success": "83%",
+        "fdi": "$640M"
+      },
+      {
+        "region": "Central Africa",
+        "countries": 4,
+        "success": "69%",
+        "fdi": "$410M"
+      },
+      {
+        "region": "North Africa",
+        "countries": 7,
+        "success": "81%",
+        "fdi": "$450M"
+      }
     ],
     "disclaimer": "Illustrative mockup indicators; the production dashboard shows live metrics (WebSocket), Africa-domiciled data, ZKP protection."
   },
@@ -240,21 +377,92 @@
     "secnum": "06",
     "title": "Solutions & Service Packages",
     "subtitle": "Role-tagged solution cards · filterable by audience (All · Enterprise · Investor · Government · Foundation · Diaspora · Celebrity).",
-    "cols": { "num": "#", "solution": "Solution", "audience": "Audience", "desc": "Description → Output" },
+    "cols": {
+      "num": "#",
+      "solution": "Solution",
+      "audience": "Audience",
+      "desc": "Description → Output"
+    },
     "items": [
-      { "num": "01", "name": "Executive Transition Diagnostic", "tag": "C-SPA", "audience": "CEOs · Foundation Admins · Institutional", "desc": "Bilingual multiple-choice assessment; score <70 → Colonial Architecture Alert triggered. → Alignment Score /100." },
-      { "num": "02", "name": "Risk & Territory Audit", "tag": "", "audience": "Strategy Directors · Risk Officers", "desc": "Catalogs grievances, quantifies the trust deficit. → Trust Deficit Index." },
-      { "num": "03", "name": "Decolonized Impact Assessment", "tag": "MAE", "audience": "Development Practitioners · CSO Leaders · DFIs", "desc": "Replaces imported KPIs with dignity, cohesion & local agency indicators. → MAE Score." },
-      { "num": "04", "name": "Institutional Capital Gateway", "tag": "Authenticity Premium™", "audience": "DFI Officers · Impact Investors · Sovereigns", "desc": "AI-verified governance data satisfying DFI diligence; access to $80B+ FDI." },
-      { "num": "05", "name": "SME Integrity Pipeline", "tag": "SME Certification", "audience": "SME Leaders · Cooperatives", "desc": "4 stages: Bootcamp → Pipeline → Sprint → M&E; certification = digital passport to capital." },
-      { "num": "06", "name": "Diaspora Sovereign Capital Pathway", "tag": "", "audience": "Diaspora Entrepreneurs · Remittance Investors", "desc": "Structured pathway to deploy expertise & resources ethically." }
+      {
+        "num": "01",
+        "name": "Executive Transition Diagnostic",
+        "tag": "C-SPA",
+        "audience": "CEOs · Foundation Admins · Institutional",
+        "desc": "Bilingual multiple-choice assessment; score <70 → Colonial Architecture Alert triggered. → Alignment Score /100."
+      },
+      {
+        "num": "02",
+        "name": "Risk & Territory Audit",
+        "tag": "",
+        "audience": "Strategy Directors · Risk Officers",
+        "desc": "Catalogs grievances, quantifies the trust deficit. → Trust Deficit Index."
+      },
+      {
+        "num": "03",
+        "name": "Decolonized Impact Assessment",
+        "tag": "MAE",
+        "audience": "Development Practitioners · CSO Leaders · DFIs",
+        "desc": "Replaces imported KPIs with dignity, cohesion & local agency indicators. → MAE Score."
+      },
+      {
+        "num": "04",
+        "name": "Institutional Capital Gateway",
+        "tag": "Authenticity Premium™",
+        "audience": "DFI Officers · Impact Investors · Sovereigns",
+        "desc": "AI-verified governance data satisfying DFI diligence; access to $80B+ FDI."
+      },
+      {
+        "num": "05",
+        "name": "SME Integrity Pipeline",
+        "tag": "SME Certification",
+        "audience": "SME Leaders · Cooperatives",
+        "desc": "4 stages: Bootcamp → Pipeline → Sprint → M&E; certification = digital passport to capital."
+      },
+      {
+        "num": "06",
+        "name": "Diaspora Sovereign Capital Pathway",
+        "tag": "",
+        "audience": "Diaspora Entrepreneurs · Remittance Investors",
+        "desc": "Structured pathway to deploy expertise & resources ethically."
+      }
     ],
     "packagesTitle": "Service Packages — Tailored to Africa's needs",
     "quote": "On quote",
     "packages": [
-      { "name": "STARTER — Country Entry", "features": ["Institutional Integrity Diagnostic", "Governance Scorecard", "GRC Policy Framework", "2 training modules", "6-month dashboard"], "ideal": "Ideal: NGOs, small institutions." },
-      { "name": "PROFESSIONAL — Full Activation", "features": ["Complete diagnostic suite", "All 15 mandates enforced", "Authenticity Premium™ tracking", "Trust Tax™ + Sigma-Suppression™", "Full training access"], "ideal": "Ideal: governments, state-owned companies, large NGOs." },
-      { "name": "ENTERPRISE — National / Regional", "features": ["All 63 tools deployed", "Country-scale rollout", "10-year impact dashboard", "Bespoke consulting + advisory", "Institutional capital integration"], "ideal": "Ideal: national & regional programs." }
+      {
+        "name": "STARTER — Country Entry",
+        "features": [
+          "Institutional Integrity Diagnostic",
+          "Governance Scorecard",
+          "GRC Policy Framework",
+          "2 training modules",
+          "6-month dashboard"
+        ],
+        "ideal": "Ideal: NGOs, small institutions."
+      },
+      {
+        "name": "PROFESSIONAL — Full Activation",
+        "features": [
+          "Complete diagnostic suite",
+          "All 15 mandates enforced",
+          "Authenticity Premium™ tracking",
+          "Trust Tax™ + Sigma-Suppression™",
+          "Full training access"
+        ],
+        "ideal": "Ideal: governments, state-owned companies, large NGOs."
+      },
+      {
+        "name": "ENTERPRISE — National / Regional",
+        "features": [
+          "All 63 tools deployed",
+          "Country-scale rollout",
+          "10-year impact dashboard",
+          "Bespoke consulting + advisory",
+          "Institutional capital integration"
+        ],
+        "ideal": "Ideal: national & regional programs."
+      }
     ],
     "advisorLabel": "AI Solutions Advisor:",
     "advisorQuote": "\"Tell me about the challenge you are facing in Africa, and I will route you to the right APA solution.\"",
@@ -272,12 +480,37 @@
       "ESG vs APA™ GRC — what is the fundamental difference?"
     ],
     "tiersTitle": "Resources & Access — 4 Tiers",
-    "tiersCols": { "tier": "Tier", "access": "Access", "content": "Content", "price": "Price" },
+    "tiersCols": {
+      "tier": "Tier",
+      "access": "Access",
+      "content": "Content",
+      "price": "Price"
+    },
     "tiers": [
-      { "tier": "Tier 0", "access": "No login", "content": "\"Africa: Poor or Drained?\" (flagship conversion asset)", "price": "Free" },
-      { "tier": "Tier 1", "access": "Free account", "content": "Full glossary, thought leadership, journey previews", "price": "Free" },
-      { "tier": "Tier 2", "access": "Paid subscription", "content": "Full GRC suite, MAE Toolbox, CVP access protocols", "price": "$10K/yr" },
-      { "tier": "Tier 3", "access": "Paid subscription", "content": "Full suite + bespoke consulting + 10-year dashboard", "price": "$50K/yr" }
+      {
+        "tier": "Tier 0",
+        "access": "No login",
+        "content": "\"Africa: Poor or Drained?\" (flagship conversion asset)",
+        "price": "Free"
+      },
+      {
+        "tier": "Tier 1",
+        "access": "Free account",
+        "content": "Full glossary, thought leadership, journey previews",
+        "price": "Free"
+      },
+      {
+        "tier": "Tier 2",
+        "access": "Paid subscription",
+        "content": "Full GRC suite, MAE Toolbox, CVP access protocols",
+        "price": "$10K/yr"
+      },
+      {
+        "tier": "Tier 3",
+        "access": "Paid subscription",
+        "content": "Full suite + bespoke consulting + 10-year dashboard",
+        "price": "$50K/yr"
+      }
     ],
     "championsLink": "See the 22-Nation Champions →"
   },
@@ -286,11 +519,26 @@
     "title": "Certification Portal & Trust Audit",
     "pathwayTitle": "APA™ Certification Pathway — 5 Steps",
     "steps": [
-      { "name": "C-SPA Diagnostic", "desc": "Score ≥70 required; Colonial Architecture Alert if below." },
-      { "name": "Trust Audit & Mapping", "desc": "Grievance catalog, Trust Deficit Index assigned by the APA team." },
-      { "name": "Kinship Equity Agreement", "desc": "Legally binding co-ownership instruments, under the APA co-governance framework." },
-      { "name": "CVP Activation & σ-Suppression", "desc": "The Community Verification Portal goes live; real-time consent matrix; leakage coefficient tracking." },
-      { "name": "APA™ GRC Certification Awarded", "desc": "Authenticity Premium™ seal + compliance certificate verifiable by DFIs & MDBs." }
+      {
+        "name": "C-SPA Diagnostic",
+        "desc": "Score ≥70 required; Colonial Architecture Alert if below."
+      },
+      {
+        "name": "Trust Audit & Mapping",
+        "desc": "Grievance catalog, Trust Deficit Index assigned by the APA team."
+      },
+      {
+        "name": "Kinship Equity Agreement",
+        "desc": "Legally binding co-ownership instruments, under the APA co-governance framework."
+      },
+      {
+        "name": "CVP Activation & σ-Suppression",
+        "desc": "The Community Verification Portal goes live; real-time consent matrix; leakage coefficient tracking."
+      },
+      {
+        "name": "APA™ GRC Certification Awarded",
+        "desc": "Authenticity Premium™ seal + compliance certificate verifiable by DFIs & MDBs."
+      }
     ],
     "criteriaTitle": "Certificate award criteria",
     "criteria": "C-SPA score ≥ 70 · Trust Deficit Index assessed & accepted · Kinship Equity Agreement executed · CVP live with live σ-tracking → self-issued certificate (Authenticity Premium™ seal + public verification URL).",
@@ -309,22 +557,61 @@
     "valuePropTitle": "Value Proposition",
     "valueProp": "The APA™ Framework decolonizes the metrics of trust — replacing Western checkboxes with verifiable, contextualized indicators that resonate locally while satisfying global institutional standards.",
     "values": [
-      { "name": "Accountability™", "desc": "verified standards of transparency." },
-      { "name": "Authenticity™", "desc": "tools calibrated for Africa only." },
-      { "name": "Inclusivity", "desc": "all 54 nations represented." },
-      { "name": "Precision", "desc": "evidence-based, field-tested." }
+      {
+        "name": "Accountability™",
+        "desc": "verified standards of transparency."
+      },
+      {
+        "name": "Authenticity™",
+        "desc": "tools calibrated for Africa only."
+      },
+      {
+        "name": "Inclusivity",
+        "desc": "all 54 nations represented."
+      },
+      {
+        "name": "Precision",
+        "desc": "evidence-based, field-tested."
+      }
     ],
     "advisorySecnum": "02",
     "advisoryTitle": "Advisory Board & Dual Leadership",
     "advisoryBoardTitle": "Global Advisory Board",
-    "advisoryCols": { "member": "Member", "profile": "Profile" },
+    "advisoryCols": {
+      "member": "Member",
+      "profile": "Profile"
+    },
     "advisors": [
-      { "name": "Prof. James Otieno", "flag": "🇰🇪", "profile": "Former World Bank Director, Africa Division. 30+ years in governance & accountability." },
-      { "name": "Dr. Fatima Diallo", "flag": "🇸🇳", "profile": "AU Commissioner for Political Affairs. Democracy & accountability specialist." },
-      { "name": "Mr. Emmanuel Nkrumah", "flag": "🇬🇭", "profile": "IFC Regional Director, West Africa. FDI facilitation & institutional reform." },
-      { "name": "Dr. Amina Osei", "flag": "🇳🇬", "profile": "Former IMF Senior Economist. Fiscal governance & transparency expert." },
-      { "name": "Prof. Leila Mansouri", "flag": "🇲🇦", "profile": "Harvard Kennedy School. Rule of law & MENA governance specialist." },
-      { "name": "Mr. Charles Mutua", "flag": "🇷🇼", "profile": "Partner, McKinsey Africa. Institutional reform & capacity building." }
+      {
+        "name": "Prof. James Otieno",
+        "flag": "🇰🇪",
+        "profile": "Former World Bank Director, Africa Division. 30+ years in governance & accountability."
+      },
+      {
+        "name": "Dr. Fatima Diallo",
+        "flag": "🇸🇳",
+        "profile": "AU Commissioner for Political Affairs. Democracy & accountability specialist."
+      },
+      {
+        "name": "Mr. Emmanuel Nkrumah",
+        "flag": "🇬🇭",
+        "profile": "IFC Regional Director, West Africa. FDI facilitation & institutional reform."
+      },
+      {
+        "name": "Dr. Amina Osei",
+        "flag": "🇳🇬",
+        "profile": "Former IMF Senior Economist. Fiscal governance & transparency expert."
+      },
+      {
+        "name": "Prof. Leila Mansouri",
+        "flag": "🇲🇦",
+        "profile": "Harvard Kennedy School. Rule of law & MENA governance specialist."
+      },
+      {
+        "name": "Mr. Charles Mutua",
+        "flag": "🇷🇼",
+        "profile": "Partner, McKinsey Africa. Institutional reform & capacity building."
+      }
     ],
     "foundersTitle": "Founders — Official Profiles (bilingual EN/FR)",
     "founders": [
@@ -332,13 +619,21 @@
         "name": "Aisha Babangida",
         "role": "Founder | Visionary President",
         "bio": "A leading pan-African humanitarian and philanthropist, she conceived APA™'s founding mandate: structurally empowering women and radically decolonizing development in Africa. Building on the Women Enterprise Alliance (WenA) and the Better Life Program for the African Rural Woman, she steers the strategy toward the integration of endogenous knowledge systems.",
-        "tags": ["WenA Network", "Decolonization", "Co-governance"]
+        "tags": [
+          "WenA Network",
+          "Decolonization",
+          "Co-governance"
+        ]
       },
       {
         "name": "Pape Samb",
         "role": "Co-Founder | CEO | Principal Architect — GRC Strategist",
         "bio": "An international strategic leader and systemic investment expert, he is the designer and principal architect of the APA™ methodology and its 63-tool GRC suite. As CEO, he designed the Authenticity Premium™, Trust Tax™ and Sigma-Suppression™ frameworks. Architect of the CVP and the 10-Year Change Dashboard. 15+ years in governance, risk & compliance across Francophone Africa.",
-        "tags": ["Authenticity Premium™", "Trust Tax™", "Sigma-Suppression™"]
+        "tags": [
+          "Authenticity Premium™",
+          "Trust Tax™",
+          "Sigma-Suppression™"
+        ]
       }
     ]
   },
@@ -347,21 +642,51 @@
     "title": "Impact & Contact",
     "impactTitle": "Impact — Vision & Trajectory",
     "impacts": [
-      { "title": "De-risk capital", "desc": "300–500 bps cost-of-capital reduction for certified enterprises; converting grant recipients into institutional-grade companies." },
-      { "title": "Empower women", "desc": "North star: 5 million women by 2050 — as value-chain growth nodes, not beneficiaries." },
-      { "title": "Continental standard", "desc": "Make APA the recognized governance standard (IFC PS1 equivalent, AfCFTA recognized) integrated into Africa risk ratings." }
+      {
+        "title": "De-risk capital",
+        "desc": "300–500 bps cost-of-capital reduction for certified enterprises; converting grant recipients into institutional-grade companies."
+      },
+      {
+        "title": "Empower women",
+        "desc": "North star: 5 million women by 2050 — as value-chain growth nodes, not beneficiaries."
+      },
+      {
+        "title": "Continental standard",
+        "desc": "Make APA the recognized governance standard (IFC PS1 equivalent, AfCFTA recognized) integrated into Africa risk ratings."
+      }
     ],
     "indicatorsLabel": "Tracked impact indicators:",
     "indicators": "cost-of-capital compression · institutional MoUs · insurance premium reduction (MIGA) for certified projects · APA data integration into ESG ratings · >100 certified enterprises (milestone).",
     "contactTitle": "Contact",
-    "cols": { "channel": "Channel", "detail": "Detail" },
+    "cols": {
+      "channel": "Channel",
+      "detail": "Detail"
+    },
     "rows": [
-      { "channel": "Entity", "detail": "APA Senegal SARL — Accountable Partners for Africa™" },
-      { "channel": "Address", "detail": "Continental HQ · Dakar, Senegal" },
-      { "channel": "Email", "detail": "pape@theapaafrica.org" },
-      { "channel": "Phone", "detail": "+221 78 839 15 84" },
-      { "channel": "Website", "detail": "https://www.theapaafrica.org/" },
-      { "channel": "Socials", "detail": "LinkedIn · YouTube · X (Twitter) — @ApaAfrica" }
+      {
+        "channel": "Entity",
+        "detail": "APA Senegal SARL — Accountable Partners for Africa™"
+      },
+      {
+        "channel": "Address",
+        "detail": "Continental HQ · Dakar, Senegal"
+      },
+      {
+        "channel": "Email",
+        "detail": "pape@theapaafrica.org"
+      },
+      {
+        "channel": "Phone",
+        "detail": "+221 78 839 15 84"
+      },
+      {
+        "channel": "Website",
+        "detail": "https://www.theapaafrica.org/"
+      },
+      {
+        "channel": "Socials",
+        "detail": "LinkedIn · YouTube · X (Twitter) — @ApaAfrica"
+      }
     ],
     "downloadTitle": "Download the Pre-Qualification Deck",
     "downloadDesc": "Available through a short qualification form (name, work email, organization, country), followed by immediate delivery of the PDF deck."
@@ -399,10 +724,30 @@
     },
     "nextTitle": "Your next steps",
     "cards": [
-      { "title": "Start certification", "desc": "The 5-step pathway begins with the C-SPA diagnostic (score ≥ 70 required).", "cta": "See the pathway", "href": "/certification" },
-      { "title": "Explore the 63 tools", "desc": "Forms, guides, legal instruments and metrics — the complete framework.", "cta": "Open the catalog", "href": "/tools" },
-      { "title": "Strategic intelligence", "desc": "3 tiers: Free account, Professional Access, Enterprise Partnership.", "cta": "Discover the tiers", "href": "/intelligence" },
-      { "title": "Verify a certificate", "desc": "The public registry — trust as currency.", "cta": "Verify", "href": "/verify" }
+      {
+        "title": "Start certification",
+        "desc": "The 5-step pathway begins with the C-SPA diagnostic (score ≥ 70 required).",
+        "cta": "See the pathway",
+        "href": "/certification"
+      },
+      {
+        "title": "Explore the 63 tools",
+        "desc": "Forms, guides, legal instruments and metrics — the complete framework.",
+        "cta": "Open the catalog",
+        "href": "/tools"
+      },
+      {
+        "title": "Strategic intelligence",
+        "desc": "3 tiers: Free account, Professional Access, Enterprise Partnership.",
+        "cta": "Discover the tiers",
+        "href": "/intelligence"
+      },
+      {
+        "title": "Verify a certificate",
+        "desc": "The public registry — trust as currency.",
+        "cta": "Verify",
+        "href": "/verify"
+      }
     ],
     "engineNote": "The online certification engine (interactive C-SPA diagnostic, audits, certificate issuance) lands in Sprint 3 — your account will unlock it directly."
   },
@@ -451,5 +796,203 @@
     "quote": "\"Accountability is not a compliance cost — it is an economic alpha generator.\"",
     "quoteSource": "APA Authenticity Premium™ Framework",
     "rights": "© {year} APA™ — Accountable Partners for Africa. All rights reserved."
+  },
+  "VerifyCredential": {
+    "metaTitle": "Verify APA™ Credential",
+    "kicker": "APA™ Verifiable Credential",
+    "holder": "Holder",
+    "issuer": "Issuer",
+    "cspa": "C-SPA Score",
+    "validity": "Validity",
+    "credentialId": "Credential ID",
+    "issuerDid": "Issuer DID",
+    "integrity": {
+      "VALID": {
+        "title": "Ed25519 Signature Valid",
+        "detail": "Tamper-proof — cryptographically verified offline."
+      },
+      "INVALID": {
+        "title": "Signature Invalid",
+        "detail": "This document does not match its signature. Do not trust it."
+      },
+      "UNAVAILABLE": {
+        "title": "Signature Not Verified",
+        "detail": "Issuer key unavailable on this instance — integrity not asserted."
+      },
+      "REVOKED": {
+        "title": "Credential Revoked",
+        "detail": "Signature is authentic, but the issuer revoked this credential in the StatusList2021 registry."
+      }
+    },
+    "maturity": {
+      "TRADITIONAL": "Traditional / Transactional",
+      "TRANSITIONAL": "Transitional",
+      "TRANSFORMATIONAL": "Transformational (CSV-aligned)",
+      "CSV_LEADER": "CSV Leader"
+    },
+    "impact": {
+      "title": "APA Tools Impact Ledger",
+      "subtitle": "{count} practical assessment tools completed and embedded as evidence.",
+      "report": "Report"
+    },
+    "proofType": "Proof Type",
+    "verificationMethod": "Verification Method",
+    "offlineNote": "Verified by replaying the Ed25519 signature over the JSON-LD document. No third party required.",
+    "notFound": {
+      "title": "Credential not found",
+      "detail": "No APA credential matches \"{id}\". Check the identifier or contact pape@theapaafrica.org."
+    }
+  },
+  "LearnPlayer": {
+    "exit": "Exit",
+    "shortcuts": "Keyboard shortcuts",
+    "keyCurriculum": "Curriculum (B)",
+    "keyDock": "Tools & AI dock (T)",
+    "keyZen": "Zen mode (F)",
+    "curriculum": "Curriculum",
+    "tool": "Tool",
+    "dock": "Tools & AI",
+    "quickTools": "Practical locks",
+    "kind": {
+      "READING": "Reading",
+      "TOOL": "Practical lock",
+      "ASSESSMENT": "Assessment"
+    },
+    "done": "Completed",
+    "noBody": "No content for this lesson yet.",
+    "markRead": "Mark as read",
+    "saving": "Saving…",
+    "signInToTrack": "Sign in to track progress",
+    "empty": "This course has no lessons yet.",
+    "toolLock": {
+      "intro": "Complete the “{tool}” tool to clear this practical lock and unlock the next lesson.",
+      "evidenceNote": "Your result is recorded as verifiable evidence and feeds your C-SPA score.",
+      "completed": "Practical lock cleared — evidence recorded.",
+      "open": "Open tool workspace →"
+    },
+    "concierge": {
+      "title": "AI Concierge",
+      "hint": "Context-aware guidance on this lesson (coming online)."
+    },
+    "zenHint": "Zen mode — press F or Esc to exit · B curriculum · T tools",
+    "notFound": {
+      "title": "Course not found",
+      "detail": "No course matches “{id}”."
+    },
+    "credential": {
+      "title": "Credential",
+      "coverage": "Practical locks cleared: {cleared}/{total}",
+      "finalize": "Issue / refresh credential",
+      "issued": "✓ Issued {number} — view on /verify →",
+      "blocked": "{count} practical lock(s) still required before issuance.",
+      "err": {
+        "NO_LEARNER": "Sign in to issue your credential.",
+        "NO_JOURNEY": "No certification journey linked to your account.",
+        "ISSUER_KEY_UNCONFIGURED": "Issuer signing key not configured on this instance.",
+        "CONTEXT_NOT_FOUND": "Certification context not found.",
+        "CSPA_MISSING": "Pass the C-SPA diagnostic first.",
+        "ALREADY_ISSUED": "Credential already current.",
+        "CAPSTONE_NOT_APPROVED": "Capstone must be approved by an APA evaluator first."
+      },
+      "capstone": "Capstone workbench"
+    }
+  },
+  "Enterprise": {
+    "kicker": "B2B Governance Portal",
+    "viewMatrix": "Skills matrix",
+    "tiles": {
+      "members": "Cohort members",
+      "coverage": "ISO 37000 coverage",
+      "coverageSub": "avg competency across domains",
+      "certs": "Active credentials",
+      "certsSub": "of {total} issued"
+    },
+    "cohort": {
+      "title": "Cohort",
+      "member": "Member",
+      "coverage": "Overall coverage",
+      "empty": "No members enrolled yet."
+    },
+    "certs": {
+      "title": "Issued credentials",
+      "number": "Credential",
+      "status": "Status",
+      "issued": "Issued",
+      "empty": "No credentials issued yet."
+    },
+    "certStatus": {
+      "ACTIVE": "Active",
+      "EXPIRED": "Expired",
+      "REVOKED": "Revoked"
+    },
+    "noOrg": {
+      "title": "No organization",
+      "detail": "No institutional cohort is linked to this view."
+    },
+    "matrix": {
+      "kicker": "ISO 37000 Competency Heatmap",
+      "subtitle": "Member coverage across the six C-SPA governance domains.",
+      "backDashboard": "Dashboard",
+      "legend": "Coverage %"
+    }
+  },
+  "Capstone": {
+    "kicker": "Capstone Workbench",
+    "title": "Institutional Transformation Project",
+    "backPlayer": "Player",
+    "intro": "Submit your transformation project. On submission it is integrity-checked (required tools, originality, length) and AI pre-scored against the ISO 37000 governance rubric, then routed to an APA evaluator.",
+    "status": "Status",
+    "statuses": {
+      "DRAFT": "Draft",
+      "SUBMITTED": "Submitted — under review",
+      "APPROVED": "Approved",
+      "REJECTED": "Returned for revision"
+    },
+    "approvedNote": "Approved — the credential issuance flow is now unlocked.",
+    "projectTitle": "Project title",
+    "titlePlaceholder": "e.g. Shared-value governance reform at the Ministry of…",
+    "document": "Project document",
+    "docPlaceholder": "Describe the institutional transformation: paradigm, governance, community co-ownership, measurement, value distribution, continuity…",
+    "words": "{n} words",
+    "saveDraft": "Save draft",
+    "saving": "Saving…",
+    "submit": "Submit for review",
+    "saved": "Draft saved.",
+    "submitted": "Submitted — pre-scored and sent to an evaluator.",
+    "integrityFailed": "Integrity checks failed — see below; not submitted.",
+    "err": {
+      "NO_LEARNER": "Sign in to submit.",
+      "NO_JOURNEY": "No certification journey linked.",
+      "LOCKED": "This capstone can no longer be edited."
+    },
+    "integrity": {
+      "title": "Integrity checks",
+      "toolsOk": "All 12 required APA tools completed",
+      "toolsMissing": "{n} required tool(s) still to complete",
+      "length": "Length: {n} words",
+      "similarity": "Originality — {pct}% max similarity"
+    },
+    "prescore": {
+      "title": "AI pre-score (ISO 37000 rubric)",
+      "advisory": "Advisory only — an APA evaluator makes the final decision."
+    }
+  },
+  "CapstoneReview": {
+    "kicker": "APA Evaluator",
+    "title": "Capstone Review",
+    "subtitle": "{n} submission(s) awaiting your decision.",
+    "empty": "No capstones awaiting review.",
+    "untitled": "(untitled)",
+    "tools": "Tools complete",
+    "similarity": "Similarity {pct}%",
+    "words": "{n} words",
+    "notesPlaceholder": "Reviewer notes (shared with the candidate on rejection)…",
+    "approve": "Approve",
+    "reject": "Return for revision",
+    "decided": {
+      "APPROVED": "✓ Approved — issuance unlocked.",
+      "REJECTED": "Returned for revision."
+    },
+    "error": "Action failed."
   }
 }

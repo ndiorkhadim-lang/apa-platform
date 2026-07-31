@@ -78,6 +78,29 @@ enum CertificateStatus {
   REVOKED
 }
 
+/// LMS lesson kind — TOOL lessons are the mandatory practical locks that feed
+/// the C-SPA evidence engine (a ToolReport is their completion proof).
+enum LessonKind {
+  READING // content step, completed by acknowledgement
+  TOOL // practical lock — must complete the linked APA tool
+  ASSESSMENT // knowledge check
+}
+
+enum LessonProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+/// Capstone lifecycle: DRAFT → SUBMITTED (AI pre-scored + integrity-checked,
+/// awaiting human review) → APPROVED | REJECTED by an APA evaluator.
+enum CapstoneStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
 /// Intelligence access tiers (V8 screen 08 — Strategic Navigator)
 enum IntelTier {
   T0 // free
@@ -108,6 +131,9 @@ model User {
   // NOT an authorization grant: platformRole remains the RBAC source of truth.
   apaRelationship String?
   apaInterests    String? // comma-separated interest-area ids
+  // Journey Partner status — set true when an APA admin approves the user's
+  // PARTNER application. Unlocks the Partner Dashboard (submit/manage journeys).
+  journeyPartner  Boolean     @default(false)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
@@ -119,8 +145,47 @@ model User {
   toolSessions ToolSession[]
   championApps ChampionApplication[]
   cspaRuns     CspaRun[]
+  lessonProgress LessonProgress[]
+  capstones       CapstoneSubmission[] @relation("CapstoneAuthor")
+  capstoneReviews CapstoneSubmission[] @relation("CapstoneReviewer")
+  journeyProposals JourneyProposal[]
 
   @@map("users")
+}
+
+/// Journey proposals submitted by an approved Journey Partner.
+/// Governance: nothing is auto-published — a proposal enters APA review.
+enum JourneyProposalStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  REVISIONS_REQUESTED
+  APPROVED
+  PUBLISHED
+  REJECTED
+}
+
+model JourneyProposal {
+  id          String                @id @default(cuid())
+  partnerId   String
+  partner     User                  @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  status      JourneyProposalStatus @default(SUBMITTED)
+
+  title       String
+  roleTier    String // OBSERVER | PRACTITIONER | CO_ARCHITECT
+  country     String
+  region      String?
+  durationDays Int?
+  priceUSD    Int?
+  themes      String? // comma-separated
+  summary     String  @db.Text
+  reviewNote  String? @db.Text // admin feedback on revisions/rejection
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([partnerId])
+  @@map("journey_proposals")
 }
 
 model Session {
@@ -290,6 +355,7 @@ model Tool {
 
   engagements ToolEngagement[]
   sessions    ToolSession[]
+  lessons     Lesson[]
 
   @@index([pillarId])
   @@index([category])
@@ -374,6 +440,7 @@ model CertificationJourney {
   audits      TrustAudit[]
   agreements  Agreement[]
   certificate Certificate?
+  capstone    CapstoneSubmission?
 
   @@index([orgId, status])
   @@index([status, currentStep])
@@ -441,8 +508,131 @@ model Certificate {
   revokedAt    DateTime?
   revokedFor   String?
 
+  // W3C Verifiable Credential 2.0 issuance (Phase 2.1)
+  credentialUuid  String  @unique // the urn:uuid:<this> credential id
+  issuerDid       String // did:web:... at time of issuance
+  evidenceVersion String // Required-Evidence-Gate policy version that gated it
+  cspaComposite   Int // C-SPA composite snapshot carried in result[]
+  cspaMaturity    String
+  proofValue      String // Ed25519 signature, multibase base58btc
+  document        Json // the full signed JSON-LD credential (offline-verifiable)
+  /// StatusList2021 revocation slot index (unique per issuer registry)
+  revocationIndex Int?
+
   @@index([status])
   @@map("certificates")
+}
+
+// ─────────────────────────────────────────────
+// LMS — Executive Learning Player (/learn/[courseId])
+// ─────────────────────────────────────────────
+
+model Course {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  order     Int      @default(0)
+  titleEn   String
+  titleFr   String
+  summaryEn String
+  summaryFr String
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  modules Module[]
+
+  @@index([published, order])
+  @@map("courses")
+}
+
+model Module {
+  id       String @id @default(cuid())
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  order    Int
+  titleEn  String
+  titleFr  String
+
+  lessons Lesson[]
+
+  @@unique([courseId, order])
+  @@index([courseId])
+  @@map("modules")
+}
+
+model Lesson {
+  id       String     @id @default(cuid())
+  moduleId String
+  module   Module     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  order    Int
+  kind     LessonKind @default(READING)
+  titleEn  String
+  titleFr  String
+  bodyEn   String     @default("")
+  bodyFr   String     @default("")
+  /// For TOOL lessons: the APA tool that must be completed to pass this lock.
+  toolId   String?
+  tool     Tool?      @relation(fields: [toolId], references: [id])
+
+  progress LessonProgress[]
+
+  @@unique([moduleId, order])
+  @@index([moduleId])
+  @@index([toolId])
+  @@map("lessons")
+}
+
+/// Per-user completion of a lesson. TOOL lessons are also gated by the linked
+/// tool's ToolReport (shared source of truth with the C-SPA evidence engine).
+model LessonProgress {
+  id          String               @id @default(cuid())
+  userId      String
+  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson               @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  status      LessonProgressStatus @default(IN_PROGRESS)
+  completedAt DateTime?
+  updatedAt   DateTime             @updatedAt
+
+  @@unique([userId, lessonId])
+  @@index([userId, status])
+  @@map("lesson_progress")
+}
+
+// ─────────────────────────────────────────────
+// CAPSTONE — institutional transformation project (Jalon 2.3)
+// ─────────────────────────────────────────────
+
+model CapstoneSubmission {
+  id        String         @id @default(cuid())
+  journeyId String         @unique
+  journey   CertificationJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User           @relation("CapstoneAuthor", fields: [authorId], references: [id])
+  title     String
+  content   String         @default("") // the transformation-project document
+  status    CapstoneStatus @default(DRAFT)
+
+  // AI pre-scoring (advisory; a human evaluator decides)
+  aiScore     Int? // 0–100 composite
+  aiBreakdown Json? // per-rubric-dimension scores + rationale
+  /// Integrity report: tool-completion, anti-plagiarism similarity, length
+  integrity   Json?
+
+  // Human review (APA evaluator / auditor)
+  reviewerId    String?
+  reviewer      User?         @relation("CapstoneReviewer", fields: [reviewerId], references: [id])
+  reviewVerdict AuditVerdict  @default(PENDING)
+  reviewNotes   String?
+
+  submittedAt DateTime?
+  decidedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status])
+  @@index([reviewVerdict])
+  @@map("capstone_submissions")
 }
 
 // ─────────────────────────────────────────────
@@ -549,6 +739,7 @@ enum ChampionAppStatus {
 enum ApplicationType {
   CHAMPION
   ADVISOR
+  PARTNER
 }
 
 /// One application per user; DRAFT is resumable, then flows through the pipeline.

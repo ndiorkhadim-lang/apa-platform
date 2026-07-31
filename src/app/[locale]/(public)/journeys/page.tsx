@@ -34,6 +34,30 @@ export default async function JourneysPage({
   const currentUserId = role === 'partner_business' ? MOCK_USERS.partner.id : MOCK_USERS.explorer.id;
   const tab = sp.tab === 'submit' ? 'submit' : 'browse';
 
+  // ── Journey Partner CTA state ──────────────────────────
+  // Resolve where "Apply as a Journey Partner" should lead, and its label.
+  const userId = (session?.user as { id?: string } | undefined)?.id;
+  const isJourneyPartner = Boolean((session?.user as { journeyPartner?: boolean } | undefined)?.journeyPartner);
+  let partnerApp: { status: string } | null = null;
+  if (session && userId) {
+    const { dbAvailable } = await import('@/infrastructure/prisma/client');
+    if (dbAvailable) {
+      const { prisma } = await import('@/infrastructure/prisma/client');
+      partnerApp = await prisma.championApplication.findUnique({
+        where: { userId_type: { userId, type: 'PARTNER' } },
+        select: { status: true },
+      });
+    }
+  }
+  const applyHref = '/champions/apply?type=partner';
+  const partnerCta = !session
+    ? { href: `/sign-up?redirect=${encodeURIComponent(applyHref)}`, label: 'Apply as a Journey Partner', note: 'Create your account, then complete the Partner Application Form.' }
+    : isJourneyPartner
+      ? { href: '/journeys/partner', label: 'Open your Partner Dashboard', note: 'Submit and manage your journey proposals.' }
+      : partnerApp && partnerApp.status !== 'DRAFT'
+        ? { href: applyHref, label: 'Track your Partner application', note: `Status: ${partnerApp.status} — APA is reviewing your application.` }
+        : { href: applyHref, label: 'Apply as a Journey Partner', note: 'Complete the Partner Application Form to submit journeys.' };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <header className="flex flex-wrap items-end justify-between gap-4">
@@ -64,6 +88,23 @@ export default async function JourneysPage({
           </div>
         </div>
       </header>
+
+      {/* Become a Journey Partner — CTA band */}
+      <div className="mt-8 overflow-hidden rounded-apa-lg apa-gradient">
+        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-6 text-white sm:px-8">
+          <div>
+            <span className="rounded bg-white/15 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-apa-gold-bright">Partner Program</span>
+            <h2 className="mt-2 text-xl font-bold">Deliver journeys with APA</h2>
+            <p className="mt-1 max-w-xl text-sm text-apa-mint">{partnerCta.note}</p>
+          </div>
+          <Link
+            href={partnerCta.href}
+            className="shrink-0 rounded-md bg-white px-5 py-3 text-sm font-bold text-apa-green transition-colors hover:bg-apa-soft"
+          >
+            {partnerCta.label} →
+          </Link>
+        </div>
+      </div>
 
       {/* Role tiers */}
       <div className="mt-8 grid gap-4 sm:grid-cols-3">

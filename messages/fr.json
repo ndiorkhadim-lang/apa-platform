@@ -33,12 +33,48 @@
     "ctaNavigator": "Interroger le Navigator",
     "ctaCertify": "Se faire Certifier",
     "items": [
-      { "slug": "investors-dfis", "audience": "Investisseurs & DFI", "heading": "Dé-risquer le déploiement de capital africain", "body": "Convertissez l'intention de développement en résultats vérifiables et institutionnellement crédibles. APA satisfait les conditions de gouvernance type IFC PS1 et compresse la prime de risque de 300–500 pb.", "cta": "Réduire ma Taxe de Confiance™ · Audit de Risque & Territoire" },
-      { "slug": "multinationals-esg", "audience": "Multinationales & ESG", "heading": "Blindez votre chaîne d'approvisionnement africaine", "body": "Répondez à la CSDDD, au UK Bribery Act et à la LkSG avec une redevabilité fournisseur vérifiable de bout en bout.", "cta": "Bouclier d'Audit Fortune 500 · C-SPA" },
-      { "slug": "government-agencies", "audience": "Gouvernements & Agences", "heading": "Un standard national de gouvernance d'entreprise", "body": "Intégrez APA comme couche de vérification qui rend les projets public-privé bancables et auditables — la chaîne souverain-entreprise.", "cta": "Conseil en Politiques du Secteur Public" },
-      { "slug": "foundations-grantmakers", "audience": "Fondations & Bailleurs", "heading": "Transformez les subventions en résultats investissables", "body": "APA est la couche de certification qui convertit les entreprises subventionnées en entreprises bancables institutionnellement — un capital 300–500 pb moins cher.", "cta": "Boîte à outils MAE · Certification" },
-      { "slug": "celebrities-ambassadors", "audience": "Célébrités & Ambassadeurs", "heading": "Protégez votre nom avant de vous engager", "body": "Testez la conformité éthique de la marque et intégrez une Clause de Sortie Morale avant tout contrat de parrainage.", "cta": "Outil 41 — Parrainage Responsable" },
-      { "slug": "diaspora", "audience": "Diaspora", "heading": "Déployez capital & expertise, de façon redevable", "body": "Une rampe d'accès structurée pour convertir transferts et expertise en engagement actionnarial gouverné éthiquement.", "cta": "Voie de Capital Souverain Diaspora" }
+      {
+        "slug": "investors-dfis",
+        "audience": "Investisseurs & DFI",
+        "heading": "Dé-risquer le déploiement de capital africain",
+        "body": "Convertissez l'intention de développement en résultats vérifiables et institutionnellement crédibles. APA satisfait les conditions de gouvernance type IFC PS1 et compresse la prime de risque de 300–500 pb.",
+        "cta": "Réduire ma Taxe de Confiance™ · Audit de Risque & Territoire"
+      },
+      {
+        "slug": "multinationals-esg",
+        "audience": "Multinationales & ESG",
+        "heading": "Blindez votre chaîne d'approvisionnement africaine",
+        "body": "Répondez à la CSDDD, au UK Bribery Act et à la LkSG avec une redevabilité fournisseur vérifiable de bout en bout.",
+        "cta": "Bouclier d'Audit Fortune 500 · C-SPA"
+      },
+      {
+        "slug": "government-agencies",
+        "audience": "Gouvernements & Agences",
+        "heading": "Un standard national de gouvernance d'entreprise",
+        "body": "Intégrez APA comme couche de vérification qui rend les projets public-privé bancables et auditables — la chaîne souverain-entreprise.",
+        "cta": "Conseil en Politiques du Secteur Public"
+      },
+      {
+        "slug": "foundations-grantmakers",
+        "audience": "Fondations & Bailleurs",
+        "heading": "Transformez les subventions en résultats investissables",
+        "body": "APA est la couche de certification qui convertit les entreprises subventionnées en entreprises bancables institutionnellement — un capital 300–500 pb moins cher.",
+        "cta": "Boîte à outils MAE · Certification"
+      },
+      {
+        "slug": "celebrities-ambassadors",
+        "audience": "Célébrités & Ambassadeurs",
+        "heading": "Protégez votre nom avant de vous engager",
+        "body": "Testez la conformité éthique de la marque et intégrez une Clause de Sortie Morale avant tout contrat de parrainage.",
+        "cta": "Outil 41 — Parrainage Responsable"
+      },
+      {
+        "slug": "diaspora",
+        "audience": "Diaspora",
+        "heading": "Déployez capital & expertise, de façon redevable",
+        "body": "Une rampe d'accès structurée pour convertir transferts et expertise en engagement actionnarial gouverné éthiquement.",
+        "cta": "Voie de Capital Souverain Diaspora"
+      }
     ]
   },
   "Verify": {
@@ -52,7 +88,11 @@
     "issued": "Émis le",
     "expires": "Expire le",
     "status": "Statut",
-    "statuses": { "ACTIVE": "ACTIF — certificat valide", "EXPIRED": "EXPIRÉ", "REVOKED": "RÉVOQUÉ" }
+    "statuses": {
+      "ACTIVE": "ACTIF — certificat valide",
+      "EXPIRED": "EXPIRÉ",
+      "REVOKED": "RÉVOQUÉ"
+    }
   },
   "Home": {
     "topbar": "Standard GRC™ · Auditable · Panafricain · Bilingue FR/EN",
@@ -70,12 +110,30 @@
     "execWhyBody": "APA™ opérationnalise la redevabilité via des diagnostics de précision, l'application de mandats et une infrastructure de confiance. La Prime d'Authenticité™ en fait un actif financier mesurable : les entreprises certifiées économisent 300–500 points de base de coût du capital.",
     "kpisTitle": "Indicateurs clés",
     "kpis": {
-      "fdi": { "value": "$80B+", "label": "Déficit d'IDE annuel adressé" },
-      "bps": { "value": "300–500 pb", "label": "Pénalité de coût du capital éliminée" },
-      "tools": { "value": "63+", "label": "Outils GRC propriétaires" },
-      "nations": { "value": "54 nations", "label": "Couverture Afrique ciblée" },
-      "valuation": { "value": "$2,5M", "label": "Hausse de valorisation / entité certifiée" },
-      "months": { "value": "12 mois", "label": "Déploiement continental" }
+      "fdi": {
+        "value": "$80B+",
+        "label": "Déficit d'IDE annuel adressé"
+      },
+      "bps": {
+        "value": "300–500 pb",
+        "label": "Pénalité de coût du capital éliminée"
+      },
+      "tools": {
+        "value": "63+",
+        "label": "Outils GRC propriétaires"
+      },
+      "nations": {
+        "value": "54 nations",
+        "label": "Couverture Afrique ciblée"
+      },
+      "valuation": {
+        "value": "$2,5M",
+        "label": "Hausse de valorisation / entité certifiée"
+      },
+      "months": {
+        "value": "12 mois",
+        "label": "Déploiement continental"
+      }
     },
     "arcTitle": "Arc d'Engagement en 3 Temps — Comprendre › S'Engager › Devenir Redevable",
     "arc1Step": "01 · Comprendre",
@@ -146,7 +204,14 @@
   "ToolsGateway": {
     "title": "Passerelle de Gouvernance — Solutions & 63 Outils",
     "intro": "Ne choisissez pas un outil. Partez de votre défi : le Concierge IA vous mène à la bonne Solution, qui déploie ses frameworks, ses outils et son parcours de certification.",
-    "flow": ["Défi métier", "Solution APA", "Framework", "Outil", "Évaluation", "Certification"],
+    "flow": [
+      "Défi métier",
+      "Solution APA",
+      "Framework",
+      "Outil",
+      "Évaluation",
+      "Certification"
+    ],
     "solutionsNav": "Aller à une solution",
     "toolsCount": "{count} outils",
     "purpose": "Objet",
@@ -163,7 +228,12 @@
     "cert": "Certif.",
     "aiRecommended": "Recommandé IA",
     "launch": "Lancer l'outil",
-    "categories": { "FORM": "Formulaire", "GUIDE": "Guide", "LEGAL": "Instrument juridique", "METRIC": "Métrique" }
+    "categories": {
+      "FORM": "Formulaire",
+      "GUIDE": "Guide",
+      "LEGAL": "Instrument juridique",
+      "METRIC": "Métrique"
+    }
   },
   "SolutionsCatalog": {
     "secnum": "06",
@@ -210,29 +280,96 @@
     "title": "Tableau de Bord GRC en Direct — Analytique Temps Réel",
     "subtitle": "Prime d'Authenticité™ · Taxe de Confiance™ · Suppression-Sigma™ · Réussite Projet · Pipeline IDE",
     "kpis": [
-      { "value": "87,3%", "label": "Prime d'Authenticité™ (+4,2% vs T3)" },
-      { "value": "12,4%", "label": "Taux de Taxe de Confiance™ (↓ de 18,1%)" },
-      { "value": "2,1σ", "label": "Suppression-Sigma™ (cible <1,5σ)" },
-      { "value": "74%", "label": "Taux de Réussite Projet (↑ 11 pts/an)" },
-      { "value": "$2,3B", "label": "IDE débloqué (cumul annuel)" },
-      { "value": "63/63", "label": "Outils déployés (100% actifs)" }
+      {
+        "value": "87,3%",
+        "label": "Prime d'Authenticité™ (+4,2% vs T3)"
+      },
+      {
+        "value": "12,4%",
+        "label": "Taux de Taxe de Confiance™ (↓ de 18,1%)"
+      },
+      {
+        "value": "2,1σ",
+        "label": "Suppression-Sigma™ (cible <1,5σ)"
+      },
+      {
+        "value": "74%",
+        "label": "Taux de Réussite Projet (↑ 11 pts/an)"
+      },
+      {
+        "value": "$2,3B",
+        "label": "IDE débloqué (cumul annuel)"
+      },
+      {
+        "value": "63/63",
+        "label": "Outils déployés (100% actifs)"
+      }
     ],
     "topTitle": "Prime d'Authenticité™ par pays (Top 6)",
     "topCountries": [
-      { "flag": "🇲🇦", "name": "Maroc", "score": 91 },
-      { "flag": "🇷🇼", "name": "Rwanda", "score": 88 },
-      { "flag": "🇸🇳", "name": "Sénégal", "score": 87 },
-      { "flag": "🇰🇪", "name": "Kenya", "score": 84 },
-      { "flag": "🇳🇬", "name": "Nigeria", "score": 79 },
-      { "flag": "🇬🇭", "name": "Ghana", "score": 76 }
+      {
+        "flag": "🇲🇦",
+        "name": "Maroc",
+        "score": 91
+      },
+      {
+        "flag": "🇷🇼",
+        "name": "Rwanda",
+        "score": 88
+      },
+      {
+        "flag": "🇸🇳",
+        "name": "Sénégal",
+        "score": 87
+      },
+      {
+        "flag": "🇰🇪",
+        "name": "Kenya",
+        "score": 84
+      },
+      {
+        "flag": "🇳🇬",
+        "name": "Nigeria",
+        "score": 79
+      },
+      {
+        "flag": "🇬🇭",
+        "name": "Ghana",
+        "score": 76
+      }
     ],
     "regionTitle": "Taux de Réussite Projet par région",
-    "regionCols": { "region": "Région", "countries": "Pays", "success": "Réussite", "fdi": "IDE" },
+    "regionCols": {
+      "region": "Région",
+      "countries": "Pays",
+      "success": "Réussite",
+      "fdi": "IDE"
+    },
     "regionRows": [
-      { "region": "Afrique de l'Ouest", "countries": 6, "success": "78%", "fdi": "$820M" },
-      { "region": "Afrique de l'Est", "countries": 5, "success": "83%", "fdi": "$640M" },
-      { "region": "Afrique Centrale", "countries": 4, "success": "69%", "fdi": "$410M" },
-      { "region": "Afrique du Nord", "countries": 7, "success": "81%", "fdi": "$450M" }
+      {
+        "region": "Afrique de l'Ouest",
+        "countries": 6,
+        "success": "78%",
+        "fdi": "$820M"
+      },
+      {
+        "region": "Afrique de l'Est",
+        "countries": 5,
+        "success": "83%",
+        "fdi": "$640M"
+      },
+      {
+        "region": "Afrique Centrale",
+        "countries": 4,
+        "success": "69%",
+        "fdi": "$410M"
+      },
+      {
+        "region": "Afrique du Nord",
+        "countries": 7,
+        "success": "81%",
+        "fdi": "$450M"
+      }
     ],
     "disclaimer": "Indicateurs illustratifs de la maquette ; le tableau de bord en production affiche des métriques live (WebSocket), données domiciliées en Afrique, protection ZKP."
   },
@@ -240,21 +377,92 @@
     "secnum": "06",
     "title": "Solutions & Forfaits de Services",
     "subtitle": "Cartes de solutions étiquetées par rôle · filtrables par audience (Toutes · Entreprise · Investisseur · Gouvernement · Fondation · Diaspora · Célébrité).",
-    "cols": { "num": "#", "solution": "Solution", "audience": "Audience", "desc": "Description → Sortie" },
+    "cols": {
+      "num": "#",
+      "solution": "Solution",
+      "audience": "Audience",
+      "desc": "Description → Sortie"
+    },
     "items": [
-      { "num": "01", "name": "Diagnostic de Transition Exécutive", "tag": "C-SPA", "audience": "CEO · Admins de Fondation · Institutionnel", "desc": "Évaluation bilingue à choix multiples ; score <70 → Alerte d'Architecture Coloniale déclenchée. → Score d'Alignement /100." },
-      { "num": "02", "name": "Audit de Risque & Territoire", "tag": "", "audience": "Directeurs Stratégie · Responsables Risque", "desc": "Catalogue les griefs, quantifie le déficit de confiance. → Indice de Déficit de Confiance." },
-      { "num": "03", "name": "Évaluation d'Impact Décolonisée", "tag": "MAE", "audience": "Praticiens du Développement · Leaders OSC · DFI", "desc": "Remplace les KPI importés par des indicateurs de dignité, cohésion & agence locale. → Score MAE." },
-      { "num": "04", "name": "Passerelle de Capital Institutionnel", "tag": "Prime d'Authenticité™", "audience": "Officiers DFI · Investisseurs d'Impact · Souverains", "desc": "Données de gouvernance vérifiées par IA satisfaisant la diligence DFI ; accès à $80B+ d'IDE." },
-      { "num": "05", "name": "Pipeline d'Intégrité PME", "tag": "Certification PME", "audience": "Dirigeants de PME · Coopératives", "desc": "4 étapes : Bootcamp → Pipeline → Sprint → S&E ; la certification = passeport numérique vers le capital." },
-      { "num": "06", "name": "Voie de Capital Souverain Diaspora", "tag": "", "audience": "Entrepreneurs Diaspora · Investisseurs de Transferts", "desc": "Voie structurée pour déployer expertise & ressources de manière éthique." }
+      {
+        "num": "01",
+        "name": "Diagnostic de Transition Exécutive",
+        "tag": "C-SPA",
+        "audience": "CEO · Admins de Fondation · Institutionnel",
+        "desc": "Évaluation bilingue à choix multiples ; score <70 → Alerte d'Architecture Coloniale déclenchée. → Score d'Alignement /100."
+      },
+      {
+        "num": "02",
+        "name": "Audit de Risque & Territoire",
+        "tag": "",
+        "audience": "Directeurs Stratégie · Responsables Risque",
+        "desc": "Catalogue les griefs, quantifie le déficit de confiance. → Indice de Déficit de Confiance."
+      },
+      {
+        "num": "03",
+        "name": "Évaluation d'Impact Décolonisée",
+        "tag": "MAE",
+        "audience": "Praticiens du Développement · Leaders OSC · DFI",
+        "desc": "Remplace les KPI importés par des indicateurs de dignité, cohésion & agence locale. → Score MAE."
+      },
+      {
+        "num": "04",
+        "name": "Passerelle de Capital Institutionnel",
+        "tag": "Prime d'Authenticité™",
+        "audience": "Officiers DFI · Investisseurs d'Impact · Souverains",
+        "desc": "Données de gouvernance vérifiées par IA satisfaisant la diligence DFI ; accès à $80B+ d'IDE."
+      },
+      {
+        "num": "05",
+        "name": "Pipeline d'Intégrité PME",
+        "tag": "Certification PME",
+        "audience": "Dirigeants de PME · Coopératives",
+        "desc": "4 étapes : Bootcamp → Pipeline → Sprint → S&E ; la certification = passeport numérique vers le capital."
+      },
+      {
+        "num": "06",
+        "name": "Voie de Capital Souverain Diaspora",
+        "tag": "",
+        "audience": "Entrepreneurs Diaspora · Investisseurs de Transferts",
+        "desc": "Voie structurée pour déployer expertise & ressources de manière éthique."
+      }
     ],
     "packagesTitle": "Forfaits de Services — Adaptés aux besoins de l'Afrique",
     "quote": "Sur devis",
     "packages": [
-      { "name": "STARTER — Entrée Pays", "features": ["Diagnostic d'Intégrité Institutionnelle", "Scorecard de Gouvernance", "Cadre de Politique GRC", "2 modules de formation", "Tableau de bord 6 mois"], "ideal": "Idéal : ONG, petites institutions." },
-      { "name": "PROFESSIONAL — Activation Complète", "features": ["Suite de diagnostics complète", "Les 15 mandats appliqués", "Suivi Prime d'Authenticité™", "Taxe de Confiance™ + Suppression-Sigma™", "Accès formation complet"], "ideal": "Idéal : gouvernements, sociétés d'État, grandes ONG." },
-      { "name": "ENTERPRISE — National / Régional", "features": ["Les 63 outils déployés", "Déploiement à l'échelle pays", "Tableau de bord d'impact 10 ans", "Conseil sur-mesure + advisory", "Intégration capital institutionnel"], "ideal": "Idéal : programmes nationaux & régionaux." }
+      {
+        "name": "STARTER — Entrée Pays",
+        "features": [
+          "Diagnostic d'Intégrité Institutionnelle",
+          "Scorecard de Gouvernance",
+          "Cadre de Politique GRC",
+          "2 modules de formation",
+          "Tableau de bord 6 mois"
+        ],
+        "ideal": "Idéal : ONG, petites institutions."
+      },
+      {
+        "name": "PROFESSIONAL — Activation Complète",
+        "features": [
+          "Suite de diagnostics complète",
+          "Les 15 mandats appliqués",
+          "Suivi Prime d'Authenticité™",
+          "Taxe de Confiance™ + Suppression-Sigma™",
+          "Accès formation complet"
+        ],
+        "ideal": "Idéal : gouvernements, sociétés d'État, grandes ONG."
+      },
+      {
+        "name": "ENTERPRISE — National / Régional",
+        "features": [
+          "Les 63 outils déployés",
+          "Déploiement à l'échelle pays",
+          "Tableau de bord d'impact 10 ans",
+          "Conseil sur-mesure + advisory",
+          "Intégration capital institutionnel"
+        ],
+        "ideal": "Idéal : programmes nationaux & régionaux."
+      }
     ],
     "advisorLabel": "Conseiller Solutions IA :",
     "advisorQuote": "« Parlez-moi du défi que vous affrontez en Afrique, et je vous orienterai vers la bonne solution APA. »",
@@ -272,12 +480,37 @@
       "ESG vs GRC APA™ — quelle différence fondamentale ?"
     ],
     "tiersTitle": "Ressources & Accès — 4 Niveaux",
-    "tiersCols": { "tier": "Niveau", "access": "Accès", "content": "Contenu", "price": "Prix" },
+    "tiersCols": {
+      "tier": "Niveau",
+      "access": "Accès",
+      "content": "Contenu",
+      "price": "Prix"
+    },
     "tiers": [
-      { "tier": "Niveau 0", "access": "Sans connexion", "content": "« L'Afrique : Pauvre ou Drainée ? » (actif de conversion phare)", "price": "Gratuit" },
-      { "tier": "Niveau 1", "access": "Compte gratuit", "content": "Glossaire complet, leadership intellectuel, aperçus des parcours", "price": "Gratuit" },
-      { "tier": "Niveau 2", "access": "Abonnement payant", "content": "Suite GRC complète, Boîte à outils MAE, protocoles d'accès CVP", "price": "$10K/an" },
-      { "tier": "Niveau 3", "access": "Abonnement payant", "content": "Suite complète + conseil sur-mesure + Tableau de bord 10 ans", "price": "$50K/an" }
+      {
+        "tier": "Niveau 0",
+        "access": "Sans connexion",
+        "content": "« L'Afrique : Pauvre ou Drainée ? » (actif de conversion phare)",
+        "price": "Gratuit"
+      },
+      {
+        "tier": "Niveau 1",
+        "access": "Compte gratuit",
+        "content": "Glossaire complet, leadership intellectuel, aperçus des parcours",
+        "price": "Gratuit"
+      },
+      {
+        "tier": "Niveau 2",
+        "access": "Abonnement payant",
+        "content": "Suite GRC complète, Boîte à outils MAE, protocoles d'accès CVP",
+        "price": "$10K/an"
+      },
+      {
+        "tier": "Niveau 3",
+        "access": "Abonnement payant",
+        "content": "Suite complète + conseil sur-mesure + Tableau de bord 10 ans",
+        "price": "$50K/an"
+      }
     ],
     "championsLink": "Voir les Champions des 22 Nations →"
   },
@@ -286,11 +519,26 @@
     "title": "Portail de Certification & Audit de Confiance",
     "pathwayTitle": "Parcours de Certification APA™ — 5 Étapes",
     "steps": [
-      { "name": "Diagnostic C-SPA", "desc": "Score ≥70 requis ; Alerte d'Architecture Coloniale si en deçà." },
-      { "name": "Audit de Confiance & Cartographie", "desc": "Catalogue des griefs, Indice de Déficit de Confiance attribué par l'équipe APA." },
-      { "name": "Accord Kinship Equity", "desc": "Instruments de co-propriété juridiquement contraignants, sous le cadre de co-gouvernance APA." },
-      { "name": "Activation CVP & Suppression-σ", "desc": "Le Portail de Vérification Communautaire devient actif ; matrice de consentement temps réel ; suivi du coefficient de fuite." },
-      { "name": "Certification GRC APA™ Décernée", "desc": "Réception du sceau Prime d'Authenticité™ + certificat de conformité vérifiable par les DFI & BMD." }
+      {
+        "name": "Diagnostic C-SPA",
+        "desc": "Score ≥70 requis ; Alerte d'Architecture Coloniale si en deçà."
+      },
+      {
+        "name": "Audit de Confiance & Cartographie",
+        "desc": "Catalogue des griefs, Indice de Déficit de Confiance attribué par l'équipe APA."
+      },
+      {
+        "name": "Accord Kinship Equity",
+        "desc": "Instruments de co-propriété juridiquement contraignants, sous le cadre de co-gouvernance APA."
+      },
+      {
+        "name": "Activation CVP & Suppression-σ",
+        "desc": "Le Portail de Vérification Communautaire devient actif ; matrice de consentement temps réel ; suivi du coefficient de fuite."
+      },
+      {
+        "name": "Certification GRC APA™ Décernée",
+        "desc": "Réception du sceau Prime d'Authenticité™ + certificat de conformité vérifiable par les DFI & BMD."
+      }
     ],
     "criteriaTitle": "Critères d'obtention du certificat",
     "criteria": "Score C-SPA ≥ 70 · Indice de Déficit de Confiance évalué & accepté · Accord Kinship Equity exécuté · CVP actif avec suivi-σ en direct → certificat auto-émis (sceau Prime d'Authenticité™ + URL de vérification publique).",
@@ -309,22 +557,61 @@
     "valuePropTitle": "Proposition de Valeur",
     "valueProp": "Le Cadre APA™ décolonise les métriques de la confiance — remplaçant les cases à cocher occidentales par des indicateurs vérifiables et contextualisés, qui résonnent localement tout en satisfaisant les standards institutionnels mondiaux.",
     "values": [
-      { "name": "Redevabilité™", "desc": "standards vérifiés de transparence." },
-      { "name": "Authenticité™", "desc": "des outils calibrés pour l'Afrique uniquement." },
-      { "name": "Inclusivité", "desc": "les 54 nations représentées." },
-      { "name": "Précision", "desc": "fondé sur les preuves, testé sur le terrain." }
+      {
+        "name": "Redevabilité™",
+        "desc": "standards vérifiés de transparence."
+      },
+      {
+        "name": "Authenticité™",
+        "desc": "des outils calibrés pour l'Afrique uniquement."
+      },
+      {
+        "name": "Inclusivité",
+        "desc": "les 54 nations représentées."
+      },
+      {
+        "name": "Précision",
+        "desc": "fondé sur les preuves, testé sur le terrain."
+      }
     ],
     "advisorySecnum": "02",
     "advisoryTitle": "Conseil Consultatif & Double Direction",
     "advisoryBoardTitle": "Conseil Consultatif Mondial",
-    "advisoryCols": { "member": "Membre", "profile": "Profil" },
+    "advisoryCols": {
+      "member": "Membre",
+      "profile": "Profil"
+    },
     "advisors": [
-      { "name": "Prof. James Otieno", "flag": "🇰🇪", "profile": "Ancien Directeur Banque Mondiale, Division Afrique. 30+ ans en gouvernance & redevabilité." },
-      { "name": "Dr. Fatima Diallo", "flag": "🇸🇳", "profile": "Commissaire UA aux Affaires Politiques. Spécialiste démocratie & redevabilité." },
-      { "name": "M. Emmanuel Nkrumah", "flag": "🇬🇭", "profile": "Directeur Régional IFC, Afrique de l'Ouest. Facilitation IDE & réforme institutionnelle." },
-      { "name": "Dr. Amina Osei", "flag": "🇳🇬", "profile": "Ancienne Économiste Senior FMI. Experte gouvernance fiscale & transparence." },
-      { "name": "Prof. Leila Mansouri", "flag": "🇲🇦", "profile": "Harvard Kennedy School. Spécialiste État de droit & gouvernance MENA." },
-      { "name": "M. Charles Mutua", "flag": "🇷🇼", "profile": "Partner McKinsey Afrique. Réforme institutionnelle & renforcement des capacités." }
+      {
+        "name": "Prof. James Otieno",
+        "flag": "🇰🇪",
+        "profile": "Ancien Directeur Banque Mondiale, Division Afrique. 30+ ans en gouvernance & redevabilité."
+      },
+      {
+        "name": "Dr. Fatima Diallo",
+        "flag": "🇸🇳",
+        "profile": "Commissaire UA aux Affaires Politiques. Spécialiste démocratie & redevabilité."
+      },
+      {
+        "name": "M. Emmanuel Nkrumah",
+        "flag": "🇬🇭",
+        "profile": "Directeur Régional IFC, Afrique de l'Ouest. Facilitation IDE & réforme institutionnelle."
+      },
+      {
+        "name": "Dr. Amina Osei",
+        "flag": "🇳🇬",
+        "profile": "Ancienne Économiste Senior FMI. Experte gouvernance fiscale & transparence."
+      },
+      {
+        "name": "Prof. Leila Mansouri",
+        "flag": "🇲🇦",
+        "profile": "Harvard Kennedy School. Spécialiste État de droit & gouvernance MENA."
+      },
+      {
+        "name": "M. Charles Mutua",
+        "flag": "🇷🇼",
+        "profile": "Partner McKinsey Afrique. Réforme institutionnelle & renforcement des capacités."
+      }
     ],
     "foundersTitle": "Fondateurs — Profils Officiels (bilingue EN/FR)",
     "founders": [
@@ -332,13 +619,21 @@
         "name": "Aisha Babangida",
         "role": "Fondatrice | Présidente Visionnaire",
         "bio": "Humanitaire et philanthrope panafricaine de premier plan, elle a conçu le mandat fondateur d'APA™ : autonomiser structurellement les femmes et décoloniser radicalement le développement en Afrique. S'appuyant sur la Women Enterprise Alliance (WenA) et le Better Life Program for the African Rural Woman, elle oriente la stratégie vers l'intégration des systèmes de savoirs endogènes.",
-        "tags": ["Réseau WenA", "Décolonisation", "Co-gouvernance"]
+        "tags": [
+          "Réseau WenA",
+          "Décolonisation",
+          "Co-gouvernance"
+        ]
       },
       {
         "name": "Pape Samb",
         "role": "Co-Fondateur | CEO | Architecte Principal — Stratège GRC",
         "bio": "Leader stratégique international et expert en investissement systémique, il est le concepteur et l'architecte principal de la méthodologie APA™ et de sa suite de 63 outils GRC. En tant que CEO, il a conçu les cadres Prime d'Authenticité™, Taxe de Confiance™ et Suppression-Sigma™. Architecte du CVP et du Tableau de Bord du Changement sur 10 ans. 15+ ans en gouvernance, risque & conformité à travers l'Afrique francophone.",
-        "tags": ["Prime d'Authenticité™", "Taxe de Confiance™", "Suppression-Sigma™"]
+        "tags": [
+          "Prime d'Authenticité™",
+          "Taxe de Confiance™",
+          "Suppression-Sigma™"
+        ]
       }
     ]
   },
@@ -347,21 +642,51 @@
     "title": "Impact & Contact",
     "impactTitle": "Impact — Vision & Trajectoire",
     "impacts": [
-      { "title": "Dé-risquer le capital", "desc": "300–500 pb de réduction du coût du capital pour les entreprises certifiées ; conversion des bénéficiaires de subventions en entreprises de qualité institutionnelle." },
-      { "title": "Autonomiser les femmes", "desc": "Étoile polaire : 5 millions de femmes d'ici 2050 — comme nœuds de croissance des chaînes de valeur, non comme bénéficiaires." },
-      { "title": "Standard continental", "desc": "Faire d'APA le standard de gouvernance reconnu (équivalent IFC PS1, reconnu AfCFTA) intégré aux notations de risque Afrique." }
+      {
+        "title": "Dé-risquer le capital",
+        "desc": "300–500 pb de réduction du coût du capital pour les entreprises certifiées ; conversion des bénéficiaires de subventions en entreprises de qualité institutionnelle."
+      },
+      {
+        "title": "Autonomiser les femmes",
+        "desc": "Étoile polaire : 5 millions de femmes d'ici 2050 — comme nœuds de croissance des chaînes de valeur, non comme bénéficiaires."
+      },
+      {
+        "title": "Standard continental",
+        "desc": "Faire d'APA le standard de gouvernance reconnu (équivalent IFC PS1, reconnu AfCFTA) intégré aux notations de risque Afrique."
+      }
     ],
     "indicatorsLabel": "Indicateurs d'impact suivis :",
     "indicators": "compression du coût du capital · MoU institutionnels · réduction de prime d'assurance (MIGA) pour projets certifiés · intégration des données APA aux notations ESG · >100 entreprises certifiées (jalon).",
     "contactTitle": "Contact",
-    "cols": { "channel": "Canal", "detail": "Détail" },
+    "cols": {
+      "channel": "Canal",
+      "detail": "Détail"
+    },
     "rows": [
-      { "channel": "Entité", "detail": "APA Sénégal SARL — Accountable Partners for Africa™" },
-      { "channel": "Adresse", "detail": "Siège continental · Dakar, Sénégal" },
-      { "channel": "Email", "detail": "pape@theapaafrica.org" },
-      { "channel": "Téléphone", "detail": "+221 78 839 15 84" },
-      { "channel": "Site web", "detail": "https://www.theapaafrica.org/" },
-      { "channel": "Réseaux", "detail": "LinkedIn · YouTube · X (Twitter) — @ApaAfrica" }
+      {
+        "channel": "Entité",
+        "detail": "APA Sénégal SARL — Accountable Partners for Africa™"
+      },
+      {
+        "channel": "Adresse",
+        "detail": "Siège continental · Dakar, Sénégal"
+      },
+      {
+        "channel": "Email",
+        "detail": "pape@theapaafrica.org"
+      },
+      {
+        "channel": "Téléphone",
+        "detail": "+221 78 839 15 84"
+      },
+      {
+        "channel": "Site web",
+        "detail": "https://www.theapaafrica.org/"
+      },
+      {
+        "channel": "Réseaux",
+        "detail": "LinkedIn · YouTube · X (Twitter) — @ApaAfrica"
+      }
     ],
     "downloadTitle": "Télécharger le Dossier de Pré-Qualification",
     "downloadDesc": "Accessible via un court formulaire de qualification (nom, email professionnel, organisation, pays), puis remise immédiate du dossier PDF."
@@ -399,10 +724,30 @@
     },
     "nextTitle": "Vos prochaines étapes",
     "cards": [
-      { "title": "Démarrer la certification", "desc": "Le parcours en 5 étapes commence par le diagnostic C-SPA (score ≥ 70 requis).", "cta": "Voir le parcours", "href": "/certification" },
-      { "title": "Explorer les 63 outils", "desc": "Formulaires, guides, instruments juridiques et métriques — le cadre complet.", "cta": "Ouvrir le catalogue", "href": "/tools" },
-      { "title": "Intelligence stratégique", "desc": "3 niveaux : compte gratuit, Accès Professionnel, Partenariat Entreprise.", "cta": "Découvrir les niveaux", "href": "/intelligence" },
-      { "title": "Vérifier un certificat", "desc": "Le registre public — la confiance comme monnaie.", "cta": "Vérifier", "href": "/verify" }
+      {
+        "title": "Démarrer la certification",
+        "desc": "Le parcours en 5 étapes commence par le diagnostic C-SPA (score ≥ 70 requis).",
+        "cta": "Voir le parcours",
+        "href": "/certification"
+      },
+      {
+        "title": "Explorer les 63 outils",
+        "desc": "Formulaires, guides, instruments juridiques et métriques — le cadre complet.",
+        "cta": "Ouvrir le catalogue",
+        "href": "/tools"
+      },
+      {
+        "title": "Intelligence stratégique",
+        "desc": "3 niveaux : compte gratuit, Accès Professionnel, Partenariat Entreprise.",
+        "cta": "Découvrir les niveaux",
+        "href": "/intelligence"
+      },
+      {
+        "title": "Vérifier un certificat",
+        "desc": "Le registre public — la confiance comme monnaie.",
+        "cta": "Vérifier",
+        "href": "/verify"
+      }
     ],
     "engineNote": "Le moteur de certification en ligne (diagnostic C-SPA interactif, audits, émission du certificat) arrive au Sprint 3 — votre compte y donnera accès directement."
   },
@@ -451,5 +796,203 @@
     "quote": "« La redevabilité n'est pas un coût de conformité — c'est un générateur d'alpha économique. »",
     "quoteSource": "Cadre de la Prime d'Authenticité™ APA",
     "rights": "© {year} APA™ — Accountable Partners for Africa. Tous droits réservés."
+  },
+  "VerifyCredential": {
+    "metaTitle": "Vérifier un titre APA™",
+    "kicker": "Titre vérifiable APA™",
+    "holder": "Titulaire",
+    "issuer": "Émetteur",
+    "cspa": "Score C-SPA",
+    "validity": "Validité",
+    "credentialId": "Identifiant du titre",
+    "issuerDid": "DID de l'émetteur",
+    "integrity": {
+      "VALID": {
+        "title": "Signature Ed25519 valide",
+        "detail": "Infalsifiable — vérifié cryptographiquement hors-ligne."
+      },
+      "INVALID": {
+        "title": "Signature invalide",
+        "detail": "Ce document ne correspond pas à sa signature. Ne pas s'y fier."
+      },
+      "UNAVAILABLE": {
+        "title": "Signature non vérifiée",
+        "detail": "Clé de l'émetteur indisponible sur cette instance — intégrité non attestée."
+      },
+      "REVOKED": {
+        "title": "Titre révoqué",
+        "detail": "La signature est authentique, mais l'émetteur a révoqué ce titre dans le registre StatusList2021."
+      }
+    },
+    "maturity": {
+      "TRADITIONAL": "Traditionnel / Transactionnel",
+      "TRANSITIONAL": "Transitionnel",
+      "TRANSFORMATIONAL": "Transformationnel (aligné CSV)",
+      "CSV_LEADER": "Leader CSV"
+    },
+    "impact": {
+      "title": "Registre d'impact des Outils APA",
+      "subtitle": "{count} outils d'évaluation pratique complétés et intégrés comme preuves.",
+      "report": "Rapport"
+    },
+    "proofType": "Type de preuve",
+    "verificationMethod": "Méthode de vérification",
+    "offlineNote": "Vérifié en rejouant la signature Ed25519 sur le document JSON-LD. Aucun tiers requis.",
+    "notFound": {
+      "title": "Titre introuvable",
+      "detail": "Aucun titre APA ne correspond à « {id} ». Vérifiez l'identifiant ou contactez pape@theapaafrica.org."
+    }
+  },
+  "LearnPlayer": {
+    "exit": "Quitter",
+    "shortcuts": "Raccourcis clavier",
+    "keyCurriculum": "Curriculum (B)",
+    "keyDock": "Dock outils & IA (T)",
+    "keyZen": "Mode Zen (F)",
+    "curriculum": "Curriculum",
+    "tool": "Outil",
+    "dock": "Outils & IA",
+    "quickTools": "Verrous pratiques",
+    "kind": {
+      "READING": "Lecture",
+      "TOOL": "Verrou pratique",
+      "ASSESSMENT": "Évaluation"
+    },
+    "done": "Terminé",
+    "noBody": "Pas encore de contenu pour cette leçon.",
+    "markRead": "Marquer comme lu",
+    "saving": "Enregistrement…",
+    "signInToTrack": "Connectez-vous pour suivre la progression",
+    "empty": "Ce cours n'a pas encore de leçons.",
+    "toolLock": {
+      "intro": "Complétez l'outil « {tool} » pour lever ce verrou pratique et débloquer la leçon suivante.",
+      "evidenceNote": "Votre résultat est consigné comme preuve vérifiable et alimente votre score C-SPA.",
+      "completed": "Verrou pratique levé — preuve consignée.",
+      "open": "Ouvrir l'atelier de l'outil →"
+    },
+    "concierge": {
+      "title": "Concierge IA",
+      "hint": "Guidage contextuel sur cette leçon (bientôt disponible)."
+    },
+    "zenHint": "Mode Zen — F ou Échap pour sortir · B curriculum · T outils",
+    "notFound": {
+      "title": "Cours introuvable",
+      "detail": "Aucun cours ne correspond à « {id} »."
+    },
+    "credential": {
+      "title": "Diplôme",
+      "coverage": "Verrous pratiques levés : {cleared}/{total}",
+      "finalize": "Émettre / actualiser le diplôme",
+      "issued": "✓ Émis {number} — voir sur /verify →",
+      "blocked": "{count} verrou(s) pratique(s) encore requis avant émission.",
+      "err": {
+        "NO_LEARNER": "Connectez-vous pour émettre votre diplôme.",
+        "NO_JOURNEY": "Aucun parcours de certification lié à votre compte.",
+        "ISSUER_KEY_UNCONFIGURED": "Clé de signature de l'émetteur non configurée sur cette instance.",
+        "CONTEXT_NOT_FOUND": "Contexte de certification introuvable.",
+        "CSPA_MISSING": "Réussissez d'abord le diagnostic C-SPA.",
+        "ALREADY_ISSUED": "Diplôme déjà à jour.",
+        "CAPSTONE_NOT_APPROVED": "Le capstone doit d'abord être approuvé par un évaluateur APA."
+      },
+      "capstone": "Atelier Capstone"
+    }
+  },
+  "Enterprise": {
+    "kicker": "Portail Gouvernance B2B",
+    "viewMatrix": "Matrice de compétences",
+    "tiles": {
+      "members": "Membres de la cohorte",
+      "coverage": "Couverture ISO 37000",
+      "coverageSub": "compétence moyenne sur les domaines",
+      "certs": "Titres actifs",
+      "certsSub": "sur {total} émis"
+    },
+    "cohort": {
+      "title": "Cohorte",
+      "member": "Membre",
+      "coverage": "Couverture globale",
+      "empty": "Aucun membre inscrit pour l'instant."
+    },
+    "certs": {
+      "title": "Titres émis",
+      "number": "Titre",
+      "status": "Statut",
+      "issued": "Émis le",
+      "empty": "Aucun titre émis pour l'instant."
+    },
+    "certStatus": {
+      "ACTIVE": "Actif",
+      "EXPIRED": "Expiré",
+      "REVOKED": "Révoqué"
+    },
+    "noOrg": {
+      "title": "Aucune organisation",
+      "detail": "Aucune cohorte institutionnelle n'est liée à cette vue."
+    },
+    "matrix": {
+      "kicker": "Heatmap de compétences ISO 37000",
+      "subtitle": "Couverture des membres sur les six domaines de gouvernance C-SPA.",
+      "backDashboard": "Tableau de bord",
+      "legend": "Couverture %"
+    }
+  },
+  "Capstone": {
+    "kicker": "Atelier Capstone",
+    "title": "Projet de Transformation Institutionnelle",
+    "backPlayer": "Player",
+    "intro": "Soumettez votre projet de transformation. À la soumission, il est contrôlé (outils requis, originalité, longueur) et pré-noté par l'IA selon la grille de gouvernance ISO 37000, puis transmis à un évaluateur APA.",
+    "status": "Statut",
+    "statuses": {
+      "DRAFT": "Brouillon",
+      "SUBMITTED": "Soumis — en cours d'examen",
+      "APPROVED": "Approuvé",
+      "REJECTED": "Retourné pour révision"
+    },
+    "approvedNote": "Approuvé — le flux d'émission du diplôme est désormais débloqué.",
+    "projectTitle": "Titre du projet",
+    "titlePlaceholder": "ex. Réforme de gouvernance à valeur partagée au Ministère de…",
+    "document": "Document du projet",
+    "docPlaceholder": "Décrivez la transformation institutionnelle : paradigme, gouvernance, co-propriété communautaire, mesure, distribution de valeur, continuité…",
+    "words": "{n} mots",
+    "saveDraft": "Enregistrer le brouillon",
+    "saving": "Enregistrement…",
+    "submit": "Soumettre pour examen",
+    "saved": "Brouillon enregistré.",
+    "submitted": "Soumis — pré-noté et transmis à un évaluateur.",
+    "integrityFailed": "Contrôles d'intégrité échoués — voir ci-dessous ; non soumis.",
+    "err": {
+      "NO_LEARNER": "Connectez-vous pour soumettre.",
+      "NO_JOURNEY": "Aucun parcours de certification lié.",
+      "LOCKED": "Ce capstone ne peut plus être modifié."
+    },
+    "integrity": {
+      "title": "Contrôles d'intégrité",
+      "toolsOk": "Les 12 outils APA requis sont complétés",
+      "toolsMissing": "{n} outil(s) requis encore à compléter",
+      "length": "Longueur : {n} mots",
+      "similarity": "Originalité — {pct}% de similarité max"
+    },
+    "prescore": {
+      "title": "Pré-notation IA (grille ISO 37000)",
+      "advisory": "À titre indicatif — un évaluateur APA prend la décision finale."
+    }
+  },
+  "CapstoneReview": {
+    "kicker": "Évaluateur APA",
+    "title": "Examen des Capstones",
+    "subtitle": "{n} soumission(s) en attente de votre décision.",
+    "empty": "Aucun capstone en attente d'examen.",
+    "untitled": "(sans titre)",
+    "tools": "Outils complétés",
+    "similarity": "Similarité {pct}%",
+    "words": "{n} mots",
+    "notesPlaceholder": "Notes de l'évaluateur (transmises au candidat en cas de refus)…",
+    "approve": "Approuver",
+    "reject": "Retourner pour révision",
+    "decided": {
+      "APPROVED": "✓ Approuvé — émission débloquée.",
+      "REJECTED": "Retourné pour révision."
+    },
+    "error": "Échec de l'action."
   }
 }

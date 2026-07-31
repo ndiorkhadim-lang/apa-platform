@@ -43,19 +43,21 @@ const shell = (title: string, body: string) => `
 </div>`;
 
 export const emailTemplates = {
-  championSubmitted: (name: string, locale: string, type: 'CHAMPION' | 'ADVISOR' = 'CHAMPION') => {
-    const progFr = type === 'ADVISOR' ? 'Conseil Consultatif Mondial APA™' : 'Programme Champions APA™';
-    const progEn = type === 'ADVISOR' ? 'APA™ Global Advisory Board' : 'APA™ Champions Program';
+  championSubmitted: (name: string, locale: string, type: 'CHAMPION' | 'ADVISOR' | 'PARTNER' = 'CHAMPION') => {
+    const progFr = type === 'ADVISOR' ? 'Conseil Consultatif Mondial APA™' : type === 'PARTNER' ? 'Programme Partenaire Journey APA™' : 'Programme Champions APA™';
+    const progEn = type === 'ADVISOR' ? 'APA™ Global Advisory Board' : type === 'PARTNER' ? 'APA™ Journey Partner Program' : 'APA™ Champions Program';
+    const roleFr = type === 'ADVISOR' ? 'Conseiller' : type === 'PARTNER' ? 'Partenaire' : 'Champion';
+    const roleEn = type === 'ADVISOR' ? 'Advisory Board' : type === 'PARTNER' ? 'Journey Partner' : 'Champion';
     return locale === 'fr'
       ? {
-          subject: `Candidature ${type === 'ADVISOR' ? 'Conseiller' : 'Champion'} APA™ bien reçue`,
+          subject: `Candidature ${roleFr} APA™ bien reçue`,
           html: shell(
             'Candidature reçue',
             `<p>Bonjour ${name},</p><p>Votre candidature au <b>${progFr}</b> a bien été soumise. Notre comité l'examine sous <b>10 jours ouvrés</b> ; vous suivrez chaque étape (présélection, entretien, décision) depuis votre espace.</p><p><i>« L'éthique en Alpha. La confiance comme monnaie. »</i></p>`
           ),
         }
       : {
-          subject: `APA™ ${type === 'ADVISOR' ? 'Advisory Board' : 'Champion'} application received`,
+          subject: `APA™ ${roleEn} application received`,
           html: shell(
             'Application received',
             `<p>Hello ${name},</p><p>Your <b>${progEn}</b> application has been submitted. Our committee reviews it within <b>10 business days</b>; you can track every stage (screening, interview, decision) from your workspace.</p><p><i>"Ethics into Alpha. Trust as Currency."</i></p>`

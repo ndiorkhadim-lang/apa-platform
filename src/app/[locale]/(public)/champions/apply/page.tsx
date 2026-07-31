@@ -39,6 +39,16 @@ const COPY: Record<ApplicationType, { fr: { title: string; sub: string }; en: { 
       sub: 'Join the board that steers APA’s strategy. Professional 5-section file, recoverable draft; committee reply within 10 business days.',
     },
   },
+  PARTNER: {
+    fr: {
+      title: 'Candidature — Partenaire Journey APA™',
+      sub: 'Devenez Partenaire Journey pour proposer et gérer des parcours immersifs. Dossier professionnel, brouillon récupérable ; après validation par APA, votre rôle passe à Partenaire et le Partner Dashboard s’ouvre.',
+    },
+    en: {
+      title: 'Application — APA™ Journey Partner',
+      sub: 'Become a Journey Partner to submit and manage immersive journeys. Professional file, recoverable draft; once APA approves, your role becomes Partner and the Partner Dashboard unlocks.',
+    },
+  },
 };
 
 const GATE = {
@@ -67,10 +77,12 @@ export default async function ApplyPage({
   setRequestLocale(locale);
   if (!dbAvailable) return <DBNotReady locale={locale} />;
   const sp = await searchParams;
-  const type: ApplicationType = sp.type === 'advisor' ? 'ADVISOR' : 'CHAMPION';
+  const type: ApplicationType =
+    sp.type === 'advisor' ? 'ADVISOR' : sp.type === 'partner' ? 'PARTNER' : 'CHAMPION';
   const c = COPY[type][locale === 'en' ? 'en' : 'fr'];
   const g = GATE[locale === 'en' ? 'en' : 'fr'];
-  const applyPath = `/champions/apply${type === 'ADVISOR' ? '?type=advisor' : ''}`;
+  const typeQuery = type === 'ADVISOR' ? '?type=advisor' : type === 'PARTNER' ? '?type=partner' : '';
+  const applyPath = `/champions/apply${typeQuery}`;
 
   const session = await getSession();
 

@@ -35,6 +35,12 @@ export const auth = betterAuth({
         required: false,
         input: true,
       },
+      // Journey Partner flag — server-controlled (granted on admin approval).
+      journeyPartner: {
+        type: 'boolean',
+        defaultValue: false,
+        input: false,
+      },
     },
   },
   socialProviders: {

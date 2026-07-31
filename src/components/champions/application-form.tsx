@@ -120,7 +120,7 @@ export function ChampionApplicationForm({
   submitted,
 }: {
   locale: string;
-  type?: 'CHAMPION' | 'ADVISOR';
+  type?: 'CHAMPION' | 'ADVISOR' | 'PARTNER';
   authenticated?: boolean;
   signInHref?: string;
   initial: DraftInput;

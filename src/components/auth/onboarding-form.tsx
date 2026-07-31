@@ -81,7 +81,7 @@ export function OnboardingForm({ locale, redirectTo = '/app' }: { locale: string
       setStep(0);
       return;
     }
-    router.push(`${redirectTo}?welcome=1`);
+    router.push(`${redirectTo}${redirectTo.includes('?') ? '&' : '?'}welcome=1`);
     router.refresh();
   }
 
