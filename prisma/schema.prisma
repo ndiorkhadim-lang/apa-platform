@@ -172,20 +172,62 @@ model JourneyProposal {
   status      JourneyProposalStatus @default(SUBMITTED)
 
   title       String
-  roleTier    String // OBSERVER | PRACTITIONER | CO_ARCHITECT
+  roleTier    String  @default("OBSERVER") // OBSERVER | PRACTITIONER | CO_ARCHITECT
   country     String
   region      String?
   durationDays Int?
   priceUSD    Int?
   themes      String? // comma-separated
-  summary     String  @db.Text
+  summary     String  @db.Text // itinerary / ground-truth description
   reviewNote  String? @db.Text // admin feedback on revisions/rejection
+
+  // Fields from the APA Partner Application & Strategic Journey form (§03)
+  sector          String?
+  maxCapacity     Int?
+  location        String? // "City / Region, Country" — exact field location
+  hostCommunities String? @db.Text // associated local host communities
+
+  // ── Structured tag taxonomy (chip multi-selects) ──────
+  themeTags        String[] @default([]) // Journey Theme chips
+  audienceTags     String[] @default([]) // Audience chips
+  languages        String[] @default([]) // Languages of delivery
+  sdgs             String[] @default([]) // UN SDG chips (e.g. "SDG 8")
+  frameworkModules String[] @default([]) // APA pillars I–VI
+  toolNumbers      Int[]    @default([]) // Applicable APA tools (1–63)
+  communityPartners String[] @default([])
+  expectedOutcomes  String[] @default([])
+  travelType             String? // Immersion | Executive Mission | …
+  difficulty             String? // Beginner | Intermediate | Advanced
+  certificationAlignment String? // APA Certified | Under Review | Pilot Journey
+
+  // ── Governance / review workflow ──────────────────────
+  assignedReviewerId String?
+  qualityScore       Int?    // reviewer quality score 0–100
+  publishedAt        DateTime?
+  comments           JourneyProposalComment[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([partnerId])
+  @@index([status])
   @@map("journey_proposals")
+}
+
+/// Threaded review conversation on a journey proposal — powers admin
+/// comments, "Communication with APA", and partner-side review history.
+model JourneyProposalComment {
+  id         String          @id @default(cuid())
+  proposalId String
+  proposal   JourneyProposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+  authorId   String
+  authorName String
+  authorRole String          @default("APA") // APA | PARTNER
+  body       String          @db.Text
+  createdAt  DateTime        @default(now())
+
+  @@index([proposalId])
+  @@map("journey_proposal_comments")
 }
 
 model Session {
@@ -769,6 +811,7 @@ model ChampionApplication {
   position        String?
   organization    String?
   industry        String?
+  orgTypeTags     String[] @default([]) // Partner org-type chips (Government, NGO, DFI, …)
   yearsExperience Int?
   education       String?
   certifications  String?

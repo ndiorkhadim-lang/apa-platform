@@ -11,6 +11,7 @@
 import { createPrivateKey, createPublicKey, sign as edSign, verify as edVerify, type KeyObject } from 'node:crypto';
 import {
   signingPayload,
+  canonicalize,
   type UnsignedCredential,
   type SignedCredential,
   type Proof,
@@ -125,4 +126,34 @@ export function verifyCredential(credential: SignedCredential, publicKey: string
   const key = typeof publicKey === 'string' ? createPublicKey(publicKey) : publicKey;
   const signature = base58btcDecode(proof.proofValue.slice(1));
   return edVerify(null, Buffer.from(signingPayload(unsigned as UnsignedCredential)), key, signature);
+}
+
+// ─────────────────────────────────────────────
+// Generic document signing — any JSON-LD credential (e.g. badge OB 3.0)
+// ─────────────────────────────────────────────
+
+/** Sign an arbitrary JSON-LD document (minus its proof) → a W3C Ed25519 proof. */
+export function signDocument(
+  doc: Record<string, unknown>,
+  config: { privateKey: string | KeyObject; verificationMethod: string; created: string },
+): Proof {
+  const key = typeof config.privateKey === 'string' ? createPrivateKey(config.privateKey) : config.privateKey;
+  const bytes = new TextEncoder().encode(canonicalize(doc));
+  const signature = edSign(null, Buffer.from(bytes), key);
+  return {
+    type: 'Ed25519Signature2020',
+    created: config.created,
+    verificationMethod: config.verificationMethod,
+    proofPurpose: 'assertionMethod',
+    proofValue: `z${base58btcEncode(signature)}`,
+  };
+}
+
+/** Verify any signed JSON-LD document offline against a public key. */
+export function verifyDocument(signed: Record<string, unknown>, publicKey: string | KeyObject): boolean {
+  const { proof, ...rest } = signed as { proof?: Proof } & Record<string, unknown>;
+  if (!proof?.proofValue?.startsWith('z')) return false;
+  const key = typeof publicKey === 'string' ? createPublicKey(publicKey) : publicKey;
+  const signature = base58btcDecode(proof.proofValue.slice(1));
+  return edVerify(null, Buffer.from(new TextEncoder().encode(canonicalize(rest))), key, signature);
 }

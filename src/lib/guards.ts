@@ -2,6 +2,7 @@ import 'server-only';
 import { redirect } from '@/i18n/navigation';
 import { getSession } from '@/lib/session';
 import { prisma } from '@/infrastructure/prisma/client';
+import { PREVIEW_ACCESS } from '@/lib/demo';
 
 /**
  * Server-side RBAC guards for protected route subtrees. In this stack session
@@ -13,8 +14,6 @@ import { prisma } from '@/infrastructure/prisma/client';
  * guard redirects — no demo bypass.
  */
 
-const isProd = () => process.env.NODE_ENV === 'production';
-
 export interface Guarded {
   /** Authenticated user id, or null in a dev demo preview. */
   userId: string | null;
@@ -25,7 +24,7 @@ export interface Guarded {
 export async function requireCandidate(locale: string, returnTo: string): Promise<Guarded> {
   const session = await getSession();
   if (session) return { userId: session.user.id, role: (session.user as { platformRole?: string }).platformRole ?? 'USER' };
-  if (!isProd()) return { userId: null, role: 'USER' };
+  if (PREVIEW_ACCESS) return { userId: null, role: 'USER' };
   redirect({ href: `/sign-in?redirect=${encodeURIComponent(returnTo)}`, locale });
   throw new Error('unreachable');
 }
@@ -37,7 +36,7 @@ export async function requireCandidate(locale: string, returnTo: string): Promis
 export async function requireOrgAdmin(locale: string, returnTo: string, orgSlug?: string): Promise<Guarded> {
   const session = await getSession();
   if (!session) {
-    if (!isProd()) return { userId: null, role: 'ORG_ADMIN' };
+    if (PREVIEW_ACCESS) return { userId: null, role: 'ORG_ADMIN' };
     redirect({ href: `/sign-in?redirect=${encodeURIComponent(returnTo)}`, locale });
     throw new Error('unreachable');
   }

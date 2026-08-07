@@ -49,7 +49,7 @@ export default async function JourneysPage({
       });
     }
   }
-  const applyHref = '/champions/apply?type=partner';
+  const applyHref = '/journeys/partner/apply';
   const partnerCta = !session
     ? { href: `/sign-up?redirect=${encodeURIComponent(applyHref)}`, label: 'Apply as a Journey Partner', note: 'Create your account, then complete the Partner Application Form.' }
     : isJourneyPartner
@@ -89,20 +89,30 @@ export default async function JourneysPage({
         </div>
       </header>
 
-      {/* Become a Journey Partner — CTA band */}
+      {/* Become a Journey Partner — prominent CTA hero */}
       <div className="mt-8 overflow-hidden rounded-apa-lg apa-gradient">
-        <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-6 text-white sm:px-8">
-          <div>
-            <span className="rounded bg-white/15 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-apa-gold-bright">Partner Program</span>
-            <h2 className="mt-2 text-xl font-bold">Deliver journeys with APA</h2>
-            <p className="mt-1 max-w-xl text-sm text-apa-mint">{partnerCta.note}</p>
+        <div className="px-6 py-8 text-white sm:px-10">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-2xl">
+              <span className="rounded bg-white/15 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide text-apa-gold-bright">Partner Program · Open call</span>
+              <h2 className="mt-3 text-2xl font-bold leading-tight sm:text-3xl">Become an APA Journey Partner</h2>
+              <p className="mt-2 text-sm text-apa-mint">
+                Organizations — governments, NGOs, universities, DFIs, foundations and companies — can certify with APA and
+                publish their own immersive Strategic Journeys. {partnerCta.note}
+              </p>
+            </div>
+            <Link
+              href={partnerCta.href}
+              className="shrink-0 rounded-md bg-white px-6 py-3.5 text-sm font-bold text-apa-green shadow-sm transition-colors hover:bg-apa-soft"
+            >
+              {partnerCta.label} →
+            </Link>
           </div>
-          <Link
-            href={partnerCta.href}
-            className="shrink-0 rounded-md bg-white px-5 py-3 text-sm font-bold text-apa-green transition-colors hover:bg-apa-soft"
-          >
-            {partnerCta.label} →
-          </Link>
+          <div className="mt-6 flex flex-wrap gap-2 text-[12px] font-semibold">
+            {['One unified application', 'Submit your first journey', 'APA governance review', 'Partner Dashboard on approval'].map((b) => (
+              <span key={b} className="rounded-full bg-white/12 px-3 py-1.5 text-white/90 ring-1 ring-white/15">✓ {b}</span>
+            ))}
+          </div>
         </div>
       </div>
 

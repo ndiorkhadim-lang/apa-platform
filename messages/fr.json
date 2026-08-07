@@ -25,7 +25,12 @@
     "myWorkspace": "Mon espace",
     "myApplication": "Ma candidature Champion",
     "adminPipeline": "Admin — Candidatures",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "certification20": "Certification 2.0",
+    "lmsPlayer": "Player LMS Exécutif",
+    "capstone": "Atelier Capstone",
+    "sovereignRegistry": "Registre Souverain",
+    "skillsMatrix": "Matrice de Compétences (B2B)"
   },
   "Journeys": {
     "title": "Trouvez Votre Parcours",
@@ -797,6 +802,22 @@
     "quoteSource": "Cadre de la Prime d'Authenticité™ APA",
     "rights": "© {year} APA™ — Accountable Partners for Africa. Tous droits réservés."
   },
+  "Certificate": {
+    "title": "Certificat d’Excellence",
+    "certifies": "Le présent document certifie que",
+    "hasEarned": "a satisfait aux exigences de la Certification APA™ et se voit décerner le titre de",
+    "composite": "Composite C-SPA",
+    "maturity": "Palier de maturité",
+    "aligned": "Aligné sur les standards de gouvernance",
+    "issued": "Délivré le",
+    "expires": "Valable jusqu’au",
+    "serial": "N° de série",
+    "scanToVerify": "Scanner pour vérifier",
+    "registrar": "Officier d’enregistrement",
+    "print": "Imprimer / Enregistrer en PDF",
+    "backToVerify": "Retour à la vérification",
+    "revoked": "Ce titre a été révoqué"
+  },
   "VerifyCredential": {
     "metaTitle": "Vérifier un titre APA™",
     "kicker": "Titre vérifiable APA™",
@@ -841,7 +862,18 @@
     "notFound": {
       "title": "Titre introuvable",
       "detail": "Aucun titre APA ne correspond à « {id} ». Vérifiez l'identifiant ou contactez pape@theapaafrica.org."
-    }
+    },
+    "registry": {
+      "badge": "Registre Souverain de Titres",
+      "auditTrail": "Piste d'audit",
+      "nav": {
+        "publicRegistry": "Registre public",
+        "vcSpec": "Spéc. W3C VC 2.0",
+        "statusList": "StatusList2021",
+        "didSpec": "Spéc. DID"
+      }
+    },
+    "downloadCertificate": "Télécharger le certificat officiel"
   },
   "LearnPlayer": {
     "exit": "Quitter",
@@ -994,5 +1026,44 @@
       "REJECTED": "Retourné pour révision."
     },
     "error": "Échec de l'action."
+  },
+  "CertNav": {
+    "overview": "Vue d'ensemble",
+    "diagnostic": "Diagnostic",
+    "learning": "Apprentissage",
+    "capstone": "Capstone",
+    "credentials": "Titres",
+    "analytics": "Analytique",
+    "admin": "Admin",
+    "signIn": "Connexion"
+  },
+  "Platform": {
+    "metaTitle": "APA Certification 2.0 — Plateforme",
+    "kicker": "APA Certification 2.0 · Plateforme de certification en gouvernance",
+    "title": "Le système d'exploitation de la certification vérifiable en gouvernance en Afrique.",
+    "subtitle": "Diagnostiquez la maturité institutionnelle, suivez des parcours exécutifs, soumettez un capstone de transformation, et émettez des titres cryptographiquement vérifiables — alignés sur l'ISO 37000 et les Verifiable Credentials W3C 2.0.",
+    "ctaPrimary": "Lancer le diagnostic C-SPA",
+    "ctaSecondary": "Voir un titre en direct",
+    "ecosystem": "L'écosystème",
+    "cards": {
+      "diagnostic": "Évaluez la maturité institutionnelle selon le paradigme de gouvernance C-SPA — seuil ≥ 70.",
+      "learning": "LMS exécutif avec modes focus et verrous-outils pratiques obligatoires alimentant vos preuves.",
+      "capstone": "Soumettez un projet de transformation institutionnelle — pré-noté par l'IA et contrôlé.",
+      "credentials": "Le Registre Souverain : vérification Ed25519 instantanée et hors-ligne de tout titre émis.",
+      "analytics": "Heatmap de compétences ISO 37000 sur les cohortes ministérielles et les organisations.",
+      "admin": "Espace évaluateur pour examiner les capstones et autoriser l'émission des titres."
+    },
+    "footer": "APA Certification 2.0 — une plateforme de certification indépendante. Ethics into Alpha."
+  },
+  "Scoring": {
+    "title": "Votre progression",
+    "level": "Niveau",
+    "points": "points",
+    "toNext": "{n} pts pour {level}",
+    "maxLevel": "Palier maximal atteint — Fellow",
+    "badges": "Badges obtenus",
+    "noBadges": "Aucun badge — lancez le diagnostic pour obtenir le premier.",
+    "verifiableBadges": "Signés · OB 3.0",
+    "downloadHint": "Télécharger le titre signé (Ed25519)"
   }
 }

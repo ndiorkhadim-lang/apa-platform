@@ -150,8 +150,8 @@ export async function CredentialView({
         </ul>
       </section>
 
-      {/* Proof footer */}
-      <footer className={`border-t ${LINE} bg-neutral-950 p-6 text-xs text-neutral-500 sm:p-8`}>
+      {/* Proof footer — cryptographic audit trail */}
+      <footer id="audit-trail" className={`scroll-mt-20 border-t ${LINE} bg-neutral-950 p-6 text-xs text-neutral-500 sm:p-8`}>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t('proofType')} mono>{document.proof.type}</Field>
           <Field label={t('verificationMethod')} mono>{document.proof.verificationMethod}</Field>

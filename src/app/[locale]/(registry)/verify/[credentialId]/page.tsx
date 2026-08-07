@@ -14,6 +14,7 @@ import { resolveVerdict, issuerPublicKeyPem } from '@/infrastructure/certificati
 import { getRevokedIndices } from '@/infrastructure/certification/prisma-issuance-repository';
 import { buildEncodedStatusList } from '@/infrastructure/certification/status-list-service';
 import { CredentialView } from '@/components/verify/credential-view';
+import { SovereignHeader } from '@/components/verify/sovereign-header';
 import type { SignedCredential } from '@/domain/certification/credential';
 
 // Dynamic: revocation status must be reflected immediately. No cookies read.
@@ -56,9 +57,19 @@ export default async function VerifyCredentialPage({
     : null;
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-black text-neutral-100">
+      <SovereignHeader locale={locale} credentialId={credentialId} />
       <div className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
         {record ? (
+          <>
+          <div className="mb-4 flex justify-end">
+            <a
+              href={`/${locale}/verify/${credentialId}/certificate`}
+              className="inline-flex items-center gap-1.5 rounded-full border border-apa-gold-bright/40 bg-apa-gold-bright/5 px-4 py-2 text-xs font-semibold text-apa-gold-bright transition-colors hover:bg-apa-gold-bright/15"
+            >
+              📄 {t('downloadCertificate')} <span aria-hidden className="text-emerald-400">↓</span>
+            </a>
+          </div>
           <CredentialView
             document={record.document as unknown as SignedCredential}
             verdict={await resolveVerdict(
@@ -72,6 +83,7 @@ export default async function VerifyCredentialPage({
             expiresAt={record.expiresAt}
             locale={locale}
           />
+          </>
         ) : (
           <div className="rounded-2xl border border-[#262626] bg-neutral-950 p-8 text-center">
             <p className="text-4xl font-black text-neutral-700">✕</p>

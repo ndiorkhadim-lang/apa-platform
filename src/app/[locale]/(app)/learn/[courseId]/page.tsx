@@ -11,6 +11,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { prisma, dbAvailable } from '@/infrastructure/prisma/client';
 import { getSession } from '@/lib/session';
 import { requireCandidate } from '@/lib/guards';
+import { PREVIEW_ACCESS } from '@/lib/demo';
 import { getCompletedToolNumbers } from '@/infrastructure/learning/completion';
 import { computeCurriculumState, type CourseInput, type LessonState } from '@/domain/learning/curriculum';
 import { CoursePlayer, type PlayerModule } from '@/components/learn/course-player';
@@ -20,7 +21,7 @@ export const dynamic = 'force-dynamic';
 /** Dev-only preview identity so the player is demoable without an auth session. */
 async function resolveLearnerId(sessionUserId: string | undefined): Promise<string | null> {
   if (sessionUserId) return sessionUserId;
-  if (process.env.NODE_ENV === 'production') return null;
+  if (!PREVIEW_ACCESS) return null;
   const demo = await prisma.user.findUnique({ where: { email: 'demo-holder@apa.test' }, select: { id: true } });
   return demo?.id ?? null;
 }

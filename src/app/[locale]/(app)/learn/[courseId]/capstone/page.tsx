@@ -8,6 +8,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { prisma, dbAvailable } from '@/infrastructure/prisma/client';
 import { getSession } from '@/lib/session';
 import { requireCandidate } from '@/lib/guards';
+import { PREVIEW_ACCESS } from '@/lib/demo';
 import { resolveLearnerJourneyId } from '@/infrastructure/certification/learner-journey';
 import { CapstoneWorkbench, type CapstoneView } from '@/components/learn/capstone-workbench';
 
@@ -15,7 +16,7 @@ export const dynamic = 'force-dynamic';
 
 async function resolveLearnerId(sessionUserId: string | undefined): Promise<string | null> {
   if (sessionUserId) return sessionUserId;
-  if (process.env.NODE_ENV === 'production') return null;
+  if (!PREVIEW_ACCESS) return null;
   const demo = await prisma.user.findUnique({ where: { email: 'demo-holder@apa.test' }, select: { id: true } });
   return demo?.id ?? null;
 }

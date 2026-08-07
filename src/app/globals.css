@@ -42,6 +42,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Sovereign Credential Registry (/verify) — full-canvas pitch black, no white
+   bleed (overscroll, gaps). Toggled on <html> by SiteChrome for /verify routes. */
+html.sovereign-dark,
+html.sovereign-dark body {
+  background: #000000;
+}
+
 /* ── V8 signature pieces ──────────────────────────── */
 
 /* Cover / hero gradient: linear-gradient(157deg, green 0%, teal 48%, navy 100%) */
@@ -163,3 +170,131 @@ body {
     print-color-adjust: exact;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   OPTION B — "APA TERMINAL" next-gen fintech surface. Fully scoped under
+   .apa-terminal so it never touches Option A. Dark-first, light-capable.
+   ════════════════════════════════════════════════════════════════════ */
+.apa-terminal {
+  --t-bg: #000000;            /* pitch-black sovereign canvas */
+  --t-bg-2: #080706;          /* raised, warm-black */
+  --t-panel: rgba(212, 175, 55, 0.035);
+  --t-panel-solid: #0b0a08;
+  --t-line: rgba(212, 175, 55, 0.16);      /* gold hairline */
+  --t-line-strong: rgba(212, 175, 55, 0.32);
+  --t-text: #F2EEE3;                        /* warm ivory */
+  --t-muted: #9c9484;
+  --t-faint: #6b6455;
+  --t-amber: #D4AF37;         /* APA bright gold — authority accent */
+  --t-amber-soft: rgba(212, 175, 55, 0.13);
+  --t-emerald: #2FA36A;       /* APA sovereign green — passed gates */
+  --t-emerald-soft: rgba(47, 163, 106, 0.14);
+  --t-red: #d9695e;
+  --t-grid: rgba(212, 175, 55, 0.05);
+
+  font-family: var(--t-font-sans, "Inter", ui-sans-serif, system-ui, sans-serif);
+  color: var(--t-text);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(212, 175, 55, 0.07), transparent 60%),
+    radial-gradient(1000px 500px at 0% 110%, rgba(47, 163, 106, 0.06), transparent 55%),
+    var(--t-bg);
+  min-height: 100vh;
+  letter-spacing: -0.011em;
+}
+.apa-terminal.light {
+  --t-bg: #F4F1E8;                          /* warm sovereign paper */
+  --t-bg-2: #ffffff;
+  --t-panel: rgba(30, 40, 30, 0.02);
+  --t-panel-solid: #ffffff;
+  --t-line: rgba(122, 92, 20, 0.16);
+  --t-line-strong: rgba(122, 92, 20, 0.30);
+  --t-text: #17140C;
+  --t-muted: #5c5647;
+  --t-faint: #8a836f;
+  --t-amber: #9A7A1C;                       /* deeper gold for light contrast */
+  --t-amber-soft: rgba(154, 122, 28, 0.12);
+  --t-emerald: #1C8154;
+  --t-emerald-soft: rgba(28, 129, 84, 0.12);
+  --t-grid: rgba(122, 92, 20, 0.05);
+  background:
+    radial-gradient(1200px 600px at 82% -10%, rgba(154, 122, 28, 0.08), transparent 60%),
+    radial-gradient(1000px 500px at 0% 110%, rgba(28, 129, 84, 0.07), transparent 55%),
+    var(--t-bg);
+}
+
+.apa-terminal .t-mono { font-family: var(--t-font-mono, "JetBrains Mono", ui-monospace, monospace); font-feature-settings: "tnum" 1, "zero" 1; }
+.apa-terminal .t-display { font-family: var(--t-font-display, "Plus Jakarta Sans", "Inter", sans-serif); letter-spacing: -0.03em; }
+.apa-terminal .t-amber { color: var(--t-amber); }
+.apa-terminal .t-emerald { color: var(--t-emerald); }
+.apa-terminal .t-muted { color: var(--t-muted); }
+
+/* Glassmorphism card + micro-glow border */
+.apa-terminal .t-glass {
+  position: relative;
+  background: linear-gradient(180deg, var(--t-panel), transparent), var(--t-panel-solid);
+  border: 1px solid var(--t-line);
+  border-radius: 16px;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+}
+.apa-terminal.light .t-glass { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 24px 50px -32px rgba(2, 6, 23, 0.25); }
+.apa-terminal .t-glass-hover { transition: border-color .25s, transform .25s, box-shadow .25s; }
+.apa-terminal .t-glass-hover:hover { border-color: var(--t-line-strong); transform: translateY(-2px); }
+
+/* Amber / emerald glow accents */
+.apa-terminal .t-glow-amber { box-shadow: 0 0 0 1px rgba(245,158,11,.35), 0 0 32px -6px rgba(245,158,11,.4); }
+.apa-terminal .t-glow-emerald { box-shadow: 0 0 0 1px rgba(16,185,129,.35), 0 0 32px -6px rgba(16,185,129,.4); }
+
+/* Dotted technical grid background */
+.apa-terminal .t-grid-bg {
+  background-image: linear-gradient(var(--t-grid) 1px, transparent 1px), linear-gradient(90deg, var(--t-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Chips / pills */
+.apa-terminal .t-chip {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  padding: .28rem .6rem; border-radius: 999px;
+  border: 1px solid var(--t-line-strong); color: var(--t-muted);
+}
+.apa-terminal .t-chip-amber { border-color: rgba(245,158,11,.4); color: var(--t-amber); background: var(--t-amber-soft); }
+.apa-terminal .t-chip-emerald { border-color: rgba(16,185,129,.4); color: var(--t-emerald); background: var(--t-emerald-soft); }
+
+/* Primary button */
+.apa-terminal .t-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-weight: 600; font-size: .9rem; border-radius: 12px; padding: .7rem 1.15rem;
+  background: linear-gradient(180deg, #E6C766, #C9A24B); color: #17130a;
+  border: 1px solid rgba(212,175,55,.5); cursor: pointer;
+  box-shadow: 0 8px 24px -10px rgba(212,175,55,.6); transition: transform .18s, box-shadow .18s, filter .18s;
+}
+.apa-terminal .t-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 30px -10px rgba(212,175,55,.8); filter: brightness(1.05); }
+.apa-terminal .t-btn-ghost {
+  background: transparent; color: var(--t-text); border: 1px solid var(--t-line-strong); box-shadow: none;
+}
+.apa-terminal .t-btn-ghost:hover { border-color: var(--t-amber); color: var(--t-amber); transform: translateY(-1px); }
+
+/* Animated progress bar fill sheen */
+.apa-terminal .t-progress { height: 8px; border-radius: 999px; background: rgba(212,175,55,.10); overflow: hidden; }
+.apa-terminal .t-progress > span {
+  display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--t-amber), #E6C766);
+  transition: width .5s cubic-bezier(.16,1,.3,1);
+}
+.apa-terminal .t-progress.passed > span { background: linear-gradient(90deg, var(--t-emerald), #47c48a); }
+
+/* Scanline shimmer for holographic surfaces */
+@keyframes t-scan { 0% { transform: translateY(-120%); } 100% { transform: translateY(120%); } }
+@keyframes t-holo { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes t-pulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+@keyframes t-spin { to { transform: rotate(360deg); } }
+
+.apa-terminal .t-holo {
+  background: linear-gradient(115deg, #0a0906 0%, #1c1608 22%, #2a2410 45%, #12281c 70%, #0a0906 100%);
+  background-size: 300% 300%; animation: t-holo 8s ease infinite;
+}
+.apa-terminal .t-live-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--t-emerald); box-shadow: 0 0 10px var(--t-emerald); animation: t-pulse 1.6s ease-in-out infinite; }
+
+.apa-terminal ::selection { background: rgba(245, 158, 11, .3); }

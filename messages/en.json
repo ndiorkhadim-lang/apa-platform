@@ -25,7 +25,12 @@
     "myWorkspace": "My workspace",
     "myApplication": "My Champion application",
     "adminPipeline": "Admin — Applications",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "certification20": "Certification 2.0",
+    "lmsPlayer": "Executive LMS Player",
+    "capstone": "Capstone Workbench",
+    "sovereignRegistry": "Sovereign Registry",
+    "skillsMatrix": "Skills Matrix (B2B)"
   },
   "Journeys": {
     "title": "Find Your Journey",
@@ -797,6 +802,22 @@
     "quoteSource": "APA Authenticity Premium™ Framework",
     "rights": "© {year} APA™ — Accountable Partners for Africa. All rights reserved."
   },
+  "Certificate": {
+    "title": "Certificate of Achievement",
+    "certifies": "This is to certify that",
+    "hasEarned": "has successfully met the standards of the APA™ Certification and is hereby awarded the credential of",
+    "composite": "C-SPA Composite",
+    "maturity": "Maturity Tier",
+    "aligned": "Aligned to governance standards",
+    "issued": "Issued",
+    "expires": "Valid until",
+    "serial": "Serial",
+    "scanToVerify": "Scan to verify",
+    "registrar": "Registrar",
+    "print": "Print / Save as PDF",
+    "backToVerify": "Back to verification",
+    "revoked": "This credential has been revoked"
+  },
   "VerifyCredential": {
     "metaTitle": "Verify APA™ Credential",
     "kicker": "APA™ Verifiable Credential",
@@ -841,7 +862,18 @@
     "notFound": {
       "title": "Credential not found",
       "detail": "No APA credential matches \"{id}\". Check the identifier or contact pape@theapaafrica.org."
-    }
+    },
+    "registry": {
+      "badge": "Sovereign Credential Registry",
+      "auditTrail": "Audit Trail",
+      "nav": {
+        "publicRegistry": "Public Registry",
+        "vcSpec": "W3C VC 2.0 Spec",
+        "statusList": "StatusList2021",
+        "didSpec": "DID Spec"
+      }
+    },
+    "downloadCertificate": "Download official certificate"
   },
   "LearnPlayer": {
     "exit": "Exit",
@@ -994,5 +1026,44 @@
       "REJECTED": "Returned for revision."
     },
     "error": "Action failed."
+  },
+  "CertNav": {
+    "overview": "Overview",
+    "diagnostic": "Diagnostic",
+    "learning": "Learning",
+    "capstone": "Capstone",
+    "credentials": "Credentials",
+    "analytics": "Analytics",
+    "admin": "Admin",
+    "signIn": "Sign in"
+  },
+  "Platform": {
+    "metaTitle": "APA Certification 2.0 — Platform",
+    "kicker": "APA Certification 2.0 · Governance Credentialing Platform",
+    "title": "The operating system for verifiable governance certification in Africa.",
+    "subtitle": "Diagnose institutional maturity, complete executive learning journeys, submit a transformation capstone, and issue cryptographically verifiable credentials — aligned with ISO 37000 and W3C Verifiable Credentials 2.0.",
+    "ctaPrimary": "Start the C-SPA diagnostic",
+    "ctaSecondary": "View a live credential",
+    "ecosystem": "The ecosystem",
+    "cards": {
+      "diagnostic": "Assess institutional maturity against the C-SPA governance paradigm — pass gate ≥ 70.",
+      "learning": "Executive LMS with focus modes and mandatory practical tool-locks that feed your evidence.",
+      "capstone": "Submit an institutional transformation project — AI pre-scored and integrity-checked.",
+      "credentials": "The Sovereign Registry: instant, offline Ed25519 verification of any issued credential.",
+      "analytics": "ISO 37000 competency heatmap across ministerial cohorts and organisations.",
+      "admin": "Evaluator workspace to review capstones and authorise credential issuance."
+    },
+    "footer": "APA Certification 2.0 — an independent certification platform. Ethics into Alpha."
+  },
+  "Scoring": {
+    "title": "Your standing",
+    "level": "Level",
+    "points": "points",
+    "toNext": "{n} pts to {level}",
+    "maxLevel": "Top tier reached — Fellow",
+    "badges": "Badges earned",
+    "noBadges": "No badges yet — start the diagnostic to earn your first.",
+    "verifiableBadges": "Signed · OB 3.0",
+    "downloadHint": "Download signed credential (Ed25519)"
   }
 }

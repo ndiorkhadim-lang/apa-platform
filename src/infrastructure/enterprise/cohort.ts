@@ -1,6 +1,7 @@
 import 'server-only';
 import { prisma } from '@/infrastructure/prisma/client';
 import { getCompletedToolNumbers } from '@/infrastructure/learning/completion';
+import { PREVIEW_ACCESS } from '@/lib/demo';
 import type { CertificateStatus } from '@/generated/prisma/client';
 
 /** A cohort: an organization's members with their tool completions + credentials. */
@@ -34,7 +35,7 @@ export async function resolveOrgSlug(queryOrg: string | undefined, userId: strin
     });
     if (membership) return membership.org.slug;
   }
-  return process.env.NODE_ENV === 'production' ? null : 'demo-ministry-finance';
+  return PREVIEW_ACCESS ? 'demo-ministry-finance' : null;
 }
 
 export async function loadCohort(slug: string): Promise<CohortData | null> {

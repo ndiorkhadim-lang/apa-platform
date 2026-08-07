@@ -71,6 +71,7 @@ export async function submitCspa(rawAnswers: Record<string, number>, locale: str
       diff: { composite: result.composite, maturity: result.maturity },
     },
   });
+
   revalidatePath(`/${locale}/app/cspa`);
   return { ok: true as const, composite: result.composite };
 }

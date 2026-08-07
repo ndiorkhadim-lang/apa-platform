@@ -85,6 +85,21 @@ async function main() {
   }
   console.log(`✔ ${nations.length} nations`);
 
+  // 4 · Demo certification journey — localhost walkthrough of the 5-step circuit.
+  // Resolved by the dev fallback in journey-step-service (org slug below).
+  const demoOrg = await prisma.organization.upsert({
+    where: { slug: 'demo-ministry-finance' },
+    update: {},
+    create: { name: 'Demo · Ministry of Finance', slug: 'demo-ministry-finance', sector: 'Public Sector' },
+  });
+  const demoJourney = await prisma.certificationJourney.findFirst({ where: { orgId: demoOrg.id } });
+  if (!demoJourney) {
+    await prisma.certificationJourney.create({
+      data: { orgId: demoOrg.id, currentStep: 'CSPA_DIAGNOSTIC', status: 'IN_PROGRESS' },
+    });
+  }
+  console.log('✔ demo certification journey (org: demo-ministry-finance)');
+
   // Integrity checks — fail loudly if canon is violated
   const [nTools, nPriority, byCat] = await Promise.all([
     prisma.tool.count(),
