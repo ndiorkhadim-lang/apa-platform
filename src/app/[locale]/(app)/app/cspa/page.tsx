@@ -90,7 +90,7 @@ export default async function CspaPage({
             {fr
               ? 'Score ≥ 70 : accès à l’étape 2 du parcours (déploiement des outils & assemblage des preuves), puis vérification communautaire et revue d’assurance.'
               : 'Score ≥ 70 unlocks step 2 of the pathway (tool deployment & evidence assembly), then community verification and assurance review.'}{' '}
-            <Link href="/platform" className="font-semibold text-apa-green underline">
+            <Link href="/certification" className="font-semibold text-apa-green underline">
               {fr ? 'Voir le parcours complet →' : 'See the full pathway →'}
             </Link>
           </p>
