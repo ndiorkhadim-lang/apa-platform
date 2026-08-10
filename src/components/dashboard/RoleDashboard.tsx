@@ -218,7 +218,7 @@ function Widget({ kind, profile, fr, userName }: { kind: WidgetKind; profile: Pr
           <H fr={fr} en="Recommended solutions" frr="Solutions recommandées" />
           <div className="mt-3 flex flex-wrap gap-2">
             {profile.recSolutions.map((s) => (
-              <Link key={s} href="/solutions" className="rounded-full border border-apa-sage bg-apa-soft px-3.5 py-1.5 text-sm font-semibold text-apa-green hover:bg-apa-green hover:text-white">
+              <Link key={s} href="/platform" className="rounded-full border border-apa-sage bg-apa-soft px-3.5 py-1.5 text-sm font-semibold text-apa-green hover:bg-apa-green hover:text-white">
                 {SOLUTION_LABEL[s] ?? s}
               </Link>
             ))}

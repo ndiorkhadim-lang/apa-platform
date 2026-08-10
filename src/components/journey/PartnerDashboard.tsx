@@ -222,7 +222,7 @@ export function PartnerDashboard({
             <p className="mx-auto mt-1 max-w-md text-sm text-apa-grey">
               Get AI help drafting itineraries, mapping the right APA tools and SDGs, aligning with governance mandates, and strengthening a journey before you submit it for review.
             </p>
-            <Link href="/intelligence" className="mt-5 inline-block rounded-md bg-apa-green px-5 py-2.5 text-sm font-bold text-white hover:bg-apa-green-mid">Open the AI Concierge →</Link>
+            <Link href="/platform" className="mt-5 inline-block rounded-md bg-apa-green px-5 py-2.5 text-sm font-bold text-white hover:bg-apa-green-mid">Open the AI Concierge →</Link>
           </div>
         )}
       </div>

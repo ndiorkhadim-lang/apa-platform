@@ -3,18 +3,15 @@ import { routing } from '@/i18n/routing';
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.theapaafrica.org';
 
+// Certification platform routes only — the corporate website lives separately.
 const PUBLIC_ROUTES = [
   '',
+  '/platform',
+  '/certify-v2',
   '/journeys',
-  '/tools',
-  '/solutions',
-  '/intelligence',
-  '/certification',
   '/champions',
   '/champions/apply',
-  '/dashboard',
-  '/about',
-  '/contact',
+  '/glossary',
   '/verify',
 ];
 

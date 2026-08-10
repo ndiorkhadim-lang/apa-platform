@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useTransition } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { authClient } from '@/lib/auth-client';
-import { submitPartnerApplication } from '@/app/[locale]/(public)/journeys/partner/apply/actions';
+import { submitPartnerApplication } from '@/app/[locale]/(app)/journeys/partner/apply/actions';
 import { TagField } from '@/components/journey/TagField';
 import {
   ORG_TYPES, JOURNEY_THEMES, JOURNEY_AUDIENCES, JOURNEY_LANGUAGES, TRAVEL_TYPES,

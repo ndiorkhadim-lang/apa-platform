@@ -19,7 +19,7 @@ export default async function NotFoundPage() {
             {t('cta')}
           </Link>
           <Link
-            href="/tools"
+            href="/certify-v2/grc"
             className="rounded-md border border-apa-gold-bright px-5 py-2.5 text-sm font-semibold text-apa-gold-bright transition-colors hover:bg-apa-gold-bright hover:text-apa-ink"
           >
             {t('ctaTools')}
