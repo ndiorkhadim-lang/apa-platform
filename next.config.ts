@@ -4,15 +4,10 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  // The deployment IS the certification platform — the corporate website lives
-  // separately. Enter straight into the platform; no marketing homepage here.
-  async redirects() {
-    return [
-      { source: '/', destination: '/en/platform', permanent: false },
-      { source: '/en', destination: '/en/platform', permanent: false },
-      { source: '/fr', destination: '/fr/platform', permanent: false },
-    ];
-  },
+  // APA ecosystem — two layers. The root now serves the Main Platform (Layer 1)
+  // Home; next-intl handles `/` → `/{locale}`. The Certification Platform
+  // (Layer 2) remains reachable at /{locale}/platform (renamed to /certification
+  // in a later phase). No forced redirect into certification.
 };
 
 export default withNextIntl(nextConfig);
