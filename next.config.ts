@@ -4,13 +4,16 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  // The deployment IS the certification platform — the corporate website lives
-  // separately. Enter straight into the platform; no marketing homepage here.
+  // APA ecosystem — two layers. The root serves the Main Platform (Layer 1)
+  // Home; next-intl handles `/` → `/{locale}`. The Certification Platform
+  // (Layer 2) gateway lives at /{locale}/certification.
+  //
+  // Preserve legacy deep links: the old /platform gateway now redirects to
+  // /certification, so nothing that pointed at the certification hub breaks.
   async redirects() {
     return [
-      { source: '/', destination: '/en/platform', permanent: false },
-      { source: '/en', destination: '/en/platform', permanent: false },
-      { source: '/fr', destination: '/fr/platform', permanent: false },
+      { source: '/:locale(en|fr)/platform', destination: '/:locale/certification', permanent: false },
+      { source: '/platform', destination: '/en/certification', permanent: false },
     ];
   },
 };

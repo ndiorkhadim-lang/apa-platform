@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState, useTransition } from 'react';
-import { saveDraft, submitApplication, type DraftInput } from '@/app/[locale]/(app)/champions/apply/actions';
+import { saveDraft, submitApplication, type DraftInput } from '@/app/[locale]/(site)/champions/apply/actions';
 
 type L = 'fr' | 'en';
 

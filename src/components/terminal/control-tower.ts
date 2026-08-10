@@ -31,7 +31,7 @@ export const CONTROL_TOWER: TowerGroup[] = [
     titleFr: 'Espace de travail',
     glyph: '▦',
     items: [
-      { slug: 'dashboard', href: '/platform', titleEn: 'Executive Dashboard', titleFr: 'Tableau de Bord Exécutif', subEn: 'Standing, score & next action', subFr: 'Statut, score & action suivante', glyph: '◧' },
+      { slug: 'dashboard', href: '/certification', titleEn: 'Executive Dashboard', titleFr: 'Tableau de Bord Exécutif', subEn: 'Standing, score & next action', subFr: 'Statut, score & action suivante', glyph: '◧' },
       { slug: 'learning', href: '/learn/cits-executive-pathway', titleEn: 'Learning Journey', titleFr: 'Parcours d’Apprentissage', subEn: 'LMS player · CITS pathway', subFr: 'Player LMS · parcours CITS', glyph: '▷' },
       { slug: 'capstone', href: '/learn/cits-executive-pathway/capstone', titleEn: 'Capstone Workbench', titleFr: 'Atelier Capstone', subEn: 'Transformation project', subFr: 'Projet de transformation', glyph: '◈' },
       { slug: 'enterprise', href: '/enterprise', titleEn: 'B2B Enterprise Cohort', titleFr: 'Cohorte B2B Entreprise', subEn: 'Members · skills matrix', subFr: 'Membres · matrice de compétences', glyph: '⛨' },

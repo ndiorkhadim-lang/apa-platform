@@ -1,5 +1,5 @@
 /**
- * /platform — Certification 2.0 product overview (the SaaS home).
+ * /certification — Certification 2.0 gateway (the certification-platform home).
  * Independent from the corporate site: entry point into the certification
  * ecosystem. Dark, premium, enterprise. The unified sovereign Control-Tower
  * chrome is applied by the (app) route-group layout.

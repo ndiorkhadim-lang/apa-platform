@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
+import { EcosystemSwitcher } from '@/components/site/ecosystem-switcher';
 import { CONTROL_TOWER } from './control-tower';
 
 const TENANTS = [
@@ -44,7 +45,7 @@ export function TerminalShell({ locale, children }: { locale: string; children: 
   useEffect(() => { setNavOpen(false); }, [pathname]);
 
   const active = (href: string) =>
-    href === '/certify-v2' || href === '/platform'
+    href === '/certify-v2' || href === '/certification'
       ? pathname === href
       : pathname === href || pathname.startsWith(href + '/');
 
@@ -56,13 +57,15 @@ export function TerminalShell({ locale, children }: { locale: string; children: 
         <div className="flex items-center gap-3 px-3 py-2.5 sm:px-4">
           <button onClick={() => setNavOpen((v) => !v)} className="grid h-9 w-9 place-items-center rounded-lg border border-[var(--t-line)] lg:hidden" aria-label="Toggle navigation">☰</button>
 
-          <Link href="/platform" className="flex items-center gap-2.5">
+          <Link href="/certification" className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-lg t-glow-amber t-amber text-lg font-black">⛨</span>
             <span className="hidden leading-none sm:flex sm:flex-col">
               <span className="t-display text-sm font-extrabold tracking-tight">APA <span className="t-muted font-semibold">Certification</span></span>
               <span className="t-mono text-[9px] uppercase tracking-[0.22em] t-amber">Sovereign Platform</span>
             </span>
           </Link>
+          {/* Layer 2 → Layer 1: the one sanctioned way back to the APA ecosystem */}
+          <EcosystemSwitcher to="main" />
           <span className="t-chip t-chip-emerald hidden xl:inline-flex">
             <span className="t-live-dot" /> SYSTEM_ONLINE_ZKP_VERIFIED
           </span>

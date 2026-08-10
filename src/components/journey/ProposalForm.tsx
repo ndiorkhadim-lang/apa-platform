@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { PRIORITY_COUNTRIES, ROLE_ORDER, ROLE_META, THEMES } from '@/types/journey';
-import { submitJourneyProposal } from '@/app/[locale]/(app)/journeys/partner/actions';
+import { submitJourneyProposal } from '@/app/[locale]/(site)/journeys/partner/actions';
 
 /** Journey Partner — submit a new journey proposal (enters APA review). */
 export function ProposalForm({ locale }: { locale: string }) {

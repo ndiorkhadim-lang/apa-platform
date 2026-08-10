@@ -6,7 +6,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.theapaafrica.org';
 // Certification platform routes only — the corporate website lives separately.
 const PUBLIC_ROUTES = [
   '',
-  '/platform',
+  '/certification',
   '/certify-v2',
   '/journeys',
   '/champions',
